@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+<title>HubMed</title>
+
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/pagination.css">
+<link rel="stylesheet" href="css/article.css">
+<link rel="stylesheet" href="css/input.css">
+
+<script src="js/ext/jquery.js"></script>
+<script src="js/ext/jquery.ajaxQueue.js"></script>
+<script src="js/ext/jquery.inview.js"></script>
+<script src="js/ext/handlebars.js"></script>
+<script src="js/ext/underscore.js"></script>
+<script src="js/ext/backbone.js"></script>
+
+<script src="js/config.js"></script>
+<script src="js/services.js"></script>
+<script src="js/resources.js"></script>
+<script src="js/app.js"></script>
+
+<!-- only templates below here -->
+
+<script type="text/html" data-template="Article">
+	<a property="url" href="./?term={{MedlineCitation.PMID._}}[UID]"><span property="name">{{MedlineCitation.Article.ArticleTitle._}}</span></a>
+
+	<div class="plural" property="creators">
+		{{#each MedlineCitation.Article.AuthorList.Author}}<a property="url" href="./?term={{#if ForeName}}{{LastName}}, {{ForeName}} [Full Author Name]{{else}}{{Forename}} {{Initials}} [AU]{{/if}}"><abbr property="creator" title="{{LastName}} {{#if ForeName}}{{ForeName}}{{else}}{{Initials}}{{/if}}">{{LastName}} {{Initials}}</abbr></a>{{/each}}
+	</div>
+
+	<div property="citation">
+		<span property="journal">{{#if MedlineCitation.Article.Journal.ISOAbbreviation}}{{MedlineCitation.Article.Journal.ISOAbbreviation}}{{else}}{{MedlineCitation.Article.Journal.Title}}{{/if}}</span>{{#if MedlineCitation.Article.ArticleDate}} <abbr property="datePublished">{{MedlineCitation.Article.ArticleDate.0.Year}} {{MedlineCitation.Article.ArticleDate.0.Month}} {{MedlineCitation.Article.ArticleDate.0.Day}}</abbr>; {{/if}}{{#if MedlineCitation.Article.Journal.JournalIssue.Volume}} <span property="volume">{{MedlineCitation.Article.Journal.JournalIssue.Volume}}</span>{{/if}}{{#if MedlineCitation.Article.Journal.JournalIssue.Issue}}(<span property="issue">{{MedlineCitation.Article.Journal.JournalIssue.Issue}}</span>){{/if}}{{#if MedlineCitation.Article.Pagination.MedlinePgn}}: <span property="pagination">{{MedlineCitation.Article.Pagination.MedlinePgn}}</span>{{/if}}
+	</div>
+
+	{{#each MedlineCitation.Article.Abstract.AbstractText}}
+	<p property="abstract">{{_}}</p>
+	{{/each}}
+
+	<footer>
+		<span class="link action" data-action="show-abstract">Abstract</span>
+		<a class="link" rel="related" href="./?term=related:{{MedlineCitation.PMID._}}">Related</a>
+	</footer>
+</script>

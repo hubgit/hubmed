@@ -1,0 +1,12 @@
+#input {
+	margin: 10px auto;
+}
+
+#input [name=term] {
+	width: 80%;
+}
+
+#input input {
+	font-size: 100%;
+	padding: 5px;
+}

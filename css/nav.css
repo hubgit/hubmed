@@ -1,0 +1,17 @@
+nav {
+	margin: 0 20px;
+}
+
+nav a {
+	display: inline-block;
+	margin: 0 0 0 15px;
+	padding: 5px;
+}
+
+nav a, nav a:visited {
+	color: #aaa;
+}
+
+nav a.active, nav a:hover {
+	color: #fff;
+}

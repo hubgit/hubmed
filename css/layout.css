@@ -1,0 +1,66 @@
+header, nav, footer {
+	display: block;
+}
+
+html {
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+	font-size: 100%;
+}
+
+body {
+	font-family: Helvetica, Arial, sans-serif;
+	line-height: 1.4;
+	margin: 0;
+	color: #000;
+}
+
+a {
+	color: #00e;
+	text-decoration: none;
+}
+
+a:focus {
+	outline: thin dotted;
+}
+
+a:hover, a:active {
+	outline: 0;
+}
+
+.wrapper{
+	width: 90%;
+	margin: 0 auto;
+}
+
+@media only screen and (min-width: 1140px) {
+	.wrapper {
+		width: 1026px;
+	}
+}
+
+header {
+	background: #444;
+	box-shadow: 0 5px 10px #aaa;
+}
+
+#movies {
+	padding: 10px 0;
+}
+
+article a:hover {
+	text-decoration: underline;
+}
+
+.action {
+	cursor: pointer;
+	color: #00e;
+}
+
+.action:hover {
+	text-decoration: underline;
+}
+
+.plural > [property]:not(:last-of-type):after {
+    content: ", ";
+}
