@@ -16,7 +16,6 @@ $(function() {
 	/** Fetch the list of articles and update the collection **/
 
 	var handleResponse = function(data) {
-		//articles.add(data.items);
 		links.reset(data.links);
 	};
 
