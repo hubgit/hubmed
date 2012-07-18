@@ -69,6 +69,10 @@ a[rel=related]:before {
 	content: "✫ ";
 }
 
+a[rel=export]:before {
+	content: "⇣ ";
+}
+
 a.expandable:before {
 	content: "▿ ";
 }

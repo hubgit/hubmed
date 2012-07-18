@@ -72,7 +72,9 @@ var Views = {
 		},
 
 		render: function() {
-			this.$el.html(Templates.Article(this.model.toJSON()));
+			var data = this.model.toJSON();
+			data.export = Config.Services.PubMed;
+			this.$el.html(Templates.Article(data));
 			return this;
 		},
 
