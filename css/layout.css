@@ -15,19 +15,6 @@ body {
 	color: #000;
 }
 
-a {
-	color: #00E;
-	text-decoration: none;
-}
-
-a:focus {
-	outline: thin dotted;
-}
-
-a:hover, a:active {
-	outline: 0;
-}
-
 .wrapper{
 	width: 90%;
 	margin: 0 auto;
@@ -44,16 +31,25 @@ header {
 	box-shadow: 0 5px 10px #aaa;
 }
 
-#movies {
-	padding: 10px 0;
+.plural > *:not(:last-of-type):after {
+    content: ", ";
+}
+
+a {
+	color: #00E;
+	text-decoration: none;
+}
+
+a:focus {
+	outline: thin dotted;
+}
+
+a:hover, a:active {
+	outline: 0;
 }
 
 article a:hover {
-	text-decoration: underline;
-}
-
-.plural > [property]:not(:last-of-type):after {
-    content: ", ";
+    color: #00E !important;
 }
 
 footer a {

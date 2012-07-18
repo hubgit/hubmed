@@ -17,6 +17,9 @@
 
 [typeof=MedicalScholarlyArticle] [property=creators] {
     margin: 0 10px;
+}
+
+[typeof=MedicalScholarlyArticle] [property=creator] {
     color: gray;
 }
 

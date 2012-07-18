@@ -29,7 +29,7 @@
 	<a property="url" href="./?term={{identifier.pubmed}}[UID]"><span property="name">{{titleInfo.title}}.</span></a>
 
 	<div class="plural" property="creators">
-		{{#each name}}<a property="url" href="./?term={{family}}{{#each given}} {{.}}{{/each}} [Author]"><abbr property="creator" title="{{family}}{{#each given}} {{.}}{{/each}}">{{#each given}}{{.}} {{/each}}{{family}}</abbr></a>{{/each}}
+		{{#each name}}<a href="./?term={{family}}{{#each given}} {{.}}{{/each}} [Author]" property="creator" title="{{family}}{{#each given}} {{.}}{{/each}}">{{#each given}}{{.}} {{/each}}{{family}}</a>{{/each}}
 	</div>
 
 	<div property="citation">
