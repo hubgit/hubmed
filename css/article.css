@@ -40,12 +40,10 @@
     text-align: left;
 }
 
-[typeof=MedicalScholarlyArticle] footer .link:not(:last-child):after {
-    content: " · ";
-}
 
-.abstract-open .link[data-action=show-abstract] {
-    display: none;
+[typeof=MedicalScholarlyArticle] footer .link:not(:last-child) {
+    /*content: " · ";*/
+    margin-right: 10px;
 }
 
 @media only screen and (max-device-width: 480px) {

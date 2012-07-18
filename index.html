@@ -41,7 +41,8 @@
 	<p property="abstract">{{abstract}}</p>
 
 	<footer>
-		<span class="link action" data-action="show-abstract">Abstract</span>
+		<a class="link expandable" href="#" data-action="show-abstract">Abstract</span>
+		<a class="link external" rel="fulltext" href="{{#if identifier.doi}}http://dx.doi.org/{{identifier.doi}}{{else}}http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id={{identifier.pubmed}}{{/if}}">FullText</a>
 		<a class="link" rel="related" href="./?term=related:{{identifier.pubmed}}">Related</a>
 	</footer>
 </script>

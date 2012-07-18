@@ -16,7 +16,7 @@ body {
 }
 
 a {
-	color: #00e;
+	color: #00E;
 	text-decoration: none;
 }
 
@@ -52,15 +52,27 @@ article a:hover {
 	text-decoration: underline;
 }
 
-.action {
-	cursor: pointer;
-	color: #00e;
-}
-
-.action:hover {
-	text-decoration: underline;
-}
-
 .plural > [property]:not(:last-of-type):after {
     content: ", ";
+}
+
+footer a {
+	opacity: 0.5;
+}
+
+footer a:hover {
+	opacity: 1.0;
+	text-decoration: none;
+}
+
+a.external:before {
+	content: "↪ ";
+}
+
+a.expandable:before {
+	content: "▿ ";
+}
+
+a.expandable.expanded:before {
+	content: "▵ ";
 }

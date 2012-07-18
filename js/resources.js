@@ -64,7 +64,7 @@ var Views = {
 		},
 
 		events: {
-			"click .action": "action"
+			"click a[data-action]": "action"
 		},
 
 		initialize: function() {
@@ -84,7 +84,7 @@ var Views = {
 
 			switch ($node.data("action")) {
 				case "show-abstract":
-					$node.closest("article").addClass("abstract-open").find("[property=abstract]").show();
+					$node.toggleClass("expanded").closest("article").find("[property=abstract]").toggle();
 					break;
 			}
 		}
