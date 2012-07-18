@@ -12,18 +12,35 @@ $(function() {
 var Collections = {
 	Articles: Backbone.Collection.extend({
 		sync: function(method, collection, options) {
+			var self = this;
+
 			if (options.url) {
 				this.service.get(options.url).done(options.success);
 			}
 			else {
 				var matches = options.data.term.match(/^related:(.+)/);
 				if(matches) {
-					options.data.related = matches[1];
-					delete options.data.term;
-					this.service.link(options);
+					this.service.related(matches[1]).done(function(doc) {
+						var data = {
+							WebEnv: document.evaluate("/eLinkResult/LinkSet/WebEnv", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent,
+							QueryKey: document.evaluate("/eLinkResult/LinkSet/LinkSetDbHistory/QueryKey", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent
+						};
+
+						var url = self.service.buildHistoryURL(data);
+						self.service.get(url).done(options.success);
+					});
 				}
 				else {
-					this.service.search(options);
+					this.service.search(options.data.term).done(function(doc) {
+						var data = {
+							Count: document.evaluate("/eSearchResult/Count", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent,
+							WebEnv: document.evaluate("/eSearchResult/WebEnv", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent,
+							QueryKey: document.evaluate("/eSearchResult/QueryKey", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent
+						};
+
+						var url = self.service.buildHistoryURL(data);
+						self.service.get(url).done(options.success);
+					});
 				}
 			}
         },

@@ -35,9 +35,14 @@ $(function() {
 		articles.reset();
 		links.reset();
 
+		var term = $("input[name=term]").val();
+		if(term) search(term, 10);
+	};
+
+	var search = function(term, n) {
 		// fetch the list of items and display them
 		var data = {
-			term: $("input[name=term]").val(),
+			term: term,
 			n: 10,
 		};
 

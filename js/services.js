@@ -19,16 +19,35 @@ var PubMed = function(options) {
 
     this.defaults = $.extend({}, options);
 
-    this.search = function(options) {
-        var _this = this;
-
-        this.get(this.base, options).done(function(data) {
-            _this.get(data.links.first).done(options.success);
+    this.search = function(term) {
+        return $.ajax({
+            dataType: "xml",
+            url: "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+            data: {
+                db: "pubmed",
+                usehistory: "y",
+                retmax: 0,
+                term: term
+            }
         });
     };
 
-    this.link = function(options) {
-        this.get(this.base, options).done(options.success);
+    this.related = function(id) {
+        return $.ajax({
+            dataType: "xml",
+            url: "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi",
+            data: {
+                dbfrom: "pubmed",
+                db: "pubmed",
+                cmd: "neighbor_history",
+                linkname: "pubmed_pubmed",
+                id: id
+            }
+        });
+    };
+
+    this.buildHistoryURL = function(data) {
+        return this.base + "?" + $.param({ history: data.WebEnv + "|" + data.QueryKey });
     };
 };
 
