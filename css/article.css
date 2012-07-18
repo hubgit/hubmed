@@ -10,12 +10,12 @@
     display: block;
 }
 
-[typeof=MedicalScholarlyArticle] [property=url] {
-    color: inherit;
+[typeof=MedicalScholarlyArticle] > *:not([property=url]) {
+    margin: 0 10px;
 }
 
-[typeof=MedicalScholarlyArticle] [property=creators] {
-    margin: 0 10px;
+[typeof=MedicalScholarlyArticle] [property=url] {
+    color: inherit;
 }
 
 [typeof=MedicalScholarlyArticle] [property=creator] {
@@ -23,7 +23,6 @@
 }
 
 [typeof=MedicalScholarlyArticle] [property=citation] {
-    margin: 0 10px;
     color: #270;
 }
 
@@ -32,20 +31,22 @@
 }
 
 [typeof=MedicalScholarlyArticle] [property=abstract] {
-    margin: 10px 10px;
     font-family: Optima, Arial, Verdana, Helvetica, serif;
     text-align: justify;
+}
+
+[typeof=MedicalScholarlyArticle] .abstract {
+    margin-top: 10px;
+    margin-bottom: 10px;
     display: none;
 }
 
 [typeof=MedicalScholarlyArticle] footer {
     color: gray;
-    margin: 0 10px;
     font-family: Verdana, Arial, Helvetica, serif;
     font-size: 90%;
     text-align: left;
 }
-
 
 [typeof=MedicalScholarlyArticle] footer .link:not(:last-child) {
     /*content: " · ";*/

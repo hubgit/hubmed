@@ -86,7 +86,7 @@ var Views = {
 
 			switch ($node.data("action")) {
 				case "show-abstract":
-					$node.toggleClass("expanded").closest("article").find("[property=abstract]").toggle();
+					$node.toggleClass("expanded").closest("article").find(".abstract").toggle();
 					break;
 			}
 		}
@@ -110,7 +110,7 @@ var Views = {
 			var articles = $("article");
 			if(articles.length === 1) {
 				articles.find("[property=abstract]").show();
-				articles.find("[data-action=show-abstract]").hide();
+				//articles.find("[data-action=show-abstract]").hide();
 			}
 		},
 
