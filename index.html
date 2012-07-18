@@ -26,22 +26,22 @@
 <!-- only templates below here -->
 
 <script type="text/html" data-template="Article">
-	<a property="url" href="./?term={{MedlineCitation.PMID._}}[UID]"><span property="name">{{MedlineCitation.Article.ArticleTitle._}}</span></a>
+	<a property="url" href="./?term={{identifier.pubmed}}[UID]"><span property="name">{{titleInfo.title}}.</span></a>
 
 	<div class="plural" property="creators">
-		{{#each MedlineCitation.Article.AuthorList.Author}}<a property="url" href="./?term={{#if ForeName}}{{LastName}}, {{ForeName}} [Full Author Name]{{else}}{{Forename}} {{Initials}} [AU]{{/if}}"><abbr property="creator" title="{{LastName}} {{#if ForeName}}{{ForeName}}{{else}}{{Initials}}{{/if}}">{{LastName}} {{Initials}}</abbr></a>{{/each}}
+		{{#each name}}<a property="url" href="./?term={{family}}{{#each given}} {{.}}{{/each}} [Author]"><abbr property="creator" title="{{family}}{{#each given}} {{.}}{{/each}}">{{#each given}}{{.}} {{/each}}{{family}}</abbr></a>{{/each}}
 	</div>
 
 	<div property="citation">
-		<span property="journal">{{#if MedlineCitation.Article.Journal.ISOAbbreviation}}{{MedlineCitation.Article.Journal.ISOAbbreviation}}{{else}}{{MedlineCitation.Article.Journal.Title}}{{/if}}</span>{{#if MedlineCitation.Article.ArticleDate}} <abbr property="datePublished">{{MedlineCitation.Article.ArticleDate.0.Year}} {{MedlineCitation.Article.ArticleDate.0.Month}} {{MedlineCitation.Article.ArticleDate.0.Day}}</abbr>; {{/if}}{{#if MedlineCitation.Article.Journal.JournalIssue.Volume}} <span property="volume">{{MedlineCitation.Article.Journal.JournalIssue.Volume}}</span>{{/if}}{{#if MedlineCitation.Article.Journal.JournalIssue.Issue}}(<span property="issue">{{MedlineCitation.Article.Journal.JournalIssue.Issue}}</span>){{/if}}{{#if MedlineCitation.Article.Pagination.MedlinePgn}}: <span property="pagination">{{MedlineCitation.Article.Pagination.MedlinePgn}}</span>{{/if}}
+	{{#with relatedItem}}
+		{{#with titleInfo}}<abbr property="journal" title="{{full}}">{{#if abbreviated}}{{abbreviated}}{{else}}{{full}}{{/if}}</span>{{/with}}. <abbr property="datePublished">{{part.date}}</abbr>{{#if part.detail}}; {{#with part.detail}}{{#if volume}} <span property="volume">{{volume}}</span>{{/if}}{{#if issue}}(<span property="issue">{{issue}}</span>){{/if}}{{#if page}}: <span property="pagination">{{page}}</span>{{/if}}{{/with}}{{/if}}
+	{{/with}}
 	</div>
 
-	{{#each MedlineCitation.Article.Abstract.AbstractText}}
-	<p property="abstract">{{_}}</p>
-	{{/each}}
+	<p property="abstract">{{abstract}}</p>
 
 	<footer>
 		<span class="link action" data-action="show-abstract">Abstract</span>
-		<a class="link" rel="related" href="./?term=related:{{MedlineCitation.PMID._}}">Related</a>
+		<a class="link" rel="related" href="./?term=related:{{identifier.pubmed}}">Related</a>
 	</footer>
 </script>

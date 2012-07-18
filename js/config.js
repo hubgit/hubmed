@@ -1,5 +1,5 @@
 var Config = {
 	Services: {
-		PubMed: "http://pubmed.macropus.org/"
+		PubMed: "http://pubmed.macropus.org/articles/"
 	}
 }
