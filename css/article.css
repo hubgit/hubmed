@@ -2,7 +2,7 @@
     display: block;
     box-sizing: border-box;
     vertical-align: top;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-family: Arial, Verdana, Helvetica, serif;
 }
 
@@ -16,6 +16,7 @@
 
 [typeof=MedicalScholarlyArticle] [property=url] {
     color: inherit;
+    padding: 5px 0;
 }
 
 [typeof=MedicalScholarlyArticle] [property=creator] {
@@ -46,6 +47,7 @@
     font-family: Verdana, Arial, Helvetica, serif;
     font-size: 90%;
     text-align: left;
+    margin-top: 5px !important;
 }
 
 [typeof=MedicalScholarlyArticle] footer .link:not(:last-child) {

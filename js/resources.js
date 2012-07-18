@@ -44,12 +44,12 @@ var Collections = {
 					});
 				}
 			}
-        },
+		},
 
-        parse: function(data) {
-            this.links = data.links;
-            return data.items;
-        }
+		parse: function(data) {
+			this.links = data.links;
+			return data.items;
+		}
 	}),
 	Links: Backbone.Collection.extend({})
 };
