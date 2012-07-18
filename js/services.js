@@ -47,7 +47,7 @@ var PubMed = function(options) {
     };
 
     this.buildHistoryURL = function(data) {
-        return this.base + "?" + $.param({ history: data.WebEnv + "|" + data.QueryKey });
+        return this.base + "?" + $.param({ total: data.Count, history: data.WebEnv + "|" + data.QueryKey });
     };
 };
 
