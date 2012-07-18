@@ -27,6 +27,10 @@
     color: #270;
 }
 
+[typeof=MedicalScholarlyArticle] [property=citation] a {
+    color: inherit;
+}
+
 [typeof=MedicalScholarlyArticle] [property=abstract] {
     margin: 10px 10px;
     font-family: Optima, Arial, Verdana, Helvetica, serif;
