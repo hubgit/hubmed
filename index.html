@@ -5,7 +5,7 @@
 
 <title>HubMed</title>
 
-<link rel="service.pubmed" href="http://pubmed.macropus.org/articles/">
+<link rel="service.pubmed" href="http://home.local/2012/07/pubmed/articles/">
 
 <link rel="stylesheet" href="css/layout.css">
 <link rel="stylesheet" href="css/nav.css">
@@ -30,7 +30,7 @@
 	<a property="url" data-action="show-abstract" href="./?term={{identifier.pubmed}}[UID]"><span property="name">{{titleInfo.title}}.</span></a>
 
 	<div class="plural" property="creators">
-		{{#each name}}<a href="./?term={{family}}{{#each given}} {{.}}{{/each}} [Author]" property="creator" title="{{family}}{{#each given}} {{.}}{{/each}}">{{#each given}}{{.}} {{/each}}{{family}}</a>{{/each}}
+		{{#each name}}<a href="./?term={{#each family}}{{.}} {{/each}}{{#each given}}{{.}} {{/each}}[Author]" property="creator">{{#each given}}{{.}} {{/each}}{{#each family}} {{.}}{{/each}}</a>{{/each}}
 	</div>
 
 	<div property="citation">
