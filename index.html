@@ -32,7 +32,7 @@
 	<a property="url" data-action="show-abstract" href="./?term={{identifier.pubmed}}[UID]"><span property="name">{{titleInfo.title}}.</span></a>
 
 	<div class="plural" property="creators">
-		{{#each name}}<a href="./?term={{#each family}} {{.}}{{/each}},{{#each given}} {{.}}{{/each}}[Author]" property="creator">{{#each given}}{{.}} {{/each}}{{#each family}} {{.}}{{/each}}</a>{{/each}}
+		{{#each name}}<a href="./?term={{#each family}} {{.}}{{/each}},{{#each given}} {{.}}{{/each}} [Author]" property="creator">{{#each given}}{{.}} {{/each}}{{#each family}} {{.}}{{/each}}</a>{{/each}}
 	</div>
 
 	<div property="citation">
