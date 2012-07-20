@@ -87,6 +87,8 @@ var Altmetric = function(options) {
 		  });
 		}
 
+		data.readers.mendeley = Number(data.readers.mendeley);
+
 		if (data.readers.mendeley) {
 			if (data.doi) mendeley_url = "http://www.mendeley.com/openURL?id=doi:" + encodeURIComponent(data.doi);
 			else if (data.pmid) mendeley_url = "http://www.mendeley.com/openURL?id=pmid:" + encodeURIComponent(data.pmid);
@@ -104,7 +106,7 @@ var Altmetric = function(options) {
 
 	this.pluralise = function(count, single, plural) {
 		plural = plural || single + "s";
-		var suffix = Number(count) === 1 ? single : plural;
+		var suffix = count === 1 ? single : plural;
 		return count.toString() + " " + suffix;
 	};
 };
