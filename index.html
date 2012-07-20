@@ -33,7 +33,7 @@
 	</div>
 
 	<div property="citation">
-	{{#with relatedItem}}
+	{{#with host}}
 		<a property="journal" title="{{full}}" href="./?term={{identifier.issn}} [ISSN]">{{#if titleInfo.abbreviated}}{{titleInfo.abbreviated}}{{else}}{{titleInfo.full}}{{/if}}</a>. <abbr property="datePublished">{{part.date}}</abbr>{{#if part.detail}}; {{#with part.detail}}{{#if volume}} <span property="volume">{{volume}}</span>{{/if}}{{#if issue}}(<a property="issue" href="./?term={{../../identifier.issn}} [ISSN] AND {{issue}} [Issue]">{{issue}}</a>){{/if}}{{#if page}}: <span property="pagination">{{page}}</span>{{/if}}{{/with}}{{/if}}
 	{{/with}}
 	</div>
