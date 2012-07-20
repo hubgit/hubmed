@@ -104,7 +104,7 @@ var Altmetric = function(options) {
 
 	this.pluralise = function(count, single, plural) {
 		plural = plural || single + "s";
-		var suffix = count === 1 ? single : plural;
+		var suffix = Number(count) === 1 ? single : plural;
 		return count.toString() + " " + suffix;
 	};
 };
