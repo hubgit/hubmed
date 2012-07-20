@@ -6,12 +6,14 @@
 <title>HubMed</title>
 
 <link rel="service.pubmed" href="http://pubmed.macropus.org/articles/">
+<link rel="service.altmetric" href="http://api.altmetric.com/v1/" data-key="574827589873e3950a86ec183d21b41a">
 
 <link rel="stylesheet" href="css/layout.css">
 <link rel="stylesheet" href="css/nav.css">
 <link rel="stylesheet" href="css/pagination.css">
 <link rel="stylesheet" href="css/article.css">
 <link rel="stylesheet" href="css/input.css">
+<link rel="stylesheet" href="css/metrics.css">
 
 <script src="js/ext/jquery.js"></script>
 <script src="js/ext/jquery.ajaxQueue.js"></script>
@@ -52,4 +54,8 @@
 		<a class="link" rel="export" type="application/research-info-systems" href="{{export}}?format=application%2Fresearch-info-systems&id={{identifier.pubmed}}">RIS</a>
 		<a class="link" rel="related" href="./?term=related:{{identifier.pubmed}}">Related</a>
 	</footer>
+</script>
+
+<script type="text/html" data-template="Metric">
+	<a class="metric" target="_blank" href="{{url}}" style="{{#if domain}}background-image:url('http://www.google.com/s2/u/0/favicons?domain={{domain}}'){{/if}}">{{text}}</a>
 </script>

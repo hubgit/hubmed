@@ -9,6 +9,38 @@ $(function() {
 	});
 });
 
+var Models = {
+	Article: Backbone.Model.extend({
+		augmentors: {
+			altmetric: function() {
+				var model = this,
+					service = app.services.altmetric,
+					data = this.toJSON(),
+					path = service.path(data.identifier);
+
+				if(!path) return;
+
+				service.fetch(path).done(function(data) {
+					var links = service.parse(data);
+					console.log(links);
+					model.metrics.reset(links);
+				});
+			}
+		},
+
+		defaults: {
+			augmented: {}
+		},
+
+		initialize: function() {
+			var model = this;
+			$.each(this.augmentors, function(name, augmentor) {
+				augmentor.call(model);
+			});
+		}
+	})
+};
+
 var Collections = {
 	Articles: Backbone.Collection.extend({
 		sync: function(method, collection, options) {
@@ -44,10 +76,13 @@ var Collections = {
 
 		parse: function(data) {
 			this.links = data.links;
-			return data.items;
+			return data.items.map(function(item) {
+				return new Models.Article(item);
+			});
 		}
 	}),
-	Links: Backbone.Collection.extend({})
+	Links: Backbone.Collection.extend({}),
+	Metrics: Backbone.Collection.extend({})
 };
 
 var Views = {
@@ -64,13 +99,16 @@ var Views = {
 		},
 
 		initialize: function() {
+			this.model.metrics = new Collections.Metrics();
+			this.metrics = new Views.Metrics({ collection: this.model.metrics });
+
 			this.model.on("change", this.render, this);
 		},
 
 		render: function() {
 			var data = this.model.toJSON();
-			data.export = app.services.pubmed.url;
-			this.$el.html(Templates.Article(data));
+			data["export"] = app.services.pubmed.url;
+			this.$el.html(Templates.Article(data)).append(this.metrics.$el);
 			return this;
 		},
 
@@ -178,6 +216,39 @@ var Views = {
 					return text.replace(/\+/g, " ");
 				});
 			});
+		}
+	}),
+
+	Metrics: Backbone.View.extend({
+		className: "metrics",
+
+		initialize: function() {
+			this.collection.on("reset", this.reset, this);
+			this.collection.on("add", this.add, this);
 		},
+
+		reset: function() {
+			this.$el.empty();
+			this.collection.each(this.add, this);
+		},
+
+		add: function(metric) {
+			var view = new Views.Metric({ model: metric });
+			view.render().$el.appendTo(this.$el);
+		}
+	}),
+
+	Metric: Backbone.View.extend({
+		tagName: "span",
+
+		initialize: function() {
+			this.model.on("change", this.render, this);
+		},
+
+		render: function() {
+			var data = this.model.toJSON();
+			this.$el.html(Templates.Metric(data));
+			return this;
+		}
 	})
 };

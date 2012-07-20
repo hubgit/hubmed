@@ -21,6 +21,7 @@ $(function() {
 
 	app.services = {
 		pubmed: new PubMed(),
+		altmetric: new Altmetric()
 	};
 
 	app.collections = {
