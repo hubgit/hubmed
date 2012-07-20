@@ -11,38 +11,32 @@ $(function() {
 
 var Collections = {
 	Articles: Backbone.Collection.extend({
-		pubmed: new PubMed(),
-
 		sync: function(method, collection, options) {
-			var self = this;
-
 			if (options.url) {
-				this.pubmed.get(options.url).done(options.success);
+				app.services.pubmed.get(options.url).done(options.success);
 			}
 			else {
 				var matches = options.data.term.match(/^related:(.+)/);
 				if(matches) {
-					this.pubmed.related(matches[1]).done(function(doc) {
+					app.services.pubmed.related(matches[1]).done(function(doc) {
 						var data = {
 							Count: 1000,
 							WebEnv: document.evaluate("/eLinkResult/LinkSet/WebEnv", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent,
 							QueryKey: document.evaluate("/eLinkResult/LinkSet/LinkSetDbHistory/QueryKey", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent
 						};
 
-						var url = self.pubmed.buildHistoryURL(data);
-						self.pubmed.get(url).done(options.success);
+						app.services.pubmed.history(data).done(options.success);
 					});
 				}
 				else {
-					this.pubmed.search(options.data.term).done(function(doc) {
+					app.services.pubmed.search(options.data.term).done(function(doc) {
 						var data = {
 							Count: document.evaluate("/eSearchResult/Count", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent,
 							WebEnv: document.evaluate("/eSearchResult/WebEnv", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent,
 							QueryKey: document.evaluate("/eSearchResult/QueryKey", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent
 						};
 
-						var url = self.pubmed.buildHistoryURL(data);
-						self.pubmed.get(url).done(options.success);
+						app.services.pubmed.history(data).done(options.success);
 					});
 				}
 			}
@@ -75,7 +69,7 @@ var Views = {
 
 		render: function() {
 			var data = this.model.toJSON();
-			data.export = Config.Services.PubMed;
+			data.export = app.services.pubmed.url;
 			this.$el.html(Templates.Article(data));
 			return this;
 		},

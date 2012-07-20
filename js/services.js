@@ -13,9 +13,9 @@ Service.prototype.get = function(url, options) {
 };
 
 var PubMed = function(options) {
-    this.base = Config.Services.PubMed;
-
     this.defaults = $.extend({}, options);
+
+    this.url = $("link[rel='service.pubmed']").attr("href");
 
     this.search = function(term) {
         var data = {
@@ -40,8 +40,9 @@ var PubMed = function(options) {
         return this.get("http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi", { data: data });
     };
 
-    this.buildHistoryURL = function(data) {
-        return this.base + "?" + $.param({ total: data.Count, history: data.WebEnv + "|" + data.QueryKey });
+    this.history = function(data) {
+        var data = { total: data.Count, history: data.WebEnv + "|" + data.QueryKey };
+        return this.get(this.url, { data: data });
     };
 };
 

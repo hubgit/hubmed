@@ -19,6 +19,10 @@ $(function() {
 		}
 	};
 
+	app.services = {
+		pubmed: new PubMed(),
+	};
+
 	app.collections = {
 		articles: new Collections.Articles(),
 		links: new Collections.Links()
