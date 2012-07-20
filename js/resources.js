@@ -11,36 +11,38 @@ $(function() {
 
 var Collections = {
 	Articles: Backbone.Collection.extend({
+		pubmed: new PubMed(),
+
 		sync: function(method, collection, options) {
 			var self = this;
 
 			if (options.url) {
-				this.service.get(options.url).done(options.success);
+				this.pubmed.get(options.url).done(options.success);
 			}
 			else {
 				var matches = options.data.term.match(/^related:(.+)/);
 				if(matches) {
-					this.service.related(matches[1]).done(function(doc) {
+					this.pubmed.related(matches[1]).done(function(doc) {
 						var data = {
 							Count: 1000,
 							WebEnv: document.evaluate("/eLinkResult/LinkSet/WebEnv", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent,
 							QueryKey: document.evaluate("/eLinkResult/LinkSet/LinkSetDbHistory/QueryKey", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent
 						};
 
-						var url = self.service.buildHistoryURL(data);
-						self.service.get(url).done(options.success);
+						var url = self.pubmed.buildHistoryURL(data);
+						self.pubmed.get(url).done(options.success);
 					});
 				}
 				else {
-					this.service.search(options.data.term).done(function(doc) {
+					this.pubmed.search(options.data.term).done(function(doc) {
 						var data = {
 							Count: document.evaluate("/eSearchResult/Count", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent,
 							WebEnv: document.evaluate("/eSearchResult/WebEnv", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent,
 							QueryKey: document.evaluate("/eSearchResult/QueryKey", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent
 						};
 
-						var url = self.service.buildHistoryURL(data);
-						self.service.get(url).done(options.success);
+						var url = self.pubmed.buildHistoryURL(data);
+						self.pubmed.get(url).done(options.success);
 					});
 				}
 			}
@@ -87,20 +89,20 @@ var Views = {
 			switch ($node.data("action")) {
 				case "show-abstract":
 					$node.toggleClass("expanded").closest("article").find(".abstract").toggle();
-					break;
+				break;
 			}
 		}
 	}),
 
 	Articles: Backbone.View.extend({
+		events: {
+			//"click a": "openNewWindow"
+		},
+
 		initialize: function() {
 			this.$el.appendTo("body");
 			this.collection.on("reset", this.reset, this);
 			this.collection.on("add", this.add, this);
-		},
-
-		events: {
-			//"click a": "openNewWindow"
 		},
 
 		reset: function() {
@@ -121,6 +123,11 @@ var Views = {
 	}),
 
 	Pagination: Backbone.View.extend({
+		events: {
+			"click a": "fetchPage",
+			"inview a": "fetchPage"
+		},
+
 		initialize: function() {
 			this.$el.appendTo("body");
 			this.collection.on("reset", this.reset, this);
@@ -136,6 +143,21 @@ var Views = {
 			if (!url) return;
 
 			$("<a/>", { href: url, html: "More &darr;", rel: "next" }).appendTo(this.$el);
+		},
+
+		handleResponse: function(data) {
+			app.collections.links.reset(data.links);
+		},
+
+		fetchPage: function(event) {
+			event.preventDefault();
+			event.stopPropagation();
+
+			var node = $(event.currentTarget);
+			if(node.hasClass("loading")) return;
+			node.addClass("loading").html("Loading more&hellip;");
+
+			app.collections.articles.fetch({ add: true, url: event.currentTarget.href, success: this.handleResponse });
 		}
 	}),
 
