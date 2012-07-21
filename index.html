@@ -23,7 +23,9 @@
 <script src="js/ext/backbone.js"></script>
 
 <script src="js/services.js"></script>
-<script src="js/resources.js"></script>
+<script src="js/templates.js"></script>
+<script src="js/models.js"></script>
+<script src="js/collections.js"></script>
 <script src="js/views.js"></script>
 <script src="js/app.js"></script>
 
@@ -49,11 +51,6 @@
 	{{/if}}
 
 	<footer>
-		<!--<a class="link expandable" href="#" data-action="show-abstract">Abstract</span>-->
-		<a class="link" rel="fulltext" href="{{#if identifier.doi}}http://dx.doi.org/{{identifier.doi}}{{else}}http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id={{identifier.pubmed}}{{/if}}">Article</a>
-		<a class="link" rel="export" type="text/bibtex" href="{{export}}?format=text%2Fbibtex&id={{identifier.pubmed}}">BibTeX</a>
-		<a class="link" rel="export" type="application/research-info-systems" href="{{export}}?format=application%2Fresearch-info-systems&id={{identifier.pubmed}}">RIS</a>
-		<a class="link" rel="related" href="./?term=related:{{identifier.pubmed}}">Related</a>
 	</footer>
 </script>
 

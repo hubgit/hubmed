@@ -11,7 +11,7 @@ $(function() {
 
 		// empty the collection
 		app.collections.articles.reset();
-		app.collections.links.reset();
+		app.collections.pages.reset();
 
 		var term = $("input[name=term]").val();
 		if(term) {
@@ -26,7 +26,7 @@ $(function() {
 
 	app.collections = {
 		articles: new Collections.Articles(),
-		links: new Collections.Links()
+		pages: new Collections.Pages()
 	};
 
 	app.views = {
@@ -44,7 +44,7 @@ $(function() {
 		pagination: new Views.Pagination({
 			id: "pagination",
 			className: "wrapper pagination",
-			collection: app.collections.links
+			collection: app.collections.pages
 		})
 	};
 
