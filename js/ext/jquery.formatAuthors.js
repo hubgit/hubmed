@@ -8,7 +8,7 @@
       if (authors.length > max) {
         authors.slice(max - 2, -2).wrap("<span class='hidden'></span>");
 
-        et = $("<a/>", { href: "#" }).addClass("et-al").text(" et-al.").appendTo(node);
+        et = $("<a/>", { href: "#" }).addClass("et-al").text(" et al.").appendTo(node);
 
         et.click(function (event) {
           event.preventDefault();
