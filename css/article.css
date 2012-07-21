@@ -42,12 +42,22 @@
     display: none;
 }
 
+[typeof=MedicalScholarlyArticle] .et-al {
+    font-style: italic;
+    white-space: nowrap;
+    color: lightSlateGray;
+}
+
 [typeof=MedicalScholarlyArticle] footer {
     color: gray;
     font-family: Verdana, Arial, Helvetica, serif;
     font-size: 90%;
     text-align: left;
     margin-top: 5px !important;
+}
+
+[typeof=MedicalScholarlyArticle] footer .link {
+    white-space: nowrap;
 }
 
 [typeof=MedicalScholarlyArticle] footer .link:not(:last-child) {

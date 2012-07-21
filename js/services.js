@@ -66,7 +66,7 @@ var Altmetric = function(options) {
 
 	this.fetch = function(path){
 		var data = { key: this.key };
-		return this.get({ url: this.url + path, data: data, queue: true });
+		return this.get({ url: this.url + path, data: data, queue: false });
 	};
 
 	this.parse = function(data){

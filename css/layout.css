@@ -31,8 +31,14 @@ header {
 	box-shadow: 0 5px 10px #aaa;
 }
 
+/*
 .plural > *:not(:last-of-type):after {
     content: ", ";
+}
+*/
+
+[hidden], .hidden {
+	display: none;
 }
 
 a {

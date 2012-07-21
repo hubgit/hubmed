@@ -77,6 +77,8 @@ var Views = {
 			var data = this.model.toJSON();
 			this.$el.html(Templates.Article(data));
 
+			this.$el.find("[property=creators]").formatAuthors(5, "creator");
+
 			this.$el.find("footer")
 				.append(this.links.$el)
 				.append(this.metrics.$el);
