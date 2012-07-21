@@ -5,7 +5,7 @@ var Collections = {
 	Articles: Backbone.Collection.extend({
 		sync: function(method, collection, options) {
 			if (options.url) {
-				app.services.pubmed.get(options.url).done(options.success);
+				app.services.pubmed.get({ url: options.url }).done(options.success);
 			}
 			else {
 				var matches = options.data.term.match(/^related:(.+)/);
@@ -37,7 +37,7 @@ var Collections = {
 		parse: function(data) {
 			app.collections.pages.reset(data.links);
 
-			if(!data.items) return;
+			if(!data.items) return [];
 
 			return data.items.map(function(item) {
 				return new Models.Article(item);
