@@ -11,7 +11,21 @@ var Models = {
 
 				service.fetch(path).done(function(data) {
 					var items = service.parse(data);
-					model.metrics.reset(items);
+					model.metrics.add(items);
+				});
+			},
+
+			scopus: function() {
+				var model = this,
+					service = app.services.scopus,
+					identifier = this.get("identifier"),
+					doi = identifier.doi;
+
+				if(!doi) return;
+
+				service.fetch(doi).done(function(data) {
+					var item = service.parse(data);
+					if(item) model.metrics.add(item);
 				});
 			}
 		},
@@ -21,7 +35,7 @@ var Models = {
 		},
 
 		events: {
-			"change:identifier": "setLinks",
+			"change:identifier": "setLinks"
 		},
 
 		initialize: function() {
@@ -67,8 +81,8 @@ var Models = {
 			];
 
 			this.links.reset(items);
-		},
+		}
 	}),
 
-	Link: Backbone.Model.extend({}),
+	Link: Backbone.Model.extend({})
 };

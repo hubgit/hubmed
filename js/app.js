@@ -21,7 +21,8 @@ $(function() {
 
 	app.services = {
 		pubmed: new PubMed(),
-		altmetric: new Altmetric()
+		altmetric: new Altmetric(),
+		scopus: new Scopus()
 	};
 
 	app.collections = {

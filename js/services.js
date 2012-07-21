@@ -1,15 +1,17 @@
 var Service = function() {};
 
-Service.prototype.get = function(url, options) {
-	options = options || {};
+Service.prototype.get = function(options) {
+	options = $.extend({ cache: true }, options);
+	options.data = $.extend({}, this.defaults, options.data);
 
 	var method = options.queue ? $.ajaxQueue : $.ajax;
+	return method(options);
+};
 
-	return method({
-		url: url,
-		data: $.extend({}, this.defaults, options.data),
-		cache: true
-	});
+Service.prototype.pluralise = function(count, single, plural) {
+	plural = plural || single + "s";
+	var suffix = count === 1 ? single : plural;
+	return count.toString() + " " + suffix;
 };
 
 var PubMed = function(options) {
@@ -25,7 +27,7 @@ var PubMed = function(options) {
 			term: term
 		};
 
-		return this.get("http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi", { data: data });
+		return this.get({ url: "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi", data: data });
 	};
 
 	this.related = function(id) {
@@ -37,12 +39,12 @@ var PubMed = function(options) {
 			id: id
 		};
 
-		return this.get("http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi", { data: data });
+		return this.get({ url: "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi", data: data });
 	};
 
 	this.history = function(data) {
 		data = { total: data.Count, history: data.WebEnv + "|" + data.QueryKey };
-		return this.get(this.url, { data: data });
+		return this.get({ url: this.url, data: data });
 	};
 };
 
@@ -64,7 +66,7 @@ var Altmetric = function(options) {
 
 	this.fetch = function(path){
 		var data = { key: this.key };
-		return this.get(this.url + path, { data: data, queue: true });
+		return this.get({ url: this.url + path, data: data, queue: true });
 	};
 
 	this.parse = function(data){
@@ -103,12 +105,42 @@ var Altmetric = function(options) {
 
 		return items;
 	};
-
-	this.pluralise = function(count, single, plural) {
-		plural = plural || single + "s";
-		var suffix = count === 1 ? single : plural;
-		return count.toString() + " " + suffix;
-	};
 };
 
 Altmetric.prototype = new Service();
+
+var Scopus = function(options) {
+	this.defaults = $.extend({}, options);
+
+	var node = $("link[rel='service.scopus']");
+
+	this.url = node.attr("href");
+	this.key = node.data("key");
+
+	this.fetch = function(doi){
+		var data = {
+			apiKey: this.key,
+			search: "DOI(" + doi + ")"
+		};
+
+		return this.get({ url: this.url + "documentSearch.url", data: data, dataType: "jsonp", queue: true });
+	};
+
+	this.parse = function(data) {
+		if(!data.OK || !data.OK.results || !data.OK.results.length) return;
+
+		var item = data.OK.results[0];
+
+		var citedbycount = Number(item.citedbycount);
+		if(!citedbycount) return;
+
+		return {
+			url: item.inwardurl,
+			text: this.pluralise(citedbycount, "citation"),
+			domain: "www.scopus.com"
+		};
+	};
+};
+
+Scopus.prototype = new Service();
+
