@@ -3,6 +3,16 @@
 
 var app = {};
 
+Handlebars.registerHelper("authorSearchComma", function(given) {
+	var initials = true;
+
+	$.each(given, function() {
+		if (this.match(/[a-z]/)) initials = false;
+	});
+
+	return initials ? "" : ",";
+});
+
 $(function() {
 	/** Fetch the list of articles and update the collection **/
 	var refresh = function() {

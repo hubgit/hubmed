@@ -172,6 +172,7 @@ var Views = {
 				.attr("rel", data.rel)
 				.attr("type", data.type)
 				.attr("href", data.href)
+				.attr("target", data.target)
 				.text(data.text);
 		}
 	}),

@@ -56,6 +56,7 @@ var Models = {
 				{
 					rel: "fulltext",
 					text: "Article",
+					target: "_blank",
 					href: identifier.doi ? "http://dx.doi.org/" + identifier.doi : "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id=" + identifier.pubmed
 				},
 
