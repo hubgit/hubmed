@@ -45,7 +45,7 @@ var Models = {
 
 			var model = this;
 			$.each(this.augmentors, function(name, augmentor) {
-				augmentor.call(model);
+				//augmentor.call(model);
 			});
 		},
 
@@ -85,5 +85,6 @@ var Models = {
 		}
 	}),
 
-	Link: Backbone.Model.extend({})
+	Link: Backbone.Model.extend({}),
+	Info: Backbone.Model.extend({})
 };

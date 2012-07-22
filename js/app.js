@@ -3,16 +3,6 @@
 
 var app = {};
 
-Handlebars.registerHelper("authorSearchComma", function(given) {
-	var initials = true;
-
-	$.each(given, function() {
-		if (this.match(/[a-z]/)) initials = false;
-	});
-
-	return initials ? "" : ",";
-});
-
 $(function() {
 	/** Fetch the list of articles and update the collection **/
 	var refresh = function() {
@@ -35,6 +25,10 @@ $(function() {
 		scopus: new Scopus()
 	};
 
+	app.models = {
+		info: new Models.Info()
+	};
+
 	app.collections = {
 		articles: new Collections.Articles(),
 		pages: new Collections.Pages()
@@ -44,6 +38,12 @@ $(function() {
 		input: new Views.Input({
 			id: "input",
 			className: "wrapper",
+		}),
+
+		info: new Views.Info({
+			id: "info",
+			className: "wrapper",
+			model: app.models.info
 		}),
 
 		articles: new Views.Articles({

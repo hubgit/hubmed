@@ -17,6 +17,8 @@ var Collections = {
 							QueryKey: document.evaluate("/eLinkResult/LinkSet/LinkSetDbHistory/QueryKey", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent
 						};
 
+						app.models.info.set(data);
+
 						app.services.pubmed.history(data).done(options.success);
 					});
 				}
@@ -27,6 +29,8 @@ var Collections = {
 							WebEnv: document.evaluate("/eSearchResult/WebEnv", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent,
 							QueryKey: document.evaluate("/eSearchResult/QueryKey", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent
 						};
+
+						app.models.info.set(data);
 
 						app.services.pubmed.history(data).done(options.success);
 					});

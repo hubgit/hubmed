@@ -8,12 +8,6 @@ Service.prototype.get = function(options) {
 	return method(options);
 };
 
-Service.prototype.pluralise = function(count, single, plural) {
-	plural = plural || single + "s";
-	var suffix = count === 1 ? single : plural;
-	return count.toString() + " " + suffix;
-};
-
 var PubMed = function(options) {
 	this.defaults = $.extend({}, options);
 
@@ -77,14 +71,14 @@ var Altmetric = function(options) {
 		if (data.cited_by_blogs_count) {
 			items.push({
 				url: "http://altmetric.com/details.php?citation_id=" + id,
-				text: this.pluralise(data.cited_by_blogs_count, "post")
+				text: $.pluralise(data.cited_by_blogs_count, "post")
 			});
 		}
 
 		if (data.cited_by_tweeters_count){
 			items.push({
 			  url: "http://altmetric.com/details.php?citation_id=" + id,
-			  text: this.pluralise(data.cited_by_tweeters_count, "tweet"),
+			  text: $.pluralise(data.cited_by_tweeters_count, "tweet"),
 			  domain: "twitter.com"
 		  });
 		}
@@ -98,7 +92,7 @@ var Altmetric = function(options) {
 
 			items.push({
 				url: mendeley_url,
-				text: this.pluralise(data.readers.mendeley, "reader"),
+				text: $.pluralise(data.readers.mendeley, "reader"),
 				domain: "mendeley.com"
 			});
 		}
@@ -136,7 +130,7 @@ var Scopus = function(options) {
 
 		return {
 			url: item.inwardurl,
-			text: this.pluralise(citedbycount, "citation"),
+			text: $.pluralise(citedbycount, "citation"),
 			domain: "www.scopus.com"
 		};
 	};

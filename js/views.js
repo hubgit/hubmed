@@ -26,11 +26,21 @@ var Views = {
 		}
 	}),
 
-	Articles: Backbone.View.extend({
-		events: {
-			//"click a": "openNewWindow"
+	Info: Backbone.View.extend({
+		initialize: function() {
+			this.$el.appendTo("body");
+			this.model.on("change", this.render, this);
 		},
 
+		render: function() {
+			var data = this.model.toJSON();
+			this.$el.html(Templates.Info(data));
+			return this;
+		},
+
+	}),
+
+	Articles: Backbone.View.extend({
 		initialize: function() {
 			this.$el.appendTo("body");
 			this.collection.on("reset", this.reset, this);
