@@ -1,17 +1,8 @@
-[typeof=MedicalScholarlyArticle] {
-    display: block;
-    box-sizing: border-box;
-    vertical-align: top;
-    margin-bottom: 15px;
-    font-family: Arial, Verdana, Helvetica, serif;
-    padding: 0 10px;
-}
-
 [typeof=MedicalScholarlyArticle] [property=url] {
     color: inherit;
     padding: 5px 0;
     display: block;
-    margin: 0 -10px;
+    margin-left: -10px;
 }
 
 [typeof=MedicalScholarlyArticle] [property=creator] {
@@ -36,7 +27,7 @@
 }
 
 [typeof=MedicalScholarlyArticle] footer {
-    margin-top: 5px !important;
+    margin-top: 5px;
     color: gray;
     font-size: 90%;
 }

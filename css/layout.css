@@ -1,4 +1,4 @@
-nav, header, section, footer {
+nav, article, header, section, footer {
 	display: block;
 }
 
@@ -9,7 +9,7 @@ html {
 }
 
 body {
-	font-family: Helvetica, Arial, sans-serif;
+    font-family: Arial, Verdana, Helvetica, sans-serif;
 	line-height: 1.4;
 	margin: 0;
 	color: #000;
@@ -26,7 +26,18 @@ body {
 	}
 }
 
-@media only screen and (max-device-width: 480px) {
+article {
+    box-sizing: border-box;
+    vertical-align: top;
+    margin-bottom: 15px;
+    padding: 0 10px;
+}
+
+header, section, footer {
+	margin-left: 10px;
+}
+
+@media only screen and (max-width: 480px) {
 	body {
 		font-size: 80%;
 	}
@@ -34,7 +45,7 @@ body {
     article {
         display: block;
         width: 100%;
-        margin: 0;
+        margin: 0 0 15px 0;
         padding: 0;
     }
 }
