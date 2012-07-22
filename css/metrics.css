@@ -8,10 +8,4 @@
 	background-position: 2px center;
 	background-repeat: no-repeat;
 	vertical-align: middle;
-	opacity: 0.5;
-	font-size: 90%;
-}
-
-.metric:hover {
-	opacity: 1.0;
 }

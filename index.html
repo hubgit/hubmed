@@ -5,21 +5,27 @@
 
 <title>HubMed</title>
 
+<!-- services -->
+
 <link rel="service.pubmed" href="http://pubmed.macropus.org/articles/">
 <link rel="service.altmetric" href="http://api.altmetric.com/v1/" data-key="574827589873e3950a86ec183d21b41a">
 <link rel="service.scopus" href="http://searchapi.scopus.com/" data-key="8fdd73f99b55d138e19630123d456d9b">
 
+<!-- stylesheets -->
+
 <link rel="stylesheet" href="css/layout.css">
-<link rel="stylesheet" href="css/nav.css">
 <link rel="stylesheet" href="css/pagination.css">
 <link rel="stylesheet" href="css/article.css">
 <link rel="stylesheet" href="css/input.css">
 <link rel="stylesheet" href="css/metrics.css">
 
+<!-- scripts -->
+
 <script src="js/ext/jquery.js"></script>
 <script src="js/ext/jquery.ajaxQueue.js"></script>
 <script src="js/ext/jquery.inview.js"></script>
 <script src="js/ext/jquery.formatAuthors.js"></script>
+
 <script src="js/ext/handlebars.js"></script>
 <script src="js/ext/underscore.js"></script>
 <script src="js/ext/backbone.js"></script>
@@ -34,28 +40,27 @@
 <!-- only templates below here -->
 
 <script type="text/html" data-template="Article">
-	<a property="url" data-action="show-abstract" href="./?term={{identifier.pubmed}}[UID]"><span property="name">{{titleInfo.title}}.</span></a>
+	<header>
+		<a property="url" data-action="show-abstract" href="./?term={{identifier.pubmed}}[UID]"><span property="name">{{titleInfo.title}}.</span></a>
 
-	<div class="plural" property="creators">
-		{{#each name}}<a href="./?term={{#each family}} {{.}}{{/each}},{{#each given}} {{.}}{{/each}} [Author]" property="creator">{{#each given}}{{.}} {{/each}}{{#each family}} {{.}}{{/each}}</a>{{/each}}
-	</div>
+		<div property="creators">
+			{{#each name}}<a href="./?term={{#each family}} {{.}}{{/each}},{{#each given}} {{.}}{{/each}} [Author]" property="creator">{{#each given}}{{.}} {{/each}}{{#each family}} {{.}}{{/each}}</a>{{/each}}
+		</div>
 
-	<div property="citation">
-	{{#with host}}
-		<a property="journal" title="{{full}}" href="./?term={{identifier.issn}} [ISSN]">{{#if titleInfo.abbreviated}}{{titleInfo.abbreviated}}{{else}}{{titleInfo.full}}{{/if}}</a>. <abbr property="datePublished">{{part.date}}</abbr>{{#if part.detail}}; {{#with part.detail}}{{#if volume}} <span property="volume">{{volume}}</span>{{/if}}{{#if issue}}(<a property="issue" href="./?term={{../../identifier.issn}} [ISSN] AND {{issue}} [Issue]">{{issue}}</a>){{/if}}{{#if page}}: <span property="pagination">{{page}}</span>{{/if}}{{/with}}{{/if}}
-	{{/with}}
-	</div>
+		<div property="citation">
+		{{#with host}}
+			<a property="journal" title="{{full}}" href="./?term={{identifier.issn}} [ISSN]">{{#if titleInfo.abbreviated}}{{titleInfo.abbreviated}}{{else}}{{titleInfo.full}}{{/if}}</a>. <abbr property="datePublished">{{part.date}}</abbr>{{#if part.detail}}; {{#with part.detail}}{{#if volume}} <span property="volume">{{volume}}</span>{{/if}}{{#if issue}}(<a property="issue" href="./?term={{../../identifier.issn}} [ISSN] AND {{issue}} [Issue]">{{issue}}</a>){{/if}}{{#if page}}: <span property="pagination">{{page}}</span>{{/if}}{{/with}}{{/if}}
+		{{/with}}
+		</div>
+	</header>
 
-	{{#if abstract}}
-	<p property="abstract" class="abstract">{{abstract}}</p>
-	{{else}}
-	<p class="abstract">No abstract available</p>
-	{{/if}}
+	<section>
+		{{#if abstract}}
+		<p property="abstract">{{abstract}}</p>
+		{{else}}
+		<p class="abstract">No abstract available</p>
+		{{/if}}
+	</section>
 
-	<footer>
-	</footer>
-</script>
-
-<script type="text/html" data-template="Metric">
-	<a class="metric" target="_blank" href="{{url}}" style="{{#if domain}}background-image:url('http://www.google.com/s2/u/0/favicons?domain={{domain}}'){{/if}}">{{text}}</a>
+	<footer></footer>
 </script>

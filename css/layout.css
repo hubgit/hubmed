@@ -1,4 +1,4 @@
-header, nav, footer {
+nav, header, section, footer {
 	display: block;
 }
 
@@ -26,16 +26,18 @@ body {
 	}
 }
 
-header {
-	background: #444;
-	box-shadow: 0 5px 10px #aaa;
-}
+@media only screen and (max-device-width: 480px) {
+	body {
+		font-size: 80%;
+	}
 
-/*
-.plural > *:not(:last-of-type):after {
-    content: ", ";
+    article {
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
 }
-*/
 
 [hidden], .hidden {
 	display: none;
@@ -85,4 +87,13 @@ a.expandable:before {
 
 a.expandable.expanded:before {
 	content: "▵ ";
+}
+
+a.link {
+    white-space: nowrap;
+}
+
+a.link:not(:last-child) {
+    /*content: " · ";*/
+    margin-right: 10px;
 }

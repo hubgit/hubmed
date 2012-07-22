@@ -4,22 +4,18 @@
     vertical-align: top;
     margin-bottom: 15px;
     font-family: Arial, Verdana, Helvetica, serif;
-}
-
-[typeof=MedicalScholarlyArticle] > * {
-    display: block;
-}
-
-[typeof=MedicalScholarlyArticle] > *:not([property=url]) {
-    margin: 0 10px;
+    padding: 0 10px;
 }
 
 [typeof=MedicalScholarlyArticle] [property=url] {
     color: inherit;
     padding: 5px 0;
+    display: block;
+    margin: 0 -10px;
 }
 
 [typeof=MedicalScholarlyArticle] [property=creator] {
+    white-space: nowrap;
     color: gray;
 }
 
@@ -31,15 +27,18 @@
     color: inherit;
 }
 
-[typeof=MedicalScholarlyArticle] [property=abstract] {
+[typeof=MedicalScholarlyArticle] section {
     font-family: Optima, Arial, Verdana, Helvetica, serif;
     text-align: justify;
-}
-
-[typeof=MedicalScholarlyArticle] .abstract {
     margin-top: 10px;
     margin-bottom: 10px;
     display: none;
+}
+
+[typeof=MedicalScholarlyArticle] footer {
+    margin-top: 5px !important;
+    color: gray;
+    font-size: 90%;
 }
 
 [typeof=MedicalScholarlyArticle] .et-al {
@@ -47,30 +46,3 @@
     white-space: nowrap;
     color: lightSlateGray;
 }
-
-[typeof=MedicalScholarlyArticle] footer {
-    color: gray;
-    font-family: Verdana, Arial, Helvetica, serif;
-    font-size: 90%;
-    text-align: left;
-    margin-top: 5px !important;
-}
-
-[typeof=MedicalScholarlyArticle] footer .link {
-    white-space: nowrap;
-}
-
-[typeof=MedicalScholarlyArticle] footer .link:not(:last-child) {
-    /*content: " · ";*/
-    margin-right: 10px;
-}
-
-@media only screen and (max-device-width: 480px) {
-    [typeof=MedicalScholarlyArticle] {
-        display: block;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-    }
-}
-

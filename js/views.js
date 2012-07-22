@@ -43,8 +43,7 @@ var Views = {
 
 			var articles = $("article");
 			if(articles.length === 1) {
-				articles.find("[property=abstract]").show();
-				//articles.find("[data-action=show-abstract]").hide();
+				articles.find("section").show();
 			}
 		},
 
@@ -67,8 +66,8 @@ var Views = {
 		},
 
 		initialize: function() {
-			this.metrics = new Views.Metrics({ collection: this.model.metrics });
 			this.links = new Views.Links({ collection: this.model.links });
+			this.metrics = new Views.Metrics({ collection: this.model.metrics });
 
 			this.model.on("change", this.render, this);
 		},
@@ -94,7 +93,7 @@ var Views = {
 
 			switch ($node.data("action")) {
 				case "show-abstract":
-					$node.toggleClass("expanded").closest("article").find(".abstract").toggle();
+					$node.toggleClass("expanded").closest("article").find("section").toggle();
 				break;
 			}
 		}
@@ -120,7 +119,13 @@ var Views = {
 	}),
 
 	Metric: Backbone.View.extend({
-		tagName: "span",
+		tagName: "a",
+
+		className: "metric",
+
+		attributes: {
+			target: "_blank"
+		},
 
 		initialize: function() {
 			this.model.on("change", this.render, this);
@@ -128,7 +133,10 @@ var Views = {
 
 		render: function() {
 			var data = this.model.toJSON();
-			this.$el.html(Templates.Metric(data));
+
+			this.$el.attr("href", data.url).text(data.text);
+			if(data.domain) this.$el.css("background-image", "url(http://www.google.com/s2/u/0/favicons?domain=" + data.domain + ")")
+
 			return this;
 		}
 	}),
