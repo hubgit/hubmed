@@ -45,7 +45,7 @@ var Models = {
 
 			var model = this;
 			$.each(this.augmentors, function(name, augmentor) {
-				//augmentor.call(model);
+				augmentor.call(model);
 			});
 		},
 
