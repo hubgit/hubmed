@@ -54,30 +54,39 @@ var Models = {
 
 			var items = [
 				{
-					rel: "fulltext",
-					text: "Article",
-					target: "_blank",
-					href: identifier.doi ? "http://dx.doi.org/" + identifier.doi : "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id=" + identifier.pubmed
+					text: "Abstract",
+					attributes: {
+						rel: "abstract",
+						href: "./?term=" + identifier.pubmed + " [UID]",
+						"class": "link expandable",
+						"data-action": "show-abstract"
+					}
 				},
 
 				{
-					rel: "export",
 					text: "BibTeX",
-					type: "text/bibtex",
-					href: app.services.pubmed.url + "?format=text%2Fbibtex&id=" + identifier.pubmed
+					attributes: {
+						rel: "export",
+						href: app.services.pubmed.url + "?format=text%2Fbibtex&id=" + identifier.pubmed,
+						type: "text/bibtex"
+					}
 				},
 
 				{
-					rel: "export",
 					text: "RIS",
-					type: "application/research-info-systems",
-					href: app.services.pubmed.url + "?format=application%2Fresearch-info-systems&id=" + identifier.pubmed
+					attributes: {
+						rel: "export",
+						href: app.services.pubmed.url + "?format=application%2Fresearch-info-systems&id=" + identifier.pubmed,
+						type: "application/research-info-systems"
+					}
 				},
 
 				{
-					rel: "related",
 					text: "Related",
-					href: "./?term=related:" + identifier.pubmed
+					attributes: {
+						rel: "related",
+						href: "./?term=related:" + identifier.pubmed
+					}
 				}
 			];
 

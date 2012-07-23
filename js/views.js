@@ -54,6 +54,7 @@ var Views = {
 			var articles = $("article");
 			if(articles.length === 1) {
 				articles.find("section").show();
+				articles.find("[data-action=show-abstract]").addClass("expanded");
 			}
 		},
 
@@ -177,13 +178,7 @@ var Views = {
 
 		initialize: function() {
 			var data = this.model.toJSON();
-
-			this.$el
-				.attr("rel", data.rel)
-				.attr("type", data.type)
-				.attr("href", data.href)
-				.attr("target", data.target)
-				.text(data.text);
+			this.$el.text(data.text).attr(data.attributes);
 		}
 	}),
 

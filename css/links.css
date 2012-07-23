@@ -1,0 +1,51 @@
+a {
+	color: #00E;
+	text-decoration: none;
+}
+
+a:focus {
+	outline: thin dotted;
+}
+
+a:hover, a:active {
+	outline: 0;
+}
+
+article a:hover {
+    color: #00E !important;
+}
+
+footer a {
+	opacity: 0.5;
+}
+
+footer a:hover {
+	opacity: 1.0;
+	text-decoration: none;
+}
+
+
+a[rel=related]:before {
+	content: "✫ ";
+}
+
+a[rel=export]:before {
+	content: "⇣ ";
+}
+
+a.expandable:before {
+	content: "▿ ";
+}
+
+a.expandable.expanded:before {
+	content: "▴ ";
+}
+
+a.link {
+    white-space: nowrap;
+}
+
+a.link:not(:last-child) {
+    /*content: " · ";*/
+    margin-right: 10px;
+}

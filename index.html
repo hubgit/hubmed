@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="css/input.css">
 <link rel="stylesheet" href="css/metrics.css">
 <link rel="stylesheet" href="css/info.css">
+<link rel="stylesheet" href="css/links.css">
 
 <!-- scripts -->
 
@@ -43,7 +44,7 @@
 
 <script type="text/html" data-template="Article">
 	<header>
-		<a property="url" data-action="show-abstract" href="./?term={{identifier.pubmed}}[UID]"><span property="name">{{titleInfo.title}}.</span></a>
+		<a property="url" target="blank" href="{{#if identifier.doi}}http://dx.doi.org/{{identifier.doi}}{{else}}http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id={{identifier.pubmed}}{{/if}}"><span property="name">{{titleInfo.title}}.</span></a>
 
 		<div property="creators">
 			{{#each name}}<a href="./?term={{#each family}} {{.}}{{/each}}{{#authorSearchComma given}}{{/authorSearchComma}}{{#each given}} {{.}}{{/each}} [Author]" property="creator">{{#each given}}{{.}} {{/each}}{{#each family}} {{.}}{{/each}}</a>{{/each}}
