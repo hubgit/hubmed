@@ -30,10 +30,6 @@ var Models = {
 			}
 		},
 
-		defaults: {
-			augmented: {}
-		},
-
 		events: {
 			"change:identifier": "setLinks"
 		},
