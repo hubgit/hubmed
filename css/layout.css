@@ -31,6 +31,7 @@ article {
     box-sizing: border-box;
     vertical-align: top;
     margin-bottom: 15px;
+    margin-top: 5px;
 }
 
 header, section, footer {
