@@ -6,7 +6,7 @@
 
 [typeof=MedicalScholarlyArticle] [property=creator] {
     white-space: nowrap;
-    color: gray;
+    color: rgb(180, 180, 180);
 }
 
 [typeof=MedicalScholarlyArticle] [property=citation] {
