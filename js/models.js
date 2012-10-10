@@ -60,20 +60,20 @@ var Models = {
 				},*/
 
 				{
-					text: "BibTeX",
-					attributes: {
-						rel: "export",
-						href: app.services.pubmed.url + "?format=text%2Fbibtex&id=" + identifier.pubmed,
-						type: "text/bibtex"
-					}
-				},
-
-				{
 					text: "RIS",
 					attributes: {
 						rel: "export",
 						href: app.services.pubmed.url + "?format=application%2Fresearch-info-systems&id=" + identifier.pubmed,
 						type: "application/research-info-systems"
+					}
+				},
+
+				{
+					text: "BibTeX",
+					attributes: {
+						rel: "export",
+						href: app.services.pubmed.url + "?format=text%2Fbibtex&id=" + identifier.pubmed,
+						type: "text/bibtex"
 					}
 				},
 
