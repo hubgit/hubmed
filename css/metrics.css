@@ -1,13 +1,13 @@
 .metrics {
-	background: #f6f6f6;
-	height: 100%;
+	/*background: #f6f6f6;
+	height: 100%;*/
 }
 
 .metric {
 	display: block;
 	white-space: nowrap;
 	padding: 2px 5px 0 27px;
-	color: #999;
+	color: #444;
 	background-color: white;
 	background-size: 16px 16px;
 	background-position: 5px center;

@@ -43,8 +43,7 @@
 <!-- templates -->
 
 <script type="text/html" data-template="Article">
-	<div class="context">
-	</div>
+	<div class="context"></div>
 	<div class="main">
 		<header>
 			<a property="url" target="_blank" data-action="show-abstract" href="{{#if identifier.doi}}http://dx.doi.org/{{identifier.doi}}{{else}}http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id={{identifier.pubmed}}{{/if}}"><span property="name">{{titleInfo.title}}.</span></a>
