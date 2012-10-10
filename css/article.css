@@ -5,9 +5,13 @@
     font-weight: 400;
 }
 
+[typeof=MedicalScholarlyArticle] [property=url]:visited {
+    color: green;
+}
+
 [typeof=MedicalScholarlyArticle] [property=creator] {
     white-space: nowrap;
-    color: rgb(180, 180, 180);
+    color: #777;
 }
 
 [typeof=MedicalScholarlyArticle] [property=citation] {
@@ -35,5 +39,5 @@
 [typeof=MedicalScholarlyArticle] .et-al {
     font-style: italic;
     white-space: nowrap;
-    color: lightSlateGray;
+    color: #aaa;
 }

@@ -47,7 +47,7 @@
 	</div>
 	<div class="main">
 		<header>
-			<a property="url" target="blank" href="{{#if identifier.doi}}http://dx.doi.org/{{identifier.doi}}{{else}}http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id={{identifier.pubmed}}{{/if}}"><span property="name">{{titleInfo.title}}.</span></a>
+			<a property="url" target="_blank" data-action="show-abstract" href="{{#if identifier.doi}}http://dx.doi.org/{{identifier.doi}}{{else}}http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id={{identifier.pubmed}}{{/if}}"><span property="name">{{titleInfo.title}}.</span></a>
 
 			<div property="creators">
 				{{#each name}}<a href="./?term={{#each family}} {{.}}{{/each}}{{#authorSearchComma given}}{{/authorSearchComma}}{{#each given}} {{.}}{{/each}} [Author]" property="creator">{{#each given}}{{.}} {{/each}}{{#each family}} {{.}}{{/each}}</a>{{/each}}

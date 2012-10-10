@@ -16,6 +16,10 @@ body {
 	font-weight: 200;
 }
 
+p {
+	margin: 0;
+}
+
 .wrapper{
 	width: 90%;
 	margin: 0 auto;
@@ -30,24 +34,27 @@ body {
 
 #articles {
 	display: table;
+	margin-top: 5px;
 }
 
-#articles > article {
+article {
 	display: table-row;
 }
 
-#articles > article > .context,
-#articles > article > .main {
+article > .context,
+article > .main {
 	display: table-cell;
 }
 
-#articles > article > .context {
+article > .context {
+	height: 50px; /* needed for child 100%; expands to fit contents */
 }
 
 article .main {
+	width: 100%;
     vertical-align: top;
-    padding-top: 5px;
     padding-bottom: 15px;
+    padding-left: 15px;
 }
 
 header, section, footer {

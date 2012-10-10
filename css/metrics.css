@@ -1,16 +1,24 @@
+.metrics {
+	background: #f6f6f6;
+	height: 100%;
+}
+
 .metric {
-	display: inline-block;
+	display: block;
 	white-space: nowrap;
-	padding: 2px 20px 0 5px;
-	margin-top: 5px;
-	color: #777;
+	padding: 2px 5px 0 27px;
+	color: #999;
+	background-color: white;
 	background-size: 16px 16px;
-	background-position: right center;
+	background-position: 5px center;
 	background-repeat: no-repeat;
 	vertical-align: middle;
-	opacity: 0.6;
+	font-size: 90%;
+	opacity: 0.75;
+	text-shadow: 0 -1px 1px white;
 }
 
 .metric:hover {
+	background-color: #C7C7C7;
 	opacity: 1.0;
 }

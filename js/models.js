@@ -49,7 +49,7 @@ var Models = {
 			var identifier = this.get("identifier");
 
 			var items = [
-				{
+				/*{
 					text: "Abstract",
 					attributes: {
 						rel: "abstract",
@@ -57,7 +57,7 @@ var Models = {
 						"class": "link expandable",
 						"data-action": "show-abstract"
 					}
-				},
+				},*/
 
 				{
 					text: "BibTeX",

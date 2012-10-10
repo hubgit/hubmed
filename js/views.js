@@ -49,6 +49,7 @@ var Views = {
 
 		reset: function() {
 			this.$el.empty();
+
 			this.collection.each(this.add, this);
 
 			var articles = $("article");
@@ -96,16 +97,26 @@ var Views = {
 		},
 
 		action: function(event) {
-			event.preventDefault();
-			event.stopPropagation();
+			//event.preventDefault();
+			//event.stopPropagation();
 
-			var $node = $(event.currentTarget);
+			if (event.metaKey || event.ctrlKey) {
+				return true;
+			}
 
-			switch ($node.data("action")) {
+			var node = $(event.currentTarget);
+
+			switch (node.data("action")) {
 				case "show-abstract":
-					$node.toggleClass("expanded").closest("article").find("section").toggle();
+					if (node.hasClass("expanded") && node.attr("property") == url) {
+						return true;
+					}
+
+					node.toggleClass("expanded").closest("article").find("section").toggle();
 				break;
 			}
+
+			return false;
 		}
 	}),
 
@@ -184,7 +195,7 @@ var Views = {
 	Pagination: Backbone.View.extend({
 		events: {
 			"click a": "fetchPage",
-			"inview a": "fetchPage"
+			"inview a": "fetchMore"
 		},
 
 		initialize: function() {
@@ -210,7 +221,17 @@ var Views = {
 			if(node.hasClass("loading")) return;
 			node.addClass("loading").html("Loading more&hellip;");
 
-			app.collections.articles.fetch({ add: true, url: event.currentTarget.href });
+			app.collections.articles
+				.fetch({ add: true, url: event.currentTarget.href })
+				.done(this.checkItems);
+		},
+
+		fetchMore: function(event) {
+			if(app.collections.articles.length) {
+				this.fetchPage(event);
+			} else {
+				this.$el.find("a").text("No more items");
+			}
 		}
 	})
 };
