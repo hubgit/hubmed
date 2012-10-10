@@ -89,9 +89,8 @@ var Views = {
 
 			this.$el.find("[property=creators]").formatAuthors(5, "creator");
 
-			this.$el.find("footer")
-				.append(this.links.$el)
-				.append(this.metrics.$el);
+			this.$el.find("footer").append(this.links.$el)
+			this.$el.find(".context").append(this.metrics.$el);
 
 			return this;
 		},

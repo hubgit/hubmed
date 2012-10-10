@@ -43,29 +43,33 @@
 <!-- templates -->
 
 <script type="text/html" data-template="Article">
-	<header>
-		<a property="url" target="blank" href="{{#if identifier.doi}}http://dx.doi.org/{{identifier.doi}}{{else}}http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id={{identifier.pubmed}}{{/if}}"><span property="name">{{titleInfo.title}}.</span></a>
+	<div class="context">
+	</div>
+	<div class="main">
+		<header>
+			<a property="url" target="blank" href="{{#if identifier.doi}}http://dx.doi.org/{{identifier.doi}}{{else}}http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id={{identifier.pubmed}}{{/if}}"><span property="name">{{titleInfo.title}}.</span></a>
 
-		<div property="creators">
-			{{#each name}}<a href="./?term={{#each family}} {{.}}{{/each}}{{#authorSearchComma given}}{{/authorSearchComma}}{{#each given}} {{.}}{{/each}} [Author]" property="creator">{{#each given}}{{.}} {{/each}}{{#each family}} {{.}}{{/each}}</a>{{/each}}
-		</div>
+			<div property="creators">
+				{{#each name}}<a href="./?term={{#each family}} {{.}}{{/each}}{{#authorSearchComma given}}{{/authorSearchComma}}{{#each given}} {{.}}{{/each}} [Author]" property="creator">{{#each given}}{{.}} {{/each}}{{#each family}} {{.}}{{/each}}</a>{{/each}}
+			</div>
 
-		<div property="citation">
-		{{#with host}}
-			<a property="journal" title="{{full}}" href="./?term={{identifier.issn}} [ISSN]">{{#if titleInfo.abbreviated}}{{titleInfo.abbreviated}}{{else}}{{titleInfo.full}}{{/if}}</a>. <abbr property="datePublished">{{part.date}}</abbr>{{#if part.detail}}; {{#with part.detail}}{{#if volume}} <span property="volume">{{volume}}</span>{{/if}}{{#if issue}}(<a property="issue" href="./?term={{../../identifier.issn}} [ISSN] AND {{issue}} [Issue]">{{issue}}</a>){{/if}}{{#if page}}: <span property="pagination">{{page}}</span>{{/if}}{{/with}}{{/if}}
-		{{/with}}
-		</div>
-	</header>
+			<div property="citation">
+			{{#with host}}
+				<a property="journal" title="{{full}}" href="./?term={{identifier.issn}} [ISSN]">{{#if titleInfo.abbreviated}}{{titleInfo.abbreviated}}{{else}}{{titleInfo.full}}{{/if}}</a>. <abbr property="datePublished">{{part.date}}</abbr>{{#if part.detail}}; {{#with part.detail}}{{#if volume}} <span property="volume">{{volume}}</span>{{/if}}{{#if issue}}(<a property="issue" href="./?term={{../../identifier.issn}} [ISSN] AND {{issue}} [Issue]">{{issue}}</a>){{/if}}{{#if page}}: <span property="pagination">{{page}}</span>{{/if}}{{/with}}{{/if}}
+			{{/with}}
+			</div>
+		</header>
 
-	<section>
-		{{#if abstract}}
-		<p property="abstract">{{abstract}}</p>
-		{{else}}
-		<p class="abstract">No abstract available</p>
-		{{/if}}
-	</section>
+		<section>
+			{{#if abstract}}
+			<p property="abstract">{{abstract}}</p>
+			{{else}}
+			<p class="abstract">No abstract available</p>
+			{{/if}}
+		</section>
 
-	<footer></footer>
+		<footer></footer>
+	</div>
 </script>
 
 <script type="text/html" data-template="Info">

@@ -17,6 +17,7 @@ article a:hover {
 
 footer a {
 	opacity: 0.5;
+	font-weight: 400;
 }
 
 footer a:hover {

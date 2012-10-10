@@ -9,10 +9,11 @@ html {
 }
 
 body {
-    font-family: Arial, Verdana, Helvetica, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
 	line-height: 1.4;
 	margin: 0;
 	color: #000;
+	font-weight: 200;
 }
 
 .wrapper{
@@ -27,11 +28,26 @@ body {
 	}
 }
 
-article {
-    box-sizing: border-box;
+#articles {
+	display: table;
+}
+
+#articles > article {
+	display: table-row;
+}
+
+#articles > article > .context,
+#articles > article > .main {
+	display: table-cell;
+}
+
+#articles > article > .context {
+}
+
+article .main {
     vertical-align: top;
-    margin-bottom: 15px;
-    margin-top: 5px;
+    padding-top: 5px;
+    padding-bottom: 15px;
 }
 
 header, section, footer {

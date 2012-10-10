@@ -71,14 +71,16 @@ var Altmetric = function(options) {
 		if (data.cited_by_blogs_count) {
 			items.push({
 				url: "http://altmetric.com/details.php?citation_id=" + id,
-				text: $.pluralise(data.cited_by_blogs_count, "post")
+				//text: $.pluralise(data.cited_by_blogs_count, "post")
+				text: data.cited_by_blogs_count
 			});
 		}
 
 		if (data.cited_by_tweeters_count){
 			items.push({
 			  url: "http://altmetric.com/details.php?citation_id=" + id,
-			  text: $.pluralise(data.cited_by_tweeters_count, "tweet"),
+			  //text: $.pluralise(data.cited_by_tweeters_count, "tweet"),
+			  text: data.cited_by_tweeters_count,
 			  domain: "twitter.com"
 		  });
 		}
@@ -92,7 +94,8 @@ var Altmetric = function(options) {
 
 			items.push({
 				url: mendeley_url,
-				text: $.pluralise(data.readers.mendeley, "reader"),
+				//text: $.pluralise(data.readers.mendeley, "reader"),
+				text: data.readers.mendeley,
 				domain: "mendeley.com"
 			});
 		}
@@ -130,7 +133,8 @@ var Scopus = function(options) {
 
 		return {
 			url: item.inwardurl,
-			text: $.pluralise(citedbycount, "citation"),
+			//text: $.pluralise(citedbycount, "citation"),
+			text: citedbycount,
 			domain: "www.scopus.com"
 		};
 	};

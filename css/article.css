@@ -2,6 +2,7 @@
     color: inherit;
     display: block;
     margin-left: -10px;
+    font-weight: 400;
 }
 
 [typeof=MedicalScholarlyArticle] [property=creator] {
