@@ -230,6 +230,12 @@ var Views = {
 				.done(this.checkItems);
 		},
 
+		checkItems: function() {
+			if(!app.collections.articles.length) {
+				this.$el.find("a").text("No more items");
+			}
+		},
+
 		fetchMore: function(event) {
 			if(app.collections.articles.length) {
 				this.fetchPage(event);

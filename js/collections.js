@@ -41,6 +41,8 @@ var Collections = {
 		parse: function(data) {
 			app.collections.pages.reset(data.links);
 
+			if(!data.items || !data.items.length) return [];
+
 			return data.items.map(function(item) {
 				return new Models.Article(item);
 			});
