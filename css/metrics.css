@@ -6,7 +6,8 @@
 .metric {
 	display: block;
 	white-space: nowrap;
-	padding: 2px 5px 0 27px;
+	padding: 2px;
+	line-height: 20px;
 	color: #444;
 	background-color: white;
 	background-size: 16px 16px;
@@ -20,4 +21,9 @@
 
 .metric:hover {
 	opacity: 1.0;
+}
+
+.metric img {
+	vertical-align: middle;
+	margin-right: 2px;
 }

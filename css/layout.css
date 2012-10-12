@@ -48,6 +48,8 @@ article > .main {
 
 article > .context {
 	height: 50px; /* needed for child 100%; expands to fit contents */
+	min-width: 4em;
+	text-align: right;
 }
 
 article .main {

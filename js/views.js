@@ -156,7 +156,11 @@ var Views = {
 			var data = this.model.toJSON();
 
 			this.$el.attr("href", data.url).text(data.text);
-			if(data.domain) this.$el.css("background-image", "url(http://www.google.com/s2/u/0/favicons?domain=" + data.domain + ")")
+
+			if (data.domain) {
+				$("<img/>", { src: "http://www.google.com/s2/u/0/favicons?domain=" + data.domain })
+					.prependTo(this.$el);
+			}
 
 			return this;
 		}
