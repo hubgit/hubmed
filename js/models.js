@@ -63,6 +63,7 @@ var Models = {
 					text: "RIS",
 					attributes: {
 						rel: "export",
+						download: "hubmed-" + identifier.pubmed,
 						href: app.services.pubmed.url + "?format=application%2Fresearch-info-systems&id=" + identifier.pubmed,
 						type: "application/research-info-systems"
 					}
@@ -72,6 +73,7 @@ var Models = {
 					text: "BibTeX",
 					attributes: {
 						rel: "export",
+						download: "hubmed-" + identifier.pubmed,
 						href: app.services.pubmed.url + "?format=text%2Fbibtex&id=" + identifier.pubmed,
 						type: "text/bibtex"
 					}
