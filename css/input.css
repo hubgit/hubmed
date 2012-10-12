@@ -1,12 +1,28 @@
 #input {
 	margin: 10px auto;
-}
-
-#input [name=term] {
-	width: 80%;
+	position: relative;
+	height: 2.5em;
+	margin-bottom: 20px;
 }
 
 #input input {
-	font-size: 100%;
-	padding: 5px;
+	font-size: 1em;
+	padding: 0.5em;
+	-webkit-appearance: none;
+	background: none;
+	border: 1px solid #DDD;
+	margin: 0;
+}
+
+#input [name=term] {
+	position: absolute;
+	left: 10px;
+	right: 10px;
+	padding-right: 5em;
+	box-sizing: border-box;
+}
+
+#input [type=submit] {
+	position: absolute;
+	right: 10px;
 }
