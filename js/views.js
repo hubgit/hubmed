@@ -157,9 +157,8 @@ var Views = {
 
 			this.$el.attr("href", data.url).text(data.text);
 
-			if (data.domain) {
-				$("<img/>", { src: "http://www.google.com/s2/u/0/favicons?domain=" + data.domain })
-					.prependTo(this.$el);
+			if (data.image) {
+				$("<img/>", { src: "images/" + data.image }).prependTo(this.$el);
 			}
 
 			return this;
