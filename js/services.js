@@ -90,8 +90,8 @@ var Altmetric = function(options) {
 		data.readers.mendeley = Number(data.readers.mendeley);
 
 		if (data.readers.mendeley) {
-			if (data.doi) mendeley_url = "http://www.mendeley.com/openURL?id=doi:" + encodeURIComponent(data.doi);
-			else if (data.pmid) mendeley_url = "http://www.mendeley.com/openURL?id=pmid:" + encodeURIComponent(data.pmid);
+			if (data.pmid) mendeley_url = "http://www.mendeley.com/openURL?id=pmid:" + encodeURIComponent(data.pmid);
+			elseif (data.doi) mendeley_url = "http://www.mendeley.com/openURL?id=doi:" + encodeURIComponent(data.doi);
 			else mendeley_url = "http://altmetric.com/details.php?citation_id=" + id;
 
 			items.push({
