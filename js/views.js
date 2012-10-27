@@ -11,6 +11,7 @@ var Views = {
 		],
 
 		selectedDays: 0,
+		selectedFilter: null,
 		relatedQuery: false,
 
 		initialize: function() {
@@ -19,7 +20,8 @@ var Views = {
 		},
 
 		events: {
-			"change input:radio": "daysChanged",
+			"change input[name=days]": "daysChanged",
+			"click button.filter": "addFilter"
 		},
 
 		render: function() {
@@ -35,15 +37,20 @@ var Views = {
 					case "term":
 						this.relatedQuery = item[1].match(/^related:/);
 						this.$el.find("[name='" + item[0] + "']").val(item[1]);
-					break;
+						break;
 				}
 			}, this);
 
+			var inputsContainer = $("<div/>", { id: "input-filters" });
+
 			if (this.relatedQuery) {
 				var inputs = this.days.map(this.buildDateInput, this);
-				var inputsContainer = $("<div/>", { id: "day-inputs" }).append(inputs);
-				this.$el.append(inputsContainer);
+				inputsContainer.append(inputs);
+			} else {
+				this.buildFilterButtons().appendTo(inputsContainer);
 			}
+
+			this.$el.append(inputsContainer);
 		},
 
 		parseQueryString: function() {
@@ -52,6 +59,12 @@ var Views = {
 					return text.replace(/\+/g, " ");
 				});
 			});
+		},
+
+		buildFilterButtons: function() {
+			return $("<button/>", { type: "button" })
+				.addClass("filter")
+				.text("free full text");
 		},
 
 		buildDateInput: function(item) {
@@ -65,6 +78,14 @@ var Views = {
 		},
 
 		daysChanged: function() {
+			this.$el.submit();
+		},
+
+		addFilter: function(event) {
+			var filter = $(event.currentTarget).text();
+			var input = this.$el.find("input[name=term]");
+			var term = input.val() + " AND " + filter + "[FILTER]";
+			input.val(term);
 			this.$el.submit();
 		},
 	}),
