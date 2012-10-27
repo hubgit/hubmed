@@ -13,7 +13,7 @@ var PubMed = function(options) {
 
 	this.url = $("link[rel='service.pubmed']").attr("href");
 
-	this.search = function(term) {
+	this.search = function(term, days) {
 		var data = {
 			db: "pubmed",
 			usehistory: "y",
@@ -21,11 +21,16 @@ var PubMed = function(options) {
 			term: term
 		};
 
+		if (days) {
+	    	data.reldate = days;
+	    	data.dateType = "pdat";
+	    }
+
 		//return this.get({ url: "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi", data: data });
 		return this.get({ url: this.url, data: data });
 	};
 
-	this.related = function(id) {
+	this.related = function(id, days) {
 		var data = {
 			dbfrom: "pubmed",
 			db: "pubmed",
@@ -33,6 +38,11 @@ var PubMed = function(options) {
 			linkname: "pubmed_pubmed",
 			id: id
 		};
+
+		if (days) {
+	    	data.reldate = days;
+	    	data.dateType = "pdat";
+	    }
 
 		//return this.get({ url: "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi", data: data });
 		return this.get({ url: this.url, data: data });

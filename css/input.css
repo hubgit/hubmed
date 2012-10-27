@@ -1,11 +1,12 @@
 #input {
 	margin: 10px auto;
 	position: relative;
-	height: 2em;
+	height: 4em;
 	margin-bottom: 20px;
 }
 
-#input input {
+#input input[type=submit],
+#input input[type=text] {
 	font-size: 1em;
 	padding: 0.5em;
 	-webkit-appearance: none;
@@ -25,4 +26,19 @@
 #input [type=submit] {
 	position: absolute;
 	right: 10px;
+}
+
+#input #day-inputs {
+	position: relative;
+	top: 50px;
+}
+
+#input label {
+	display: inline-block;
+	margin-right: 10px;
+	vertical-align: middle;
+}
+
+#input input[type=radio] {
+	margin-right: 5px;
 }

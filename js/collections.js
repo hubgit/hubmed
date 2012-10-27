@@ -10,7 +10,7 @@ var Collections = {
 			else {
 				var matches = options.data.term.match(/^related:(.+)/);
 				if(matches) {
-					return app.services.pubmed.related(matches[1]).done(function(doc) {
+					return app.services.pubmed.related(matches[1], options.data.days).done(function(doc) {
 						var data = {
 							Count: 1000,
 							WebEnv: document.evaluate("/eLinkResult/LinkSet/WebEnv", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent,
@@ -23,7 +23,7 @@ var Collections = {
 					});
 				}
 				else {
-					return app.services.pubmed.search(options.data.term).done(function(doc) {
+					return app.services.pubmed.search(options.data.term, options.data.days).done(function(doc) {
 						var data = {
 							Count: document.evaluate("/eSearchResult/Count", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent,
 							WebEnv: document.evaluate("/eSearchResult/WebEnv", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent,

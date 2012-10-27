@@ -13,9 +13,13 @@ $(function() {
 		app.collections.articles.reset();
 		app.collections.pages.reset();
 
-		var term = $("input[name=term]").val();
+		var input = $("input[name=term]");
+		var term = input.val();
+		var days = Number($("input[name=days]:checked").val());
 		if(term) {
-			app.collections.articles.fetch({ data: { term: term, n: 10 } });
+			app.collections.articles.fetch({ data: { term: term, n: 10, days: days } });
+		} else {
+			input.focus();
 		}
 	};
 

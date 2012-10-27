@@ -3,18 +3,47 @@ var Views = {
 	Input: Backbone.View.extend({
 		tagName: "form",
 
+		days: [
+			[365, "1 year"],
+			[365 * 2, "2 years"],
+			[365 * 5, "5 years"],
+			[0, "All"]
+		],
+
+		selectedDays: 0,
+		relatedQuery: false,
+
 		initialize: function() {
 			this.$el.appendTo("body");
 			this.render();
 		},
 
+		events: {
+			"change input:radio": "daysChanged",
+		},
+
 		render: function() {
-			$("<input/>", { type: "text", name: "term" }).appendTo(this.$el);
+			$("<input/>", { type: "text", name: "term", placeholder: "Enter search terms" }).appendTo(this.$el);
 			$("<input/>", { type: "submit", value: "search" }).appendTo(this.$el);
 
 			this.parseQueryString().forEach(function(item) {
-				this.$el.find("[name='" + item[0] + "']").val(item[1]);
+				switch (item[0]) {
+					case "days":
+						this.selectedDays = Number(item[1].replace(/\/$/, ""));
+						return;
+
+					case "term":
+						this.relatedQuery = item[1].match(/^related:/);
+						this.$el.find("[name='" + item[0] + "']").val(item[1]);
+					break;
+				}
 			}, this);
+
+			if (this.relatedQuery) {
+				var inputs = this.days.map(this.buildDateInput, this);
+				var inputsContainer = $("<div/>", { id: "day-inputs" }).append(inputs);
+				this.$el.append(inputsContainer);
+			}
 		},
 
 		parseQueryString: function() {
@@ -23,7 +52,21 @@ var Views = {
 					return text.replace(/\+/g, " ");
 				});
 			});
-		}
+		},
+
+		buildDateInput: function(item) {
+			var input = $("<input/>", { type: "radio", name: "days", value: item[0] });
+
+			if (item[0] === this.selectedDays) {
+				input.prop("checked", true);
+			}
+
+			return $("<label/>").text(item[1]).prepend(input);
+		},
+
+		daysChanged: function() {
+			this.$el.submit();
+		},
 	}),
 
 	Info: Backbone.View.extend({
