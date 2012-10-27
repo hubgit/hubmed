@@ -54,7 +54,7 @@
 
 			<div property="citation">
 			{{#with host}}
-				<a property="journal" title="{{full}}" href="./?term={{identifier.issn}} [ISSN]">{{#if titleInfo.abbreviated}}{{titleInfo.abbreviated}}{{else}}{{titleInfo.full}}{{/if}}</a>. <abbr property="datePublished">{{part.date}}</abbr>{{#if part.detail}}; {{#with part.detail}}{{#if volume}} <span property="volume">{{volume}}</span>{{/if}}{{#if issue}}(<a property="issue" href="./?term={{../../identifier.issn}} [ISSN] AND {{issue}} [Issue]">{{issue}}</a>){{/if}}{{#if page}}: <span property="pagination">{{page}}</span>{{/if}}{{/with}}{{/if}}
+				<a property="journal" title="{{titleInfo.full}}" href="./?term={{identifier.issn}} [ISSN]">{{#if titleInfo.abbreviated}}{{titleInfo.abbreviated}}{{else}}{{titleInfo.full}}{{/if}}</a>. <abbr property="datePublished">{{part.date}}</abbr>{{#if part.detail}}; {{#with part.detail}}{{#if volume}} <span property="volume">{{volume}}</span>{{/if}}{{#if issue}}(<a property="issue" href="./?term={{../../identifier.issn}} [ISSN] AND {{issue}} [Issue]">{{issue}}</a>){{/if}}{{#if page}}: <span property="pagination">{{page}}</span>{{/if}}{{/with}}{{/if}}
 			{{/with}}
 			</div>
 		</header>
@@ -64,6 +64,14 @@
 			<p property="abstract">{{abstract}}</p>
 			{{else}}
 			<p class="abstract">No abstract available</p>
+			{{/if}}
+		</section>
+
+		<section class="sources">
+			{{#if identifier.doi}}
+				<a class="link" target="_blank" href="http://scholar.google.com/scholar?cluster=http://dx.doi.org/{{identifier.doi}}">Google Scholar</a>
+			{{else}}
+				<a class="link" target="_blank" href="http://scholar.google.com/scholar?q={{titleInfo.title}}">Google Scholar</a>
 			{{/if}}
 		</section>
 

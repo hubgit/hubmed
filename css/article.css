@@ -24,16 +24,17 @@
 }
 
 [typeof=MedicalScholarlyArticle] section {
-    font-family: Optima, Arial, Verdana, Helvetica, serif;
     margin-top: 10px;
     margin-bottom: 10px;
     display: none;
 }
 
+[typeof=MedicalScholarlyArticle] [property=abstract] {
+    font-family: Optima, Arial, Verdana, Helvetica, serif;
+}
+
 [typeof=MedicalScholarlyArticle] footer {
     margin-top: 5px;
-    color: gray;
-    font-size: 90%;
 }
 
 [typeof=MedicalScholarlyArticle] .et-al {

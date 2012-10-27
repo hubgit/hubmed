@@ -15,17 +15,6 @@ article a:hover {
     color: #00E !important;
 }
 
-footer a {
-	opacity: 0.5;
-	font-weight: 400;
-}
-
-footer a:hover {
-	opacity: 1.0;
-	text-decoration: none;
-}
-
-
 a[rel=related]:before {
 	content: "✫ ";
 }
@@ -44,9 +33,17 @@ a.expandable.expanded:before {
 
 a.link {
     white-space: nowrap;
+    opacity: 0.5;
+    font-weight: 400;
+    font-size: 90%;
 }
 
 a.link:not(:last-child) {
     /*content: " · ";*/
     margin-right: 10px;
+}
+
+a.link:hover {
+	opacity: 1.0;
+	text-decoration: none;
 }
