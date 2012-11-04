@@ -32,11 +32,11 @@ var Views = {
 
 			switch (name) {
 				case "days":
-					this.model.set("days", Number(value.replace(/\/$/, "")));
+					this.model.set("days", Number(value));
 					return;
 
 				case "term":
-					this.model.set("relatedQuery", value.match(/^related:/), { silent: true });
+					this.model.set("relatedQuery", value.match(/^related:/));
 					this.model.set("term", value);
 					break;
 
@@ -72,6 +72,9 @@ var Views = {
 	}),
 
 	Articles: Backbone.View.extend({
+		offset: 0,
+		limit: 10,
+
 		initialize: function() {
 			this.$el.appendTo("body");
 			this.collection.on("reset", this.reset, this);
@@ -81,9 +84,12 @@ var Views = {
 		reset: function() {
 			this.$el.empty();
 
+			console.log(["collection", this.collection]);
+
 			this.collection.each(this.add, this);
 
 			var articles = $("article");
+
 			if(articles.length === 1) {
 				articles.find("section").show();
 				articles.find("[data-action=show-abstract]").addClass("expanded");
@@ -234,17 +240,12 @@ var Views = {
 
 		initialize: function() {
 			this.$el.appendTo("body");
-			this.collection.on("reset", this.reset, this);
 		},
 
-		reset: function() {
-			this.$el.empty();
-			this.collection.each(this.add, this);
-		},
-
-		add: function(page) {
-			var url = page.get("next");
-			if(url) $("<a/>", { href: url, html: "More &darr;", rel: "next" }).appendTo(this.$el);
+		render: function(offset) {
+			$("<a/>", { href: "#", html: "More &darr;", rel: "next" })
+				.data("offset", offset)
+				.appendTo(this.$el);
 		},
 
 		fetchPage: function(event) {
@@ -252,12 +253,16 @@ var Views = {
 			event.stopPropagation();
 
 			var node = $(event.currentTarget);
-			if(node.hasClass("loading")) return;
+
+			if(node.hasClass("loading")) {
+				return;
+			}
+
 			node.addClass("loading").html("Loading more&hellip;");
 
-			app.collections.articles
-				.fetch({ add: true, url: event.currentTarget.href })
-				.done(this.checkItems);
+			app.views.article.offset = node.data("offset");
+
+			app.collections.articles.fetch({ add: true }).done(this.checkItems);
 		},
 
 		checkItems: function() {

@@ -59,6 +59,10 @@ article .main {
     padding-left: 15px;
 }
 
+.collection .separator:last-of-type {
+	display: none;
+}
+
 header, section, footer {
 	margin-left: 10px;
 }

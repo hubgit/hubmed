@@ -1,11 +1,21 @@
 var Models = {
+	Query: Backbone.Model.extend({
+		defaults: {
+		    "filters":  {
+		    	"free full text": false
+		    },
+		    "days": 0,
+		    "term": "",
+	    }
+	}),
+
 	Article: Backbone.Model.extend({
 		augmentors: {
 			altmetric: function() {
 				var model = this,
 					service = app.services.altmetric,
 					data = this.toJSON(),
-					path = service.path(data.identifier);
+					path = service.path({ doi: data.doi, pubmed: data.pmid });
 
 				if(!path) return;
 
@@ -18,8 +28,7 @@ var Models = {
 			scopus: function() {
 				var model = this,
 					service = app.services.scopus,
-					identifier = this.get("identifier"),
-					doi = identifier.doi;
+					doi = this.get("doi");
 
 				if(!doi) return;
 
@@ -46,14 +55,14 @@ var Models = {
 		},
 
 		setLinks: function() {
-			var identifier = this.get("identifier");
+			var pmid = this.get("pmid");
 
 			var items = [
 				/*{
 					text: "Abstract",
 					attributes: {
 						rel: "abstract",
-						href: "./?term=" + identifier.pubmed + " [UID]",
+						href: "./?term=" + pmid + " [UID]",
 						"class": "link expandable",
 						"data-action": "show-abstract"
 					}
@@ -63,8 +72,8 @@ var Models = {
 					text: "RIS",
 					attributes: {
 						rel: "export",
-						download: "hubmed-" + identifier.pubmed,
-						href: app.services.pubmed.url + "?format=application%2Fresearch-info-systems&id=" + identifier.pubmed,
+						download: "hubmed-" + pmid,
+						href: app.services.pubmed.url + "?format=application%2Fresearch-info-systems&id=" + pmid,
 						type: "application/research-info-systems"
 					}
 				},
@@ -73,8 +82,8 @@ var Models = {
 					text: "BibTeX",
 					attributes: {
 						rel: "export",
-						download: "hubmed-" + identifier.pubmed,
-						href: app.services.pubmed.url + "?format=text%2Fbibtex&id=" + identifier.pubmed,
+						download: "hubmed-" + pmid,
+						href: app.services.pubmed.url + "?format=text%2Fbibtex&id=" + pmid,
 						type: "text/bibtex"
 					}
 				},
@@ -83,7 +92,7 @@ var Models = {
 					text: "Related",
 					attributes: {
 						rel: "related",
-						href: "./?term=related:" + identifier.pubmed
+						href: "./?term=related:" + pmid
 					}
 				}
 			];
@@ -92,15 +101,6 @@ var Models = {
 		}
 	}),
 
-	Query: Backbone.Model.extend({
-		defaults: {
-		    "filters":  {
-		    	"free full text": false
-		    },
-		    "days": "0",
-		    "term": ""
-	    }
-	}),
 	Link: Backbone.Model.extend({}),
 	Info: Backbone.Model.extend({})
 };

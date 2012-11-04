@@ -4,51 +4,65 @@
 var Collections = {
 	Articles: Backbone.Collection.extend({
 		sync: function(method, collection, options) {
-			if (options.url) {
-				return app.services.pubmed.get({ url: options.url }).done(options.success);
+			var input = app.models.query.toJSON();
+
+			if(input.term.match(/^related:(.+)/)) {
+				return app.services.pubmed.related(input).done(function(doc) {
+					var data = {
+						count: 1000,
+						webEnv: document.evaluate("/eLinkResult/LinkSet/WebEnv", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent,
+						queryKey: document.evaluate("/eLinkResult/LinkSet/LinkSetDbHistory/QueryKey", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent
+					};
+
+					app.models.query.set(data);
+
+					app.services.pubmed.history(data).done(options.success);
+				});
 			}
-			else {
-				var matches = options.data.term.match(/^related:(.+)/);
-				if(matches) {
-					return app.services.pubmed.related(matches[1], options.data.days).done(function(doc) {
-						var data = {
-							Count: 1000,
-							WebEnv: document.evaluate("/eLinkResult/LinkSet/WebEnv", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent,
-							QueryKey: document.evaluate("/eLinkResult/LinkSet/LinkSetDbHistory/QueryKey", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent
-						};
 
-						app.models.info.set(data);
+			return app.services.pubmed.search(input).done(function(doc) {
+				var data = {
+					count: document.evaluate("/eSearchResult/Count", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent,
+					webEnv: document.evaluate("/eSearchResult/WebEnv", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent,
+					queryKey: document.evaluate("/eSearchResult/QueryKey", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent
+				};
 
-						app.services.pubmed.history(data).done(options.success);
-					});
-				}
-				else {
-					return app.services.pubmed.search(options.data.term, options.data.days).done(function(doc) {
-						var data = {
-							Count: document.evaluate("/eSearchResult/Count", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent,
-							WebEnv: document.evaluate("/eSearchResult/WebEnv", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent,
-							QueryKey: document.evaluate("/eSearchResult/QueryKey", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent
-						};
+				app.models.query.set(data);
 
-						app.models.info.set(data);
-
-						app.services.pubmed.history(data).done(options.success);
-					});
-				}
-			}
+				app.services.pubmed.history(data).done(options.success);
+			});
 		},
 
-		parse: function(data) {
-			app.collections.pages.reset(data.links);
+		parse: function(doc) {
+			var fragment = app.processor.transformToFragment(doc, document);
+			var node = document.createElement("div");
+			node.appendChild(fragment);
 
-			if(!data.items || !data.items.length) return [];
+			var items = $(node.firstChild).find("article").map(function() {
+				var item = {};
+				var node = $(this);
 
-			return data.items.map(function(item) {
+				node.children("[property]").each(function() {
+					var node = $(this);
+					var property = node.attr("property");
+
+					if (node.hasClass("multiple")) {
+						if (typeof item[property] === "undefined") {
+							item[property] = [];
+						}
+
+						item[property].push(node.html());
+					} else {
+						item[property] = node.html();
+					}
+				});
+
 				return new Models.Article(item);
 			});
+
+			return items.toArray();
 		}
 	}),
-	Pages: Backbone.Collection.extend({}),
 	Links: Backbone.Collection.extend({}),
 	Metrics: Backbone.Collection.extend({})
 };

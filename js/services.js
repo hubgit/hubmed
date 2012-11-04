@@ -11,46 +11,64 @@ Service.prototype.get = function(options) {
 var PubMed = function(options) {
 	this.defaults = $.extend({}, options);
 
-	this.url = $("link[rel='service.pubmed']").attr("href");
+	this.search = function(input) {
+		var parts = [input.term];
 
-	this.search = function(term, days) {
+		$.each(input.filters, function(index, value) {
+			if (value) {
+				parts.push(index + "[FILTER]");
+			}
+		});
+
 		var data = {
 			db: "pubmed",
 			usehistory: "y",
 			retmax: 0,
-			term: term
+			term: parts.join(" AND ")
 		};
 
-		if (days) {
-	    	data.reldate = days;
+		console.log(data);
+
+		if (input.days) {
+	    	data.reldate = input.days;
 	    	data.dateType = "pdat";
 	    }
 
-		//return this.get({ url: "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi", data: data });
-		return this.get({ url: this.url, data: data });
+		return this.get({ url: "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi", data: data });
 	};
 
-	this.related = function(id, days) {
+	this.related = function(input) {
 		var data = {
 			dbfrom: "pubmed",
 			db: "pubmed",
 			cmd: "neighbor_history",
 			linkname: "pubmed_pubmed",
-			id: id
+			id: input.term.replace(/^related:/, "")
 		};
 
-		if (days) {
-	    	data.reldate = days;
+		console.log(data);
+
+		if (input.days) {
+	    	data.reldate = input.days;
 	    	data.dateType = "pdat";
 	    }
 
-		//return this.get({ url: "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi", data: data });
-		return this.get({ url: this.url, data: data });
+		return this.get({ url: "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi", data: data });
 	};
 
-	this.history = function(data) {
-		data = { total: data.Count, history: data.WebEnv + "|" + data.QueryKey };
-		return this.get({ url: this.url, data: data });
+	this.history = function(input) {
+		var data = {
+			db: "pubmed",
+			rettype: "xml",
+      		webenv: input.webEnv,
+      		query_key: input.queryKey,
+			retstart: app.views.articles.offset,
+			retmax: app.views.articles.limit,
+		};
+
+		console.log(data);
+
+		return this.get({ url: "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi", data: data });
 	};
 };
 
@@ -83,7 +101,6 @@ var Altmetric = function(options) {
 		if (data.cited_by_blogs_count) {
 			items.push({
 				url: "http://altmetric.com/details.php?citation_id=" + id,
-				//text: $.pluralise(data.cited_by_blogs_count, "post")
 				text: data.cited_by_blogs_count,
 				image: "altmetric.png"
 			});
@@ -92,7 +109,6 @@ var Altmetric = function(options) {
 		if (data.cited_by_tweeters_count){
 			items.push({
 			  url: "http://altmetric.com/details.php?citation_id=" + id,
-			  //text: $.pluralise(data.cited_by_tweeters_count, "tweet"),
 			  text: data.cited_by_tweeters_count,
 			  image: "twitter.png"
 		  });
@@ -107,7 +123,6 @@ var Altmetric = function(options) {
 
 			items.push({
 				url: mendeley_url,
-				//text: $.pluralise(data.readers.mendeley, "reader"),
 				text: data.readers.mendeley,
 				image: "mendeley.png"
 			});
@@ -146,7 +161,6 @@ var Scopus = function(options) {
 
 		return {
 			url: item.inwardurl,
-			//text: $.pluralise(citedbycount, "citation"),
 			text: citedbycount,
 			image: "sciverse.png"
 		};

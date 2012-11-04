@@ -73,16 +73,14 @@
 
 	<div class="main">
 		<header>
-			<a property="url" target="_blank" data-action="show-abstract" href="{{#if identifier.doi}}http://dx.doi.org/{{identifier.doi}}{{else}}http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id={{identifier.pubmed}}{{/if}}"><span property="name">{{titleInfo.title}}.</span></a>
+			<a property="url" target="_blank" data-action="show-abstract" href="{{#if doi}}http://dx.doi.org/{{doi}}{{else}}http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id={{pmid}}{{/if}}"><span property="name">{{title}}</span></a>
 
-			<div property="creators">
-				{{#each name}}<a href="./?term={{#each family}} {{.}}{{/each}}{{#authorSearchComma given}}{{/authorSearchComma}}{{#each given}} {{.}}{{/each}} [Author]" property="creator">{{#each given}}{{.}} {{/each}}{{#each family}} {{.}}{{/each}}</a>{{/each}}
+			<div property="creators" class="collection">
+				{{#each creator}}{{{.}}}<span class="separator">, </span>{{/each}}
 			</div>
 
 			<div property="citation">
-				{{#with host}}
-					<a property="journal" title="{{titleInfo.full}}" href="./?term={{identifier.issn}} [ISSN]">{{#if titleInfo.abbreviated}}{{titleInfo.abbreviated}}{{else}}{{titleInfo.full}}{{/if}}</a>. <abbr property="datePublished">{{part.date}}</abbr>{{#if part.detail}}; {{#with part.detail}}{{#if volume}} <span property="volume">{{volume}}</span>{{/if}}{{#if issue}}(<a property="issue" href="./?term={{../../identifier.issn}} [ISSN] AND {{issue}} [Issue]">{{issue}}</a>){{/if}}{{#if page}}: <span property="pagination">{{page}}</span>{{/if}}{{/with}}{{/if}}
-				{{/with}}
+				<a property="journal" title="{{journalTitle}}" href="./?term={{journalISSN}} [ISSN]">{{#if journalISOAbbreviation}}{{journalISOAbbreviation}}{{else}}{{journalTitle}}.{{/if}}</a> <abbr property="datePublished">{{datePublished}}</abbr>; {{#if volume}} <span property="volume">{{volume}}</span>{{/if}}{{#if issue}}(<a property="issue" href="./?term={{journalISSN}} [ISSN] AND {{issue}} [Issue]">{{issue}}</a>){{/if}}{{#if pagination}}:<span property="pagination">{{pagination}}</span>{{/if}}
 			</div>
 		</header>
 
@@ -107,5 +105,5 @@
 </script>
 
 <script type="text/html" data-template="Info">
-	<div>{{#pluralise Count "article" "articles"}}{{/pluralise}}</div>
+	<div>{{#pluralise count "article" "articles"}}{{/pluralise}}</div>
 </script>

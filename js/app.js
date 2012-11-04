@@ -5,22 +5,18 @@ var app = {};
 
 $(function() {
 	/** Fetch the list of articles and update the collection **/
-	var refresh = function() {
+	var refresh = function(xslXHR) {
+		app.processor = new XSLTProcessor();
+		app.processor.importStylesheet(xslXHR);
+
 		// reset the AJAX queue
-		$.ajaxQueue.stop(true);
+		//$.ajaxQueue.stop(true);
 
 		// empty the collection
-		app.collections.articles.reset();
-		app.collections.pages.reset();
+		//app.collections.articles.reset();
 
-		var input = $("input[name=term]");
-		var term = input.val();
-		var days = Number($("input[name=days]:checked").val());
-		if(term) {
-			app.collections.articles.fetch({ data: { term: term, n: 10, days: days } });
-		} else {
-			input.focus();
-		}
+		$("input[name=term]").focus();
+		app.collections.articles.fetch();
 	};
 
 	app.services = {
@@ -30,13 +26,11 @@ $(function() {
 	};
 
 	app.models = {
-		info: new Models.Info(),
 		query: new Models.Query
 	};
 
 	app.collections = {
-		articles: new Collections.Articles(),
-		pages: new Collections.Pages()
+		articles: new Collections.Articles()
 	};
 
 	app.views = {
@@ -49,7 +43,7 @@ $(function() {
 		info: new Views.Info({
 			id: "info",
 			className: "wrapper",
-			model: app.models.info
+			model: app.models.query
 		}),
 
 		articles: new Views.Articles({
@@ -61,9 +55,13 @@ $(function() {
 		pagination: new Views.Pagination({
 			id: "pagination",
 			className: "wrapper pagination",
-			collection: app.collections.pages
 		})
 	};
 
-	refresh();
+	var fetchXSL = $.ajax({
+		url: "results.xsl",
+		dataType: "xml"
+	});
+
+	$.when(fetchXSL).done(refresh);
 });
