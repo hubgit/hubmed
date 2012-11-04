@@ -30,7 +30,8 @@ $(function() {
 	};
 
 	app.models = {
-		info: new Models.Info()
+		info: new Models.Info(),
+		query: new Models.Query
 	};
 
 	app.collections = {
@@ -42,6 +43,7 @@ $(function() {
 		input: new Views.Input({
 			id: "input",
 			className: "wrapper",
+			model: app.models.query
 		}),
 
 		info: new Views.Info({

@@ -92,6 +92,15 @@ var Models = {
 		}
 	}),
 
+	Query: Backbone.Model.extend({
+		defaults: {
+		    "filters":  {
+		    	"free full text": false
+		    },
+		    "days": "0",
+		    "term": ""
+	    }
+	}),
 	Link: Backbone.Model.extend({}),
 	Info: Backbone.Model.extend({})
 };

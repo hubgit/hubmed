@@ -8,6 +8,20 @@ $(function() {
 	});
 });
 
+Handlebars.registerHelper("ifEqual", function(a, b, options) {
+    return (a == b) ? options.fn(this) : options.inverse(this);
+});
+
+Handlebars.registerHelper("eachProperty", function(context, options) {
+    var ret = "";
+
+    for (var prop in context) {
+        ret += options.fn({ property: prop, value: context[prop] });
+    }
+
+    return ret;
+});
+
 Handlebars.registerHelper("authorSearchComma", function(given) {
 	var initials = true;
 

@@ -42,8 +42,35 @@
 
 <!-- templates -->
 
+<script type="text/html" data-template="Input">
+	<div>
+		<input type="text" name="term" placeholder="Enter search terms" value="{{term}}">
+		<input type="submit" value="search">
+	</div>
+
+	{{#if relatedQuery}}
+		<div id="date-filters">
+			<label><input type="radio" name="days" value="365" {{#ifEqual days "365"}}checked{{/ifEqual}}>
+				1 year</label>
+			<label><input type="radio" name="days" value="730" {{#ifEqual days "730"}}checked{{/ifEqual}}>
+				2 years</label>
+			<label><input type="radio" name="days" value="1825" {{#ifEqual days "1825"}}checked{{/ifEqual}}>
+				5 years</label>
+			<label><input type="radio" name="days" value="0" {{#ifEqual days "0"}}checked{{/ifEqual}}>
+				All</label>
+		</div>
+	{{else}}
+		<div id="input-filters">
+			{{#eachProperty filters}}
+				<label><input type="checkbox" name="filter" value="{{property}}" {{#if value}}checked{{/if}}>{{property}}</input></label>
+			{{/eachProperty}}
+		</div>
+	{{/if}}
+</script>
+
 <script type="text/html" data-template="Article">
 	<div class="context"></div>
+
 	<div class="main">
 		<header>
 			<a property="url" target="_blank" data-action="show-abstract" href="{{#if identifier.doi}}http://dx.doi.org/{{identifier.doi}}{{else}}http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id={{identifier.pubmed}}{{/if}}"><span property="name">{{titleInfo.title}}.</span></a>
@@ -53,17 +80,17 @@
 			</div>
 
 			<div property="citation">
-			{{#with host}}
-				<a property="journal" title="{{titleInfo.full}}" href="./?term={{identifier.issn}} [ISSN]">{{#if titleInfo.abbreviated}}{{titleInfo.abbreviated}}{{else}}{{titleInfo.full}}{{/if}}</a>. <abbr property="datePublished">{{part.date}}</abbr>{{#if part.detail}}; {{#with part.detail}}{{#if volume}} <span property="volume">{{volume}}</span>{{/if}}{{#if issue}}(<a property="issue" href="./?term={{../../identifier.issn}} [ISSN] AND {{issue}} [Issue]">{{issue}}</a>){{/if}}{{#if page}}: <span property="pagination">{{page}}</span>{{/if}}{{/with}}{{/if}}
-			{{/with}}
+				{{#with host}}
+					<a property="journal" title="{{titleInfo.full}}" href="./?term={{identifier.issn}} [ISSN]">{{#if titleInfo.abbreviated}}{{titleInfo.abbreviated}}{{else}}{{titleInfo.full}}{{/if}}</a>. <abbr property="datePublished">{{part.date}}</abbr>{{#if part.detail}}; {{#with part.detail}}{{#if volume}} <span property="volume">{{volume}}</span>{{/if}}{{#if issue}}(<a property="issue" href="./?term={{../../identifier.issn}} [ISSN] AND {{issue}} [Issue]">{{issue}}</a>){{/if}}{{#if page}}: <span property="pagination">{{page}}</span>{{/if}}{{/with}}{{/if}}
+				{{/with}}
 			</div>
 		</header>
 
 		<section>
 			{{#if abstract}}
-			<p property="abstract">{{abstract}}</p>
+				<p property="abstract">{{abstract}}</p>
 			{{else}}
-			<p class="abstract">No abstract available</p>
+				<p class="abstract">No abstract available</p>
 			{{/if}}
 		</section>
 

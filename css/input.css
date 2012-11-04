@@ -1,8 +1,13 @@
 #input {
-	margin: 10px auto;
-	position: relative;
-	height: 4em;
-	margin-bottom: 20px;
+	margin: 10px auto 10px;
+}
+
+#input > div {
+	margin-bottom: 10px;
+}
+
+#input > div > * {
+	display: inline-block;
 }
 
 #input input[type=submit],
@@ -15,22 +20,19 @@
 	margin: 0;
 }
 
-#input [name=term] {
-	position: absolute;
-	left: 10px;
-	right: 10px;
-	padding-right: 5em;
-	box-sizing: border-box;
+#input input[name=term] {
+	width: 800px;
 }
 
-#input [type=submit] {
-	position: absolute;
-	right: 10px;
-}
-
-#input #input-filters {
+#input input[type=submit] {
 	position: relative;
-	top: 50px;
+	left: -5px;
+	background: #f6f6f6;
+}
+
+#input input[type=submit]:hover {
+	cursor: pointer;
+	background: #eee;
 }
 
 #input label {

@@ -3,54 +3,19 @@ var Views = {
 	Input: Backbone.View.extend({
 		tagName: "form",
 
-		days: [
-			[365, "1 year"],
-			[365 * 2, "2 years"],
-			[365 * 5, "5 years"],
-			[0, "All"]
-		],
-
-		selectedDays: 0,
-		selectedFilter: null,
-		relatedQuery: false,
-
 		initialize: function() {
 			this.$el.appendTo("body");
+			this.parseQueryString().forEach(this.handleQueryPart, this);
 			this.render();
 		},
 
 		events: {
-			"change input[name=days]": "daysChanged",
-			"click button.filter": "addFilter"
+			"change input[type=checkbox],input[type=radio]": "submitChangedForm"
 		},
 
 		render: function() {
-			$("<input/>", { type: "text", name: "term", placeholder: "Enter search terms" }).appendTo(this.$el);
-			$("<input/>", { type: "submit", value: "search" }).appendTo(this.$el);
-
-			this.parseQueryString().forEach(function(item) {
-				switch (item[0]) {
-					case "days":
-						this.selectedDays = Number(item[1].replace(/\/$/, ""));
-						return;
-
-					case "term":
-						this.relatedQuery = item[1].match(/^related:/);
-						this.$el.find("[name='" + item[0] + "']").val(item[1]);
-						break;
-				}
-			}, this);
-
-			var inputsContainer = $("<div/>", { id: "input-filters" });
-
-			if (this.relatedQuery) {
-				var inputs = this.days.map(this.buildDateInput, this);
-				inputsContainer.append(inputs);
-			} else {
-				this.buildFilterButtons().appendTo(inputsContainer);
-			}
-
-			this.$el.append(inputsContainer);
+			var data = this.model.toJSON();
+			this.$el.html(Templates.Input(data));
 		},
 
 		parseQueryString: function() {
@@ -61,33 +26,35 @@ var Views = {
 			});
 		},
 
-		buildFilterButtons: function() {
-			return $("<button/>", { type: "button" })
-				.addClass("filter")
-				.text("free full text");
-		},
+		handleQueryPart: function(item) {
+			var name = item[0];
+			var value = item[1].replace(/\/$/, "");
 
-		buildDateInput: function(item) {
-			var input = $("<input/>", { type: "radio", name: "days", value: item[0] });
+			switch (name) {
+				case "days":
+					this.model.set("days", Number(value.replace(/\/$/, "")));
+					return;
 
-			if (item[0] === this.selectedDays) {
-				input.prop("checked", true);
+				case "term":
+					this.model.set("relatedQuery", value.match(/^related:/), { silent: true });
+					this.model.set("term", value);
+					break;
+
+				case "filter":
+					var filters = this.model.get("filters");
+
+					if (typeof filters[value] !== "undefined") {
+						filters[value] = true;
+						this.model.set("filters", filters);
+					}
+
+					break;
 			}
-
-			return $("<label/>").text(item[1]).prepend(input);
 		},
 
-		daysChanged: function() {
+		submitChangedForm: function() {
 			this.$el.submit();
-		},
-
-		addFilter: function(event) {
-			var filter = $(event.currentTarget).text();
-			var input = this.$el.find("input[name=term]");
-			var term = input.val() + " AND " + filter + "[FILTER]";
-			input.val(term);
-			this.$el.submit();
-		},
+		}
 	}),
 
 	Info: Backbone.View.extend({
