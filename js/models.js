@@ -40,7 +40,8 @@ var Models = {
 		},
 
 		events: {
-			"change:identifier": "setLinks"
+			"change:pmid": "setLinks",
+			"change:doi": "setLinks"
 		},
 
 		initialize: function() {
