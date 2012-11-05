@@ -74,7 +74,7 @@ var Views = {
 
 	Articles: Backbone.View.extend({
 		offset: 0,
-		limit: 10,
+		limit: 5,
 
 		initialize: function() {
 			this.$el.appendTo("body");
