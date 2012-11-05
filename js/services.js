@@ -57,14 +57,14 @@ var PubMed = function(options) {
 		return this.get({ url: "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi", data: data });
 	};
 
-	this.history = function(input, offset, limit) {
+	this.history = function(query, offset, limit) {
 		var data = {
 			tool: "hubmed",
 			email: "alf@hubmed.org",
 			db: "pubmed",
 			rettype: "xml",
-      		webenv: input.webEnv,
-      		query_key: input.queryKey,
+      		webenv: query.webEnv,
+      		query_key: query.queryKey,
 			retstart: offset,
 			retmax: limit,
 		};

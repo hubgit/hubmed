@@ -12,10 +12,20 @@ var Collections = {
 
 			var view = app.views.articles;
 
+			if (view.offset) {
+				var data = app.models.query.toJSON();
+
+				if (view.offset > data.count) {
+					return;
+				}
+
+				return app.services.pubmed.history(data, view.offset, view.limit).done(options.success);
+			}
+
 			if(input.term.match(/^related:(.+)/)) {
 				return app.services.pubmed.related(input).done(function(doc) {
 					var data = {
-						count: 1000,
+						count: 1000, // note: can be less than 1000
 						webEnv: document.evaluate("/eLinkResult/LinkSet/WebEnv", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent,
 						queryKey: document.evaluate("/eLinkResult/LinkSet/LinkSetDbHistory/QueryKey", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent
 					};

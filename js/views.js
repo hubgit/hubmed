@@ -65,6 +65,10 @@ var Views = {
 		},
 
 		render: function() {
+			if (app.models.query.get("relatedQuery")) {
+				return;
+			}
+
 			var data = this.model.toJSON();
 			this.$el.html(Templates.Info(data));
 			return this;
@@ -268,7 +272,13 @@ var Views = {
 
 			app.views.articles.offset = node.data("offset");
 
-			app.collections.articles.fetch({ add: true }).done(this.countItems);
+			var result = app.collections.articles.fetch({ add: true });
+
+			if (result) {
+				result.done(this.countItems);
+			} else {
+				this.noMoreItems();
+			}
 		},
 
 		countItems: function() {

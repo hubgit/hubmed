@@ -77,7 +77,7 @@
 			<a property="url" target="_blank" data-action="show-abstract"
 			   {{#if doi}}href="http://dx.doi.org/{{doi}}"
 			   {{else}}href="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id={{pmid}}"
-			   {{/if}}><span property="name">{{title}}</span></a>
+			   {{/if}}><span property="name">{{{title}}</span></a>
 
 			<div property="creators" class="collection">
 				{{#each creator}}<span property="creator">{{{.}}}</span>{{/each}}
