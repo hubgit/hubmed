@@ -2,7 +2,8 @@ var Models = {
 	Query: Backbone.Model.extend({
 		defaults: {
 		    "filters":  {
-		    	"free full text": false
+		    	"free full text[filter]": false,
+		    	"review[ptyp]": false
 		    },
 		    "days": 0,
 		    "term": "",

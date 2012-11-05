@@ -18,7 +18,7 @@ var PubMed = function(options) {
 
 		$.each(input.filters, function(index, value) {
 			if (value) {
-				parts.push(index + "[FILTER]");
+				parts.push(index);
 			}
 		});
 

@@ -35,12 +35,26 @@
 	background: #eee;
 }
 
+#input-filters {
+	margin-top: 15px;
+}
+
+#input-filters input[type=checkbox] {
+	margin: 0 5px 0 0;
+}
+
+#input-filters label {
+	display: inline-block;
+	margin-right: 0.5em;
+	vertical-align: middle;
+}
+
 #date-filters label {
 	display: inline-block;
 	margin-left: 0.5em;
 	vertical-align: middle;
 }
 
-#input input[type=radio] {
+#date-filters input[type=radio] {
 	margin: 0 2px 2px;
 }
