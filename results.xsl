@@ -83,15 +83,22 @@
 
   <xsl:template match="PubDate" mode="journal">
     <abbr property="datePublished">
-      <xsl:value-of select="Year"/>
-      <xsl:if test="Month">
-        <xsl:text> </xsl:text>
-        <xsl:value-of select="Month"/>
-        <xsl:if test="Day">
-          <xsl:text> </xsl:text>
-          <xsl:value-of select="Day"/>
-        </xsl:if>
-      </xsl:if>
+      <xsl:choose>
+        <xsl:when test="MedlineDate">
+          <xsl:value-of select="MedlineDate"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="Year"/>
+          <xsl:if test="Month">
+            <xsl:text> </xsl:text>
+            <xsl:value-of select="Month"/>
+            <xsl:if test="Day">
+              <xsl:text> </xsl:text>
+              <xsl:value-of select="Day"/>
+            </xsl:if>
+          </xsl:if>
+        </xsl:otherwise>
+      </xsl:choose>
     </abbr>;
   </xsl:template>
 
