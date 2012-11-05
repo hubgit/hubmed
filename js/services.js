@@ -23,6 +23,8 @@ var PubMed = function(options) {
 		});
 
 		var data = {
+			tool: "hubmed",
+			email: "alf@hubmed.org",
 			db: "pubmed",
 			usehistory: "y",
 			retmax: 0,
@@ -39,7 +41,8 @@ var PubMed = function(options) {
 
 	this.related = function(input) {
 		var data = {
-			dbfrom: "pubmed",
+			tool: "hubmed",
+			email: "alf@hubmed.org",
 			db: "pubmed",
 			cmd: "neighbor_history",
 			linkname: "pubmed_pubmed",
@@ -54,17 +57,17 @@ var PubMed = function(options) {
 		return this.get({ url: "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi", data: data });
 	};
 
-	this.history = function(input) {
+	this.history = function(input, offset, limit) {
 		var data = {
+			tool: "hubmed",
+			email: "alf@hubmed.org",
 			db: "pubmed",
 			rettype: "xml",
       		webenv: input.webEnv,
       		query_key: input.queryKey,
-			retstart: app.views.articles.offset,
-			retmax: app.views.articles.limit,
+			retstart: offset,
+			retmax: limit,
 		};
-
-		console.log(data);
 
 		return this.get({ url: "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi", data: data });
 	};

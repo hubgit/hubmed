@@ -10,6 +10,8 @@ var Collections = {
 				return;
 			}
 
+			var view = app.views.articles;
+
 			if(input.term.match(/^related:(.+)/)) {
 				return app.services.pubmed.related(input).done(function(doc) {
 					var data = {
@@ -20,7 +22,7 @@ var Collections = {
 
 					app.models.query.set(data);
 
-					app.services.pubmed.history(data).done(options.success);
+					app.services.pubmed.history(data, view.offset, view.limit).done(options.success);
 				});
 			}
 
@@ -33,7 +35,7 @@ var Collections = {
 
 				app.models.query.set(data);
 
-				app.services.pubmed.history(data).done(options.success);
+				app.services.pubmed.history(data, view.offset, view.limit).done(options.success);
 			});
 		},
 
@@ -64,7 +66,11 @@ var Collections = {
 				return new Models.Article(item);
 			});
 
-			return items.toArray();
+			if (items.length) {
+				app.views.pagination.setNextOffset();
+
+				return items.toArray();
+			}
 		}
 	}),
 	Links: Backbone.Collection.extend({}),

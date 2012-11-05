@@ -1,4 +1,3 @@
-
 var Views = {
 	Input: Backbone.View.extend({
 		tagName: "form",
@@ -86,8 +85,6 @@ var Views = {
 		reset: function() {
 			this.$el.empty();
 
-			console.log(["collection", this.collection]);
-
 			this.collection.each(this.add, this);
 
 			var articles = $("article");
@@ -136,9 +133,6 @@ var Views = {
 		},
 
 		action: function(event) {
-			//event.preventDefault();
-			//event.stopPropagation();
-
 			if (event.metaKey || event.ctrlKey) {
 				return true;
 			}
@@ -235,19 +229,27 @@ var Views = {
 	}),
 
 	Pagination: Backbone.View.extend({
+		tagName: "a",
+
 		events: {
-			"click a": "fetchPage",
-			"inview a": "fetchMore"
+			"click": "fetchPage",
+			"inview": "fetchMore"
 		},
 
 		initialize: function() {
-			this.$el.appendTo("body");
+			this
+				.$el
+				.attr("href", "#")
+				.attr("rel", "next")
+				.html("More &darr;")
+				.hide()
+				.appendTo("body");
 		},
 
-		render: function(offset) {
-			$("<a/>", { href: "#", html: "More &darr;", rel: "next" })
-				.data("offset", offset)
-				.appendTo(this.$el);
+		setNextOffset: function() {
+			var offset = app.views.articles.offset + app.views.articles.limit;
+			this.$el.data("offset", offset).removeClass("loading").html("More &darr;")
+			this.$el.show();
 		},
 
 		fetchPage: function(event) {
@@ -256,29 +258,35 @@ var Views = {
 
 			var node = $(event.currentTarget);
 
-			if(node.hasClass("loading")) {
+			if (node.hasClass("loading")) {
 				return;
 			}
 
-			node.addClass("loading").html("Loading more&hellip;");
+			var spinner = $("<img/>", { src: "./images/spinner.gif"}).addClass("spinner");
 
-			app.views.article.offset = node.data("offset");
+			node.addClass("loading").text("Loading").append(spinner)
 
-			app.collections.articles.fetch({ add: true }).done(this.checkItems);
+			app.views.articles.offset = node.data("offset");
+
+			app.collections.articles.fetch({ add: true }).done(this.countItems);
 		},
 
-		checkItems: function() {
-			if(!app.collections.articles.length) {
-				this.$el.find("a").text("No more items");
+		countItems: function() {
+			if (!app.collections.articles.length) {
+				this.noMoreItems();
 			}
 		},
 
 		fetchMore: function(event) {
-			if(app.collections.articles.length) {
+			if (app.collections.articles.length) {
 				this.fetchPage(event);
 			} else {
-				this.$el.find("a").text("No more items");
+				this.noMoreItems();
 			}
+		},
+
+		noMoreItems: function() {
+			this.$el.text("No more items");
 		}
 	})
 };

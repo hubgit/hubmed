@@ -1,8 +1,5 @@
 .pagination {
 	margin-bottom: 40px;
-}
-
-.pagination a {
 	display: block;
 	padding: 10px;
 	background: #f6f6f6;
@@ -11,7 +8,11 @@
 	text-shadow: 0 -1px 1px white;
 }
 
-.pagination a:hover {
+.pagination:hover {
 	color: #000;
 	background: #f0f0f0;
+}
+
+.pagination .spinner {
+	vertical-align: middle;
 }
