@@ -14,7 +14,10 @@ $(function() {
 		app.processor = new XSLTProcessor();
 		app.processor.importStylesheet(xsl);
 
-		$("input[name=term]").focus();
+		if (!app.models.query.get("term")) {
+			app.views.input.$("input[name=term]").focus();
+		}
+
 		app.collections.articles.fetch();
 	};
 

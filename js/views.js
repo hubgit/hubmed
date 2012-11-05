@@ -6,6 +6,11 @@ var Views = {
 			this.$el.appendTo("body");
 			if (location.search) {
 				this.parseQueryString().forEach(this.handleQueryPart, this);
+
+				// only use "days" for "related" queries
+				if (!this.model.get("relatedQuery")) {
+					this.model.set("days", 0);
+				}
 			}
 			this.render();
 		},
