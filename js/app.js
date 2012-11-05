@@ -3,17 +3,16 @@
 
 var app = {};
 
+var fetchXSL = $.ajax({
+	url: "results.xsl",
+	dataType: "xml"
+});
+
 $(function() {
 	/** Fetch the list of articles and update the collection **/
-	var refresh = function(xslXHR) {
+	var refresh = function(xsl) {
 		app.processor = new XSLTProcessor();
-		app.processor.importStylesheet(xslXHR);
-
-		// reset the AJAX queue
-		//$.ajaxQueue.stop(true);
-
-		// empty the collection
-		//app.collections.articles.reset();
+		app.processor.importStylesheet(xsl);
 
 		$("input[name=term]").focus();
 		app.collections.articles.fetch();
@@ -57,11 +56,6 @@ $(function() {
 			className: "wrapper pagination",
 		})
 	};
-
-	var fetchXSL = $.ajax({
-		url: "results.xsl",
-		dataType: "xml"
-	});
 
 	$.when(fetchXSL).done(refresh);
 });

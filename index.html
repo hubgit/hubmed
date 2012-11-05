@@ -50,6 +50,7 @@
 
 	{{#if relatedQuery}}
 		<div id="date-filters">
+			<span>Published in the last</span>
 			<label><input type="radio" name="days" value="365" {{#ifEqual days "365"}}checked{{/ifEqual}}>
 				1 year</label>
 			<label><input type="radio" name="days" value="730" {{#ifEqual days "730"}}checked{{/ifEqual}}>
@@ -73,31 +74,37 @@
 
 	<div class="main">
 		<header>
-			<a property="url" target="_blank" data-action="show-abstract" href="{{#if doi}}http://dx.doi.org/{{doi}}{{else}}http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id={{pmid}}{{/if}}"><span property="name">{{title}}</span></a>
+			<a property="url" target="_blank" data-action="show-abstract"
+			   {{#if doi}}href="http://dx.doi.org/{{doi}}"
+			   {{else}}href="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id={{pmid}}"
+			   {{/if}}><span property="name">{{title}}</span></a>
 
 			<div property="creators" class="collection">
-				{{#each creator}}{{{.}}}<span class="separator">, </span>{{/each}}
+				{{#each creator}}<span property="creator">{{{.}}}</span>{{/each}}
 			</div>
 
 			<div property="citation">
-				<a property="journal" title="{{journalTitle}}" href="./?term={{journalISSN}} [ISSN]">{{#if journalISOAbbreviation}}{{journalISOAbbreviation}}{{else}}{{journalTitle}}.{{/if}}</a> <abbr property="datePublished">{{datePublished}}</abbr>; {{#if volume}} <span property="volume">{{volume}}</span>{{/if}}{{#if issue}}(<a property="issue" href="./?term={{journalISSN}} [ISSN] AND {{issue}} [Issue]">{{issue}}</a>){{/if}}{{#if pagination}}:<span property="pagination">{{pagination}}</span>{{/if}}
+				<a property="journal" title="{{journalTitle}}" href="./?term={{journalISSN}} [ISSN]">{{#if journalISOAbbreviation}}{{journalISOAbbreviation}}{{else}}{{journalTitle}}{{/if}}.</a>
+
+				<abbr property="datePublished">{{datePublished}}</abbr>;
+
+				{{#if volume}}<span property="volume">{{volume}}</span>{{/if}}{{#if issue}}(<a property="issue" href="./?term={{journalISSN}} [ISSN] AND {{issue}} [Issue]">{{issue}}</a>){{/if}}{{#if pagination}}:<span property="pagination">{{pagination}}</span>{{/if}}
 			</div>
 		</header>
 
 		<section>
 			{{#if abstract}}
-				<p property="abstract">{{abstract}}</p>
+				{{#each abstract}}<p property="abstract">{{{.}}}</p>{{/each}}
 			{{else}}
-				<p class="abstract">No abstract available</p>
+				<p>No abstract available</p>
 			{{/if}}
 		</section>
 
 		<section class="sources">
-			{{#if doi}}
-				<a class="link" target="_blank" href="http://scholar.google.com/scholar?cluster=http://dx.doi.org/{{doi}}">Google Scholar</a>
-			{{else}}
-				<a class="link" target="_blank" href="http://scholar.google.com/scholar?q={{title}}">Google Scholar</a>
-			{{/if}}
+			<a class="link" target="_blank"
+				{{#if doi}}href="http://scholar.google.com/scholar?cluster=http://dx.doi.org/{{doi}}"
+				{{else}}href="http://scholar.google.com/scholar?q={{title}}"
+				{{/if}}>Google Scholar</a>
 		</section>
 
 		<footer></footer>

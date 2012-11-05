@@ -29,8 +29,6 @@ var PubMed = function(options) {
 			term: parts.join(" AND ")
 		};
 
-		console.log(data);
-
 		if (input.days) {
 	    	data.reldate = input.days;
 	    	data.dateType = "pdat";
@@ -47,8 +45,6 @@ var PubMed = function(options) {
 			linkname: "pubmed_pubmed",
 			id: input.term.replace(/^related:/, "")
 		};
-
-		console.log(data);
 
 		if (input.days) {
 	    	data.reldate = input.days;

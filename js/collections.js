@@ -6,6 +6,10 @@ var Collections = {
 		sync: function(method, collection, options) {
 			var input = app.models.query.toJSON();
 
+			if (!input.term) {
+				return;
+			}
+
 			if(input.term.match(/^related:(.+)/)) {
 				return app.services.pubmed.related(input).done(function(doc) {
 					var data = {

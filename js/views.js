@@ -5,7 +5,9 @@ var Views = {
 
 		initialize: function() {
 			this.$el.appendTo("body");
-			this.parseQueryString().forEach(this.handleQueryPart, this);
+			if (location.search) {
+				this.parseQueryString().forEach(this.handleQueryPart, this);
+			}
 			this.render();
 		},
 

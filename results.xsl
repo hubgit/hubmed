@@ -37,10 +37,18 @@
 
   <xsl:template match="Author">
     <div property="creator" class="multiple">
-      <xsl:apply-templates select="ForeName"/>
+      <xsl:choose>
+        <xsl:when test="ForeName">
+          <xsl:apply-templates select="ForeName"/>
+        </xsl:when>
+        <xsl:when test="Initials">
+          <xsl:apply-templates select="Initials"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:apply-templates select="Name"/>
+        </xsl:otherwise>
+      </xsl:choose>
       <xsl:text> </xsl:text>
-      <!--<xsl:apply-templates select="Initials"/>
-      <xsl:text> </xsl:text>-->
       <xsl:apply-templates select="LastName"/>
     </div>
   </xsl:template>
@@ -61,17 +69,29 @@
     <span property="name"><xsl:value-of select="."/></span>
   </xsl:template>
 
+  <xsl:template match="@Label" mode="abstract">
+    <span class="label"><xsl:value-of select="."/></span>
+    <xsl:text>: </xsl:text>
+  </xsl:template>
+
   <xsl:template match="AbstractText">
-    <div property="abstract"><xsl:apply-templates select="node()"/></div>
+    <div property="abstract" class="multiple">
+      <xsl:apply-templates select="@Label" mode="abstract"/>
+      <xsl:apply-templates select="node()"/>
+    </div>
   </xsl:template>
 
   <xsl:template match="PubDate" mode="journal">
     <abbr property="datePublished">
       <xsl:value-of select="Year"/>
-      <xsl:text> </xsl:text>
-      <xsl:value-of select="Month"/>
-      <xsl:text> </xsl:text>
-      <xsl:value-of select="Day"/>
+      <xsl:if test="Month">
+        <xsl:text> </xsl:text>
+        <xsl:value-of select="Month"/>
+        <xsl:if test="Day">
+          <xsl:text> </xsl:text>
+          <xsl:value-of select="Day"/>
+        </xsl:if>
+      </xsl:if>
     </abbr>;
   </xsl:template>
 
@@ -101,7 +121,8 @@
   </xsl:template>
 
   <xsl:template match="ISOAbbreviation" mode="journal">
-    <div property="journalISOAbbreviation"><xsl:value-of select="."/></div>
+    <xsl:variable name="noDots" select="translate(.,'.','')"/>
+    <div property="journalISOAbbreviation"><xsl:value-of select="$noDots"/></div>
   </xsl:template>
 
   <xsl:template match="Volume" mode="journal">

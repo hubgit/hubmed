@@ -19,6 +19,22 @@
 
       var comma = document.createTextNode(", ")
       authors.not(":last").after(comma);
+
+      authors.each(function() {
+        var node = $(this);
+        var name = node.text();
+
+        // build a different search term if only initials are available
+        var matches = name.match(/^([A-Z ]+) (.+)/);
+        if (matches) {
+          name = matches[2] + " " + matches[1].replace(/\s/g, "");
+        }
+
+        var query = $.param({ term: name + "[AU]" });
+        var link = $("<a/>", { href: "./?" + query });
+        node.wrapInner(link);
+      })
+
     });
   };
 })(jQuery);

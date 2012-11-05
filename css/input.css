@@ -37,10 +37,10 @@
 
 #input label {
 	display: inline-block;
-	margin-right: 10px;
+	margin-left: 0.5em;
 	vertical-align: middle;
 }
 
 #input input[type=radio] {
-	margin-right: 5px;
+	margin: 0 2px 2px;
 }
