@@ -4,6 +4,7 @@ var Views = {
 
 		initialize: function() {
 			this.$el.appendTo("body");
+
 			if (location.search) {
 				this.parseQueryString().forEach(this.handleQueryPart, this);
 
@@ -12,6 +13,7 @@ var Views = {
 					this.model.set("days", 0);
 				}
 			}
+
 			this.render();
 		},
 
@@ -89,6 +91,7 @@ var Views = {
 			this.$el.appendTo("body");
 			this.collection.on("reset", this.reset, this);
 			this.collection.on("add", this.add, this);
+            this.setOffset(this.readOffsetHash())
 		},
 
 		reset: function() {
@@ -107,7 +110,22 @@ var Views = {
 		add: function(article) {
 			var view = new Views.Article({ model: article });
 			this.$el.append(view.render().el);
-		}
+		},
+
+        readOffsetHash: function() {
+            var matches = location.hash.match(/^#offset-(\d+)/);
+
+            return matches ? Number(matches[1]) : 0;
+        },
+
+        setOffset: function(offset) {
+            this.offset = offset;
+        },
+
+        setNextOffset: function() {
+            this.setOffset(this.offset + this.limit);
+            app.views.pagination.$el.removeClass("loading").html("More &darr;");
+        },
 	}),
 
 	Article: Backbone.View.extend({
@@ -137,6 +155,8 @@ var Views = {
 
 			this.$el.find("footer").append(this.links.$el)
 			this.$el.find(".context").append(this.metrics.$el);
+
+            this.$el.data("offset", data.offset).attr("id", "offset-" + data.offset);
 
 			return this;
 		},
@@ -252,7 +272,6 @@ var Views = {
                 .attr("href", "#")
                 .attr("rel", "next")
                 .html("More &darr;")
-                .data("offset", 0)
                 .hide()
                 .appendTo("body");
         },
@@ -260,6 +279,10 @@ var Views = {
         start: function() {
             this.fetchPage();
             this.watchScrollPosition(this.fetchPage, 500, 500);
+
+            if (history.pushState) {
+                this.watchScrollOffset();
+            }
         },
 
         watchScrollPosition: function(callback, distance, interval) {
@@ -277,11 +300,38 @@ var Views = {
             setInterval(checkScrollPosition, interval);
         },
 
-		setNextOffset: function() {
-			var offset = app.views.articles.offset + app.views.articles.limit;
-			this.$el.data("offset", offset).removeClass("loading").html("More &darr;")
-			this.$el.show();
-		},
+        watchScrollOffset: function() {
+            var $window = $(window),
+                $document = $(document);
+
+            var checkScrollOffset = function() {
+                var scrollTop = $window.scrollTop();
+                var windowHeight = $window.height();
+
+                $("article").each(function() {
+                    var node = $(this);
+                    var offsetTop = node.offset().top;
+
+                    if (scrollTop <= offsetTop) {
+                        var offset = node.data("offset");
+                        var locationOffset = app.views.articles.readOffsetHash();
+
+                        //if (Math.abs(offset - locationOffset) > 2) {
+                        if (offset !== locationOffset) {
+                            history.pushState(null, null, "#offset-" + offset);
+                        }
+
+                        return false; // break
+                    }
+                });
+            };
+
+            setInterval(checkScrollOffset, 1000);
+        },
+
+        setOffset: function(offset) {
+
+        },
 
 		fetchPage: function(event) {
 			var node = this.$el;
@@ -293,8 +343,6 @@ var Views = {
 			var spinner = $("<img/>", { src: "./images/spinner.gif"}).addClass("spinner");
 
 			node.addClass("loading").text("Loading").append(spinner)
-
-			app.views.articles.offset = node.data("offset");
 
 			var result = app.collections.articles.fetch({ add: true });
 

@@ -12,9 +12,9 @@ var Collections = {
 
 			var view = app.views.articles;
 
-			if (view.offset) {
-				var data = app.models.query.toJSON();
+			var data = app.models.query.toJSON();
 
+			if (data.webEnv && data.queryKey) {
 				if (view.offset >= data.count) {
 					app.views.pagination.noMoreItems();
 					return;
@@ -55,8 +55,13 @@ var Collections = {
 			var node = document.createElement("div");
 			node.appendChild(fragment);
 
+			var offset = app.views.articles.offset;
+
 			var items = $(node.firstChild).find("article").map(function() {
-				var item = {};
+				var item = {
+					offset: offset++
+				};
+
 				var node = $(this);
 
 				node.children("[property]").each(function() {
@@ -78,7 +83,7 @@ var Collections = {
 			});
 
 			if (items.length) {
-				app.views.pagination.setNextOffset();
+				app.views.articles.setNextOffset();
 
 				return items.toArray();
 			}
