@@ -30,7 +30,7 @@ $(function() {
 	};
 
 	app.models = {
-		query: new Models.Query
+		query: new Models.Query()
 	};
 
 	app.collections = {

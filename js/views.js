@@ -134,7 +134,7 @@ var Views = {
 
 			this.$el.find("[property=creators]").formatAuthors(5, "creator");
 
-			this.$el.find("footer").append(this.links.$el)
+			this.$el.find("footer").append(this.links.$el);
 			this.$el.find(".context").append(this.metrics.$el);
 
 			return this;
@@ -240,7 +240,7 @@ var Views = {
 		tagName: "a",
 
 		events: {
-			"click": "fetchPage",
+			"click": "fetchPage"
 		},
 
         initialize: function() {
@@ -278,11 +278,11 @@ var Views = {
 
 		setNextOffset: function() {
 			var offset = app.views.articles.offset + app.views.articles.limit;
-			this.$el.data("offset", offset).removeClass("loading").html("More &darr;")
+			this.$el.data("offset", offset).removeClass("loading").html("More &darr;");
 			this.$el.show();
 		},
 
-		fetchPage: function(event) {
+		fetchPage: function() {
 			var node = this.$el;
 
 			if (node.hasClass("loading")) {
@@ -291,11 +291,11 @@ var Views = {
 
 			var spinner = $("<img/>", { src: "./images/spinner.gif"}).addClass("spinner");
 
-			node.addClass("loading").text("Loading").append(spinner)
+			node.addClass("loading").text("Loading").append(spinner);
 
 			app.views.articles.offset = node.data("offset");
 
-			var result = app.collections.articles.fetch({ add: true });
+			app.collections.articles.fetch({ add: true });
 
             return false;
         },

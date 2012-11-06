@@ -17,7 +17,7 @@
         });
       }
 
-      var comma = document.createTextNode(", ")
+      var comma = document.createTextNode(", ");
       authors.not(":last").after(comma);
 
       authors.each(function() {
@@ -33,7 +33,7 @@
         var query = $.param({ term: name + "[AU]" });
         var link = $("<a/>", { href: "./?" + query });
         node.wrapInner(link);
-      })
+      });
 
     });
   };
