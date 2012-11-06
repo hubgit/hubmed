@@ -37,10 +37,6 @@
     font-family: Optima, Arial, Verdana, Helvetica, serif;
 }
 
-[typeof=MedicalScholarlyArticle] [property=abstract] {
-    font-family: Optima, Arial, Verdana, Helvetica, serif;
-}
-
 [typeof=MedicalScholarlyArticle] [property=abstract]:not(:last-of-type) {
     margin-bottom: 10px;
 }

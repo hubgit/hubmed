@@ -245,15 +245,34 @@ var Views = {
 			"inview": "fetchMore"
 		},
 
-		initialize: function() {
-			this
-				.$el
-				.attr("href", "#")
-				.attr("rel", "next")
-				.html("More &darr;")
-				.hide()
-				.appendTo("body");
-		},
+        initialize: function() {
+            _.bindAll(this);
+
+            this
+                .$el
+                .attr("href", "#")
+                .attr("rel", "next")
+                .html("More &darr;")
+                .hide()
+                .appendTo("body");
+
+            this.watchScrollPosition(this.fetchMore, 500, 1000);
+        },
+
+        watchScrollPosition: function(callback, distance, interval) {
+            var $window = $(window),
+                $document = $(document);
+
+            var checkScrollPosition = function() {
+                var top = $document.height() - $window.height() - distance;
+
+                if ($window.scrollTop() >= top) {
+                    callback();
+                }
+            };
+
+            setInterval(checkScrollPosition, interval);
+        },
 
 		setNextOffset: function() {
 			var offset = app.views.articles.offset + app.views.articles.limit;
