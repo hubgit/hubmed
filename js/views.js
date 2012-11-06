@@ -77,8 +77,7 @@ var Views = {
 			var data = this.model.toJSON();
 			this.$el.html(Templates.Info(data));
 			return this;
-		},
-
+		}
 	}),
 
 	Articles: Backbone.View.extend({

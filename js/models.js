@@ -6,7 +6,7 @@ var Models = {
 		    	"review[ptyp]": false
 		    },
 		    "days": 0,
-		    "term": "",
+		    "term": ""
 	    }
 	}),
 

@@ -66,7 +66,7 @@ var PubMed = function(options) {
       		webenv: query.webEnv,
       		query_key: query.queryKey,
 			retstart: offset,
-			retmax: limit,
+			retmax: limit
 		};
 
 		return this.get({ url: "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi", data: data });

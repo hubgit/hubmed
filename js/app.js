@@ -58,7 +58,7 @@ $(function() {
 
 		pagination: new Views.Pagination({
 			id: "pagination",
-			className: "wrapper pagination",
+			className: "wrapper pagination"
 		})
 	};
 
