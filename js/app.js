@@ -14,7 +14,9 @@ $(function() {
 		app.processor = new XSLTProcessor();
 		app.processor.importStylesheet(xsl);
 
-		if (!app.models.query.get("term")) {
+		if (app.models.query.get("term")) {
+			app.views.pagination.$el.show();
+		} else {
 			app.views.input.$("input[name=term]").focus();
 		}
 

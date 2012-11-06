@@ -253,6 +253,7 @@ var Views = {
                 .attr("rel", "next")
                 .html("More &darr;")
                 .data("offset", 0)
+                .hide()
                 .appendTo("body");
         },
 
