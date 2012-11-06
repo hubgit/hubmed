@@ -18,7 +18,7 @@ $(function() {
 			app.views.input.$("input[name=term]").focus();
 		}
 
-		app.collections.articles.fetch();
+		app.views.pagination.start();
 	};
 
 	app.services = {

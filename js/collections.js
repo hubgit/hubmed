@@ -15,7 +15,8 @@ var Collections = {
 			if (view.offset) {
 				var data = app.models.query.toJSON();
 
-				if (view.offset > data.count) {
+				if (view.offset >= data.count) {
+					app.views.pagination.noMoreItems();
 					return;
 				}
 
@@ -81,6 +82,8 @@ var Collections = {
 
 				return items.toArray();
 			}
+
+			app.views.pagination.noMoreItems();
 		}
 	}),
 	Links: Backbone.Collection.extend({}),

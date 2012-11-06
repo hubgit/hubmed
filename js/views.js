@@ -252,10 +252,13 @@ var Views = {
                 .attr("href", "#")
                 .attr("rel", "next")
                 .html("More &darr;")
-                .hide()
+                .data("offset", 0)
                 .appendTo("body");
+        },
 
-            this.watchScrollPosition(this.fetchMore, 500, 1000);
+        start: function() {
+            this.fetchPage();
+            this.watchScrollPosition(this.fetchPage, 500, 500);
         },
 
         watchScrollPosition: function(callback, distance, interval) {
@@ -294,28 +297,8 @@ var Views = {
 
 			var result = app.collections.articles.fetch({ add: true });
 
-			if (result) {
-				result.done(this.countItems);
-			} else {
-				this.noMoreItems();
-			}
-
             return false;
-		},
-
-		countItems: function() {
-			if (!app.collections.articles.length) {
-				this.noMoreItems();
-			}
-		},
-
-		fetchMore: function() {
-			if (app.collections.articles.length) {
-				this.fetchPage();
-			} else {
-				this.noMoreItems();
-			}
-		},
+        },
 
 		noMoreItems: function() {
 			this.$el.text("No more items");
