@@ -1,6 +1,6 @@
 [typeof=MedicalScholarlyArticle] [property=url] {
     color: inherit;
-    display: block;
+    display: inline-block;
     margin-left: -10px;
     margin-bottom: 5px;
     font-weight: 400;
