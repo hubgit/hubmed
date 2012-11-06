@@ -22,6 +22,7 @@
 
 #input input[name=term] {
 	width: 800px;
+	background: white;
 }
 
 #input input[type=submit] {
