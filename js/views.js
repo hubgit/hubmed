@@ -242,7 +242,6 @@ var Views = {
 
 		events: {
 			"click": "fetchPage",
-			"inview": "fetchMore"
 		},
 
         initialize: function() {
@@ -281,13 +280,10 @@ var Views = {
 		},
 
 		fetchPage: function(event) {
-			event.preventDefault();
-			event.stopPropagation();
-
-			var node = $(event.currentTarget);
+			var node = this.$el;
 
 			if (node.hasClass("loading")) {
-				return;
+				return false;
 			}
 
 			var spinner = $("<img/>", { src: "./images/spinner.gif"}).addClass("spinner");
@@ -303,6 +299,8 @@ var Views = {
 			} else {
 				this.noMoreItems();
 			}
+
+            return false;
 		},
 
 		countItems: function() {
@@ -311,9 +309,9 @@ var Views = {
 			}
 		},
 
-		fetchMore: function(event) {
+		fetchMore: function() {
 			if (app.collections.articles.length) {
-				this.fetchPage(event);
+				this.fetchPage();
 			} else {
 				this.noMoreItems();
 			}
