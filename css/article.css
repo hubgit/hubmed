@@ -10,13 +10,6 @@
     color: green;
 }
 
-[typeof=MedicalScholarlyArticle] [property=url].visited:before {
-    content: url("../images/eye.png");
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 5px;
-}
-
 [typeof=MedicalScholarlyArticle] [property=creator] {
     white-space: nowrap;
     color: #777;
