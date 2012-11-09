@@ -27,7 +27,7 @@
 
 #input input[type=submit] {
 	position: relative;
-	left: -20px;
+	left: -35px;
 	background: #f6f6f6;
 }
 
@@ -39,10 +39,13 @@
 #input .clear {
 	color: #aaa;
 	position: relative;
-	left: -30px;
+	left: -35px;
 	cursor: pointer;
 	display: inline-block;
 	z-index: 99;
+	border: none;
+	background: none;
+	font-size: inherit;
 }
 
 #input .clear:hover {
