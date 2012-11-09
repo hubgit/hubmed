@@ -73,7 +73,7 @@ var Models = {
                 {
                     text: "⇣ RIS",
                     attributes: {
-                        rel: "export",
+                        rel: "save",
                         download: "hubmed-" + pmid,
                         href: app.services.pubmed.url + "?format=application%2Fresearch-info-systems&id=" + pmid,
                         type: "application/research-info-systems",
@@ -84,11 +84,21 @@ var Models = {
                 {
                     text: "⇣ BibTeX",
                     attributes: {
-                        rel: "export",
+                        rel: "save",
                         download: "hubmed-" + pmid,
                         href: app.services.pubmed.url + "?format=text%2Fbibtex&id=" + pmid,
                         type: "text/bibtex",
                         title: "Download as BibTeX"
+                    }
+                },
+
+                {
+                    text: "↪ Mendeley",
+                    attributes: {
+                        rel: "bookmark",
+                        href: "http://www.mendeley.com/import/?url=" + encodeURIComponent("http://www.ncbi.nlm.nih.gov/pubmed/" + pmid),
+                        title: "Save to Mendeley",
+                        target: "_blank"
                     }
                 },
 

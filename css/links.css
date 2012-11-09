@@ -39,3 +39,18 @@ a.link:hover {
 	opacity: 1.0;
 	text-decoration: none;
 }
+
+a.link[rel=bookmark] {
+	display: none;
+}
+
+@media only screen and (max-width: 500px) {
+	a.link[rel=save] {
+		display: none;
+	}
+
+	a.link[rel=bookmark] {
+		display: inline-block;
+	}
+}
+
