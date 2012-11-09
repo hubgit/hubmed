@@ -12,7 +12,7 @@ a[title]:after {
     transition-delay:1s;
 }
 
-a[title]:after {
+a[title]:hover:after {
     opacity:0.8;
     display:inline-block;
     content:attr(title);
