@@ -4,7 +4,8 @@ var Views = {
 
 		events: {
 			"change input[type=checkbox],input[type=radio]": "submitChangedForm",
-			"click .clear": "clearInput"
+			"click .clear": "clearInput",
+			"click input[name=term]": "selectInput"
 		},
 
 		initialize: function() {
@@ -73,6 +74,10 @@ var Views = {
 		clearInput: function() {
 			this.model.set("term", null, { silent: true });
 			this.$("[name=term]").val("").focus();
+		},
+
+		selectInput: function(event) {
+			$(event.currentTarget).select();
 		}
 	}),
 
