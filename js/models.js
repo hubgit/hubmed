@@ -98,8 +98,8 @@ var Models = {
                     attributes: {
                         rel: "related",
                         href: "./?term=related:" + pmid,
-                        title: "show related items (ctrl/cmd to combine)",
-                        "data-hinted": "true"
+                        title: "Show related items",
+                        "data-hint": "ctrl/cmd to combine"
                     }
                 }
             ];
