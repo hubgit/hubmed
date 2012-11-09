@@ -31,7 +31,7 @@ var Collections = {
 						queryKey: doc.evaluate("/eLinkResult/LinkSet/LinkSetDbHistory/QueryKey", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent
 					};
 
-					app.models.query.set(data, { silent: true });
+					app.models.query.set(data);
 
 					app.services.pubmed.history(data, view.offset, view.limit).done(options.success);
 				});
@@ -44,7 +44,7 @@ var Collections = {
 					queryKey: doc.evaluate("/eSearchResult/QueryKey", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent
 				};
 
-				app.models.query.set(data, { silent: true });
+				app.models.query.set(data);
 
 				app.services.pubmed.history(data, view.offset, view.limit).done(options.success);
 			});

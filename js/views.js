@@ -16,14 +16,11 @@ var Views = {
 
 				// only use "days" for "related" queries
 				if (!this.model.get("relatedQuery")) {
-					this.model.set("days", 0, { silent: true });
+					this.model.set("days", 0);
 				}
 			}
 
-			this.model.on("change", function() {
-				this.render();
-				this.$el.submit();
-			}, this);
+			this.model.on("change", this.render, this);
 
 			this.render();
 		},
@@ -47,12 +44,12 @@ var Views = {
 
 			switch (name) {
 				case "days":
-					this.model.set("days", Number(value), { silent: true });
+					this.model.set("days", Number(value));
 					return;
 
 				case "term":
-					this.model.set("relatedQuery", value.match(/^related:/), { silent: true });
-					this.model.set("term", value, { silent: true });
+					this.model.set("relatedQuery", value.match(/^related:/));
+					this.model.set("term", value);
 					break;
 
 				case "filter":
@@ -60,7 +57,7 @@ var Views = {
 
 					if (typeof filters[value] !== "undefined") {
 						filters[value] = true;
-						this.model.set("filters", filters, { silent: true });
+						this.model.set("filters", filters);
 					}
 
 					break;
@@ -72,7 +69,7 @@ var Views = {
 		},
 
 		clearInput: function() {
-			this.model.set("term", null, { silent: true });
+			this.model.set("term", null);
 			this.$("[name=term]").val("").focus();
 		},
 
@@ -93,6 +90,7 @@ var Views = {
 			}
 
 			var data = this.model.toJSON();
+
 			this.$el.html(Templates.Info(data));
 			return this;
 		}
@@ -277,6 +275,7 @@ var Views = {
 						}
 
 						app.models.query.set("term", term);
+						app.views.input.$el.submit();
 					}
 
 					return;
