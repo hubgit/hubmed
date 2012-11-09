@@ -5,7 +5,7 @@ var Views = {
 		events: {
 			"change input[type=checkbox],input[type=radio]": "submitChangedForm",
 			"click .clear": "clearInput",
-			"click input[name=term]": "selectInput"
+			//"click input[name=term]": "selectInput"
 		},
 
 		initialize: function() {
