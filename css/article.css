@@ -34,7 +34,11 @@
 }
 
 [typeof=MedicalScholarlyArticle] [property=abstract] {
-    font-family: Optima, Arial, Verdana, Helvetica, serif;
+    background: white;
+    font-weight: normal;
+    padding: 10px;
+    color: #444;
+    font-size: 90%;
 }
 
 [typeof=MedicalScholarlyArticle] [property=abstract]:not(:last-of-type) {
