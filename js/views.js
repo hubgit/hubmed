@@ -4,14 +4,21 @@ var Views = {
 
 		initialize: function() {
 			this.$el.appendTo("body");
+
 			if (location.search) {
 				this.parseQueryString().forEach(this.handleQueryPart, this);
 
 				// only use "days" for "related" queries
 				if (!this.model.get("relatedQuery")) {
-					this.model.set("days", 0);
+					this.model.set("days", 0, { silent: true });
 				}
 			}
+
+			this.model.on("change", function() {
+				this.render();
+				this.$el.submit();
+			}, this);
+
 			this.render();
 		},
 
@@ -38,12 +45,12 @@ var Views = {
 
 			switch (name) {
 				case "days":
-					this.model.set("days", Number(value));
+					this.model.set("days", Number(value), { silent: true });
 					return;
 
 				case "term":
-					this.model.set("relatedQuery", value.match(/^related:/));
-					this.model.set("term", value);
+					this.model.set("relatedQuery", value.match(/^related:/), { silent: true });
+					this.model.set("term", value, { silent: true });
 					break;
 
 				case "filter":
@@ -51,7 +58,7 @@ var Views = {
 
 					if (typeof filters[value] !== "undefined") {
 						filters[value] = true;
-						this.model.set("filters", filters);
+						this.model.set("filters", filters, { silent: true });
 					}
 
 					break;
@@ -230,9 +237,36 @@ var Views = {
 		tagName: "a",
 		className: "link",
 
+		events: {
+			"click": "handleClick"
+		},
+
 		initialize: function() {
 			var data = this.model.toJSON();
 			this.$el.text(data.text).attr(data.attributes);
+		},
+
+		handleClick: function() {
+			var attributes = this.model.get("attributes");
+
+			switch (attributes.rel) {
+				case "related":
+					if (!app.models.query.get("relatedQuery")) {
+						return true;
+					}
+
+					if (event.metaKey || event.ctrlKey) {
+						var term = $.trim(app.models.query.get("term")) + "," + this.model.get("pmid");
+						app.models.query.set("term", term);
+
+						return false;
+					}
+
+					return true;
+
+				default:
+					return true;
+			}
 		}
 	}),
 
