@@ -154,15 +154,17 @@ var Views = {
 		},
 
 		action: function(event) {
+			var node = $(event.currentTarget);
+
 			if (event.metaKey || event.ctrlKey) {
+				node.addClass("visited");
 				return true;
 			}
 
-			var node = $(event.currentTarget);
-
 			switch (node.data("action")) {
 				case "show-abstract":
-					if (node.hasClass("expanded") && node.attr("property") == url) {
+					if (node.hasClass("expanded")) {
+						node.addClass("visited");
 						return true;
 					}
 
