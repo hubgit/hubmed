@@ -13,6 +13,7 @@
 
 <!-- stylesheets -->
 
+<link rel="stylesheet" href="css/tooltip.css">
 <link rel="stylesheet" href="css/layout.css">
 <link rel="stylesheet" href="css/pagination.css">
 <link rel="stylesheet" href="css/article.css">
@@ -75,6 +76,7 @@
 	<div class="main">
 		<header>
 			<a property="url" target="_blank" data-action="show-abstract"
+				title="Click to show abstract; again for full text"
 			   {{#if doi}}href="http://dx.doi.org/{{doi}}"
 			   {{else}}href="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id={{pmid}}"
 			   {{/if}}><span property="name">{{{title}}</span></a>

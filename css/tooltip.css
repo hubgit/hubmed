@@ -1,0 +1,33 @@
+a[title] {
+    position:relative;
+}
+
+a[title]:after {
+    content:"";
+    opacity:0;
+    z-index:999;
+    text-decoration:none;
+    transition-property:opacity;
+    transition-duration:2s;
+    transition-delay:1s;
+}
+
+a[title]:after {
+    opacity:0.8;
+    display:inline-block;
+    content:attr(title);
+    position:absolute;
+    white-space:nowrap;
+    top:-20px;
+    left:0;
+    width:auto;
+    padding:2px 5px;
+    color:#fff;
+    font-size:90%;
+    font-family:"Helvetica", "Arial", sans-serif;
+    background:#6198cd;
+    text-align:center;
+    border-radius:5px;
+    box-shadow:2px 2px 4px rgba(0,0,0,0.25);
+    text-shadow:0 1px #2187c8;
+}

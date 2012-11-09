@@ -76,7 +76,8 @@ var Models = {
                         rel: "export",
                         download: "hubmed-" + pmid,
                         href: app.services.pubmed.url + "?format=application%2Fresearch-info-systems&id=" + pmid,
-                        type: "application/research-info-systems"
+                        type: "application/research-info-systems",
+                        title: "Download as RIS"
                     }
                 },
 
@@ -86,15 +87,18 @@ var Models = {
                         rel: "export",
                         download: "hubmed-" + pmid,
                         href: app.services.pubmed.url + "?format=text%2Fbibtex&id=" + pmid,
-                        type: "text/bibtex"
+                        type: "text/bibtex",
+                        title: "Download as BibTeX"
                     }
                 },
 
                 {
+                    pmid: pmid,
                     text: "Related",
                     attributes: {
                         rel: "related",
-                        href: "./?term=related:" + pmid
+                        href: "./?term=related:" + pmid,
+                        title: "Related items (hold Ctrl to combine)"
                     }
                 }
             ];
