@@ -246,26 +246,30 @@ var Views = {
 			this.$el.text(data.text).attr(data.attributes);
 		},
 
-		handleClick: function() {
+		handleClick: function(event) {
+			var term, pmid;
 			var attributes = this.model.get("attributes");
 
 			switch (attributes.rel) {
 				case "related":
-					if (!app.models.query.get("relatedQuery")) {
-						return true;
-					}
-
 					if (event.metaKey || event.ctrlKey) {
-						var term = $.trim(app.models.query.get("term")) + "," + this.model.get("pmid");
-						app.models.query.set("term", term);
+						event.preventDefault();
 
-						return false;
+						pmid = this.model.get("pmid");
+
+						if (app.models.query.get("relatedQuery")) {
+							term = $.trim(app.models.query.get("term")) + "," + pmid;
+						} else {
+							term = "related:" + pmid;
+						}
+
+						app.models.query.set("term", term);
 					}
 
-					return true;
+					return;
 
 				default:
-					return true;
+					return;
 			}
 		}
 	}),
