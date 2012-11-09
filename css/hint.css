@@ -1,22 +1,24 @@
-a[data-hint]:after {
-    opacity: 0;
-    display: none;
-    content: attr(data-hint);
-    text-decoration: none;
-    color: green;
-    font-family: "Helvetica", "Arial", sans-serif;
-    margin-left: 10px;
+@media only screen and (min-width: 500px) {
+    a[data-hint]:after {
+        opacity: 0;
+        display: none;
+        content: attr(data-hint);
+        text-decoration: none;
+        color: green;
+        font-family: "Helvetica", "Arial", sans-serif;
+        margin-left: 10px;
 
-    -webkit-transition-property:opacity;
-    -webkit-transition-duration:2s;
-    -webkit-transition-delay:1s;
+        -webkit-transition-property:opacity;
+        -webkit-transition-duration:2s;
+        -webkit-transition-delay:1s;
 
-    transition-property:opacity;
-    transition-duration:2s;
-    transition-delay:1s;
-}
+        transition-property:opacity;
+        transition-duration:2s;
+        transition-delay:1s;
+    }
 
-a[data-hint]:hover:after {
-    display: inline-block;
-    opacity: 0.7;
+    a[data-hint]:hover:after {
+        display: inline-block;
+        opacity: 0.7;
+    }
 }

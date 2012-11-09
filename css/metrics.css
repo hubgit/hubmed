@@ -28,7 +28,7 @@
 	width: 16px;
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 500px) {
 	.metric {
 		display: inline-block;
 		margin-right: 5px;
