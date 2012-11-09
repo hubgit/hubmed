@@ -99,7 +99,7 @@ var Models = {
                         rel: "related",
                         href: "./?term=related:" + pmid,
                         title: "show related items (ctrl/cmd to combine)",
-                        "data-tooltop-position": "after"
+                        "data-hinted": "true"
                     }
                 }
             ];
