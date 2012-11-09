@@ -21,7 +21,7 @@
 }
 
 #input input[name=term] {
-	width: 800px;
+	width: 70%;
 	background: white;
 }
 
@@ -36,8 +36,12 @@
 	background: #eee;
 }
 
+#input-filters, #date-filters {
+	margin-left: 1px;
+}
+
 #input-filters {
-	margin-top: 15px;
+	margin-top: 10px;
 }
 
 #input-filters input[type=checkbox] {
@@ -59,3 +63,4 @@
 #date-filters input[type=radio] {
 	margin: 0 2px 2px;
 }
+

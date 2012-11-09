@@ -27,3 +27,10 @@
 	height: 16px;
 	width: 16px;
 }
+
+@media only screen and (max-width: 480px) {
+	.metric {
+		display: inline-block;
+		margin-right: 5px;
+	}
+}
