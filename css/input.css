@@ -36,6 +36,18 @@
 	background: #eee;
 }
 
+#input .clear {
+	color: #aaa;
+	position: relative;
+	left: -25px;
+	cursor: pointer;
+	display: inline-block;
+}
+
+#input .clear:hover {
+	color: #000;
+}
+
 #input-filters, #date-filters {
 	margin-left: 1px;
 }

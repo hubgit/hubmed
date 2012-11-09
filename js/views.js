@@ -2,6 +2,11 @@ var Views = {
 	Input: Backbone.View.extend({
 		tagName: "form",
 
+		events: {
+			"change input[type=checkbox],input[type=radio]": "submitChangedForm",
+			"click .clear": "clearInput"
+		},
+
 		initialize: function() {
 			this.$el.appendTo("body");
 
@@ -20,10 +25,6 @@ var Views = {
 			}, this);
 
 			this.render();
-		},
-
-		events: {
-			"change input[type=checkbox],input[type=radio]": "submitChangedForm"
 		},
 
 		render: function() {
@@ -67,6 +68,11 @@ var Views = {
 
 		submitChangedForm: function() {
 			this.$el.submit();
+		},
+
+		clearInput: function() {
+			this.model.set("term", null, { silent: true });
+			this.$("[name=term]").val("").focus();
 		}
 	}),
 
