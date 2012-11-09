@@ -80,14 +80,14 @@
 				title="click to show abstract, again for full text"
 			   {{#if doi}}href="http://dx.doi.org/{{doi}}"
 			   {{else}}href="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id={{pmid}}"
-			   {{/if}}><span property="name">{{{title}}</span></a>
+			   {{/if}}><span property="name">{{{title}}}</span></a>
 
 			<div property="creators" class="collection">
 				{{#each creator}}<span property="creator">{{{.}}}</span>{{/each}}
 			</div>
 
 			<div property="citation">
-				<a property="journal" title="{{journalTitle}}" href="./?term={{journalISSN}} [ISSN]">{{#if journalISOAbbreviation}}{{journalISOAbbreviation}}{{else}}{{{journalTitle}}}{{/if}}.</a>
+				<a property="journal" title="{{journalTitle}}" href="./?term={{journalISSN}} [ISSN]">{{#if journalISOAbbreviation}}{{journalISOAbbreviation}}{{else}}{{journalTitle}}{{/if}}.</a>
 
 				{{#if datePublished}}<abbr property="datePublished">{{datePublished}}</abbr>;{{/if}}
 
