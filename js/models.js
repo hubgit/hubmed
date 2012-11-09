@@ -71,7 +71,7 @@ var Models = {
                 },*/
 
                 {
-                    text: "RIS",
+                    text: "⇣ RIS",
                     attributes: {
                         rel: "export",
                         download: "hubmed-" + pmid,
@@ -82,7 +82,7 @@ var Models = {
                 },
 
                 {
-                    text: "BibTeX",
+                    text: "⇣ BibTeX",
                     attributes: {
                         rel: "export",
                         download: "hubmed-" + pmid,
@@ -94,11 +94,12 @@ var Models = {
 
                 {
                     pmid: pmid,
-                    text: "Related",
+                    text: "✫ Related",
                     attributes: {
                         rel: "related",
                         href: "./?term=related:" + pmid,
-                        title: "Related items (hold Ctrl to combine)"
+                        title: "show related items (ctrl/cmd to combine)",
+                        "data-tooltop-position": "after"
                     }
                 }
             ];

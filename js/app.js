@@ -9,11 +9,15 @@ var fetchXSL = $.ajax({
 });
 
 $(function() {
-	/** Fetch the list of articles and update the collection **/
-	var refresh = function(xsl) {
+	var createXSLProcessor = function(xsl) {
 		app.processor = new XSLTProcessor();
 		app.processor.importStylesheet(xsl);
 
+		refresh();
+	};
+
+	/** Fetch the list of articles and update the collection **/
+	var refresh = function() {
 		if (app.models.query.get("term")) {
 			app.views.pagination.$el.show();
 		} else {
@@ -62,5 +66,5 @@ $(function() {
 		})
 	};
 
-	$.when(fetchXSL).done(refresh);
+	$.when(fetchXSL).done(createXSLProcessor);
 });

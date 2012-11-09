@@ -15,14 +15,6 @@ article a:hover {
     color: #00E !important;
 }
 
-a[rel=related]:before {
-	content: "✫ ";
-}
-
-a[rel=export]:before {
-	content: "⇣ ";
-}
-
 a.expandable:before {
 	content: "▿ ";
 }
