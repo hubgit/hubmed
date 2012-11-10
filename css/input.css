@@ -10,46 +10,9 @@
 	display: inline-block;
 }
 
-#input input[type=submit],
-#input input[type=text] {
-	font-size: 1em;
-	padding: 0.5em;
-	-webkit-appearance: none;
-	background: none;
-	border: 1px solid #DDD;
-	margin: 0;
-}
-
 #input input[name=term] {
 	width: 60%;
 	background: white;
-}
-
-#input input[type=submit] {
-	position: relative;
-	left: -35px;
-	background: #f6f6f6;
-}
-
-#input input[type=submit]:hover {
-	cursor: pointer;
-	background: #eee;
-}
-
-#input .clear {
-	color: #aaa;
-	position: relative;
-	left: -35px;
-	cursor: pointer;
-	display: inline-block;
-	z-index: 99;
-	border: none;
-	background: none;
-	font-size: inherit;
-}
-
-#input .clear:hover {
-	color: #000;
 }
 
 #input-filters, #date-filters {
