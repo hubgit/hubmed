@@ -1,9 +1,9 @@
-[typeof=MedicalScholarlyArticle] header {
+article header {
     display: -webkit-flex;
     display: flex;
 }
 
-[typeof=MedicalScholarlyArticle] [property=url] {
+article [property=url] {
     color: inherit;
     display: inline-block;
     margin-bottom: 5px;
@@ -12,36 +12,36 @@
     flex: 1;
 }
 
-[typeof=MedicalScholarlyArticle] [property=url]:visited {
+article [property=url]:visited {
     color: green;
 }
 
 
-[typeof=MedicalScholarlyArticle] [property=datePublished] {
+article [property=datePublished] {
     display: inline-block;
     white-space: nowrap;
     padding-left: 10px;
     color: #999;
 }
 
-[typeof=MedicalScholarlyArticle] [property=datePublished] .month {
+article [property=datePublished] .month {
     visibility: hidden;
 }
 
-[typeof=MedicalScholarlyArticle] [property=creators] {
+article [property=creators] {
     color: #777;
     margin-left: 10px;
 }
 
-[typeof=MedicalScholarlyArticle] [property=creator] {
+article [property=creator] {
     white-space: nowrap;
 }
 
-[typeof=MedicalScholarlyArticle] [property=creator] a {
+article [property=creator] a {
     color: inherit;
 }
 
-[typeof=MedicalScholarlyArticle] [property=citation] {
+article [property=citation] {
     color: #270;
     white-space: nowrap;
     overflow-x: hidden;
@@ -50,25 +50,25 @@
     margin-left: 10px;
 }
 
-[typeof=MedicalScholarlyArticle] [property=citation] a {
+article [property=citation] a {
     color: inherit;
 }
 
-[typeof=MedicalScholarlyArticle] .has-extra .extra {
+article .has-extra .extra {
     display: none;
 }
 
-[typeof=MedicalScholarlyArticle] .has-extra:hover .extra {
+article .has-extra:hover .extra {
     display: inline;
 }
 
-[typeof=MedicalScholarlyArticle] section {
+article section {
     margin-top: 10px;
     margin-bottom: 10px;
     display: none;
 }
 
-[typeof=MedicalScholarlyArticle] [property=abstract] {
+article [property=abstract] {
     background: white;
     font-weight: normal;
     padding: 10px;
@@ -76,32 +76,36 @@
     font-size: 90%;
 }
 
-[typeof=MedicalScholarlyArticle] [property=abstract]:not(:last-of-type) {
+article [property=abstract]:not(:last-of-type) {
     margin-bottom: 10px;
 }
 
-[typeof=MedicalScholarlyArticle] footer {
+article footer {
     margin-top: 5px;
 }
 
-[typeof=MedicalScholarlyArticle] .et-al {
+article .et-al {
     font-style: italic;
     white-space: nowrap;
     color: #aaa;
 }
 
 @media only screen and (max-width: 500px) {
-    [typeof=MedicalScholarlyArticle] [property=abstract] {
+    article [property=abstract] {
         margin-left: -10px;
     }
 
-    [typeof=MedicalScholarlyArticle] [property=datePublished] .month {
+    article [property=datePublished] .month {
         display: none;
     }
 }
 
 @media only screen and (min-width: 500px) {
-    [typeof=MedicalScholarlyArticle] [property=datePublished]:hover .month {
+    article .context {
+        width: 4em;
+    }
+
+    article [property=datePublished]:hover .month {
         visibility: visible;
     }
 }

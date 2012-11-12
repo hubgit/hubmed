@@ -225,6 +225,7 @@ var Views = {
 	}),
 
 	Metrics: Backbone.View.extend({
+		tagName: "span",
 		className: "metrics",
 
 		initialize: function() {

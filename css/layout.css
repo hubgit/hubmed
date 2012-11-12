@@ -17,6 +17,23 @@ body {
 	background: #f6f6f6;
 }
 
+#articles {
+	display: table;
+}
+
+article {
+	display: table-row;
+}
+
+article > * {
+	display: table-cell;
+	padding-bottom: 20px;
+}
+
+footer {
+	margin-left: 10px;
+}
+
 p {
 	margin: 0;
 }
@@ -32,41 +49,23 @@ p {
 }
 
 #articles {
-	display: table;
 	margin-top: 10px;
 }
 
 article {
-	display: table-row;
-}
-
-article > .main {
-	display: table-cell;
-}
-
-article > .context {
-	display: none;
-	height: 50px; /* needed for child 100%; expands to fit contents */
-	min-width: 3em;
-	text-align: right;
-}
-
-#articles.metrics article > .context {
-	display: table-cell;
-}
-
-article .main {
-    width: 100%;
-    vertical-align: top;
     padding-bottom: 20px;
-}
-
-#articles.metrics article > .main {
-	padding-left: 15px;
 }
 
 .collection .separator:last-of-type {
 	display: none;
+}
+
+.context {
+	display: none;
+}
+
+.show-metrics .context {
+	display: table-cell;
 }
 
 @media only screen and (min-width: 1140px) {
@@ -85,28 +84,9 @@ article .main {
 	}
 
     article {
-        display: block;
         width: 100%;
         margin: 0 0 15px 0;
         padding: 0;
-    }
-
-    article > .context,
-    article > .main {
-    	height: auto;
-    	min-width: 0;
-    	text-align: left;
-    	padding-left: 0;
-    	padding-bottom: 0;
-    }
-
-    article > .main {
-    	display: block;
-    }
-
-    #articles.metrics article > .context {
-    	display: block;
-		min-height: 22px;
     }
 
     section {

@@ -72,7 +72,7 @@ $(function() {
 		})
 	};
 
-	app.views.articles.$el.toggleClass("metrics", app.models.options.get("metrics"));
+	app.views.articles.$el.toggleClass("show-metrics", app.models.options.get("metrics"));
 
 	$.when(fetchXSL).done(createXSLProcessor);
 });

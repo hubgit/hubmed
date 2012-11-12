@@ -1,10 +1,5 @@
-.metrics {
-	/*background: #f6f6f6;
-	height: 100%;*/
-}
-
 .metric {
-	display: block;
+	display: inline-block;
 	white-space: nowrap;
 	line-height: 20px;
 	color: #444;
@@ -14,7 +9,7 @@
 	font-size: 90%;
 	opacity: 0.75;
 	text-shadow: 0 -1px 1px white;
-	margin-bottom: 2px;
+	margin: 0 5px;
 }
 
 .metric:hover {
@@ -26,11 +21,4 @@
 	margin-right: 5px;
 	height: 16px;
 	width: 16px;
-}
-
-@media only screen and (max-width: 500px) {
-	.metric {
-		display: inline-block;
-		margin-right: 5px;
-	}
 }
