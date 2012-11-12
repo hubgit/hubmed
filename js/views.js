@@ -300,7 +300,7 @@ var Views = {
 
 		initialize: function() {
 			var data = this.model.toJSON();
-			this.$el.text(data.text).attr(data.attributes);
+			this.$el.html(data.text).attr(data.attributes);
 		},
 
 		handleClick: function(event) {

@@ -88,20 +88,19 @@
           <xsl:value-of select="MedlineDate"/>
         </xsl:when>
         <xsl:otherwise>
+          <xsl:value-of select="Year"/>
           <xsl:if test="Month">
+            <xsl:text> </xsl:text>
             <span class="month">
               <xsl:value-of select="Month"/>
               <xsl:if test="Day">
                 <span class="day">
                   <xsl:text> </xsl:text>
                   <xsl:value-of select="Day"/>
-                  <xsl:text>,</xsl:text>
                 </span>
               </xsl:if>
             </span>
-            <xsl:text> </xsl:text>
           </xsl:if>
-          <xsl:value-of select="Year"/>
         </xsl:otherwise>
       </xsl:choose>
     </abbr>;

@@ -9,6 +9,10 @@ var Models = {
                 "review[ptyp]": {
                     name: "review",
                     enabled: false
+                },
+                "comment[ptyp]": {
+                    name: "comment",
+                    enabled: false
                 }
             },
             "days": 0,
@@ -112,12 +116,11 @@ var Models = {
 
                 {
                     pmid: pmid,
-                    text: "✫ Related",
+                    text: "✫ Related <span class='hint'>combine using ctrl/cmd</span>",
                     attributes: {
                         rel: "related",
                         href: "./?term=related:" + pmid,
                         title: "Show related items",
-                        "data-hint": "combine using ctrl/cmd"
                     }
                 }
             ];
