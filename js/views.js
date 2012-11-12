@@ -2,6 +2,10 @@ var Views = {
 	Input: Backbone.View.extend({
 		tagName: "form",
 
+		attributes: {
+			autocapitalize: "off"
+		},
+
 		events: {
 			"change input[type=checkbox],input[type=radio]": "submitChangedForm",
 			"click .clear": "clearInput",
