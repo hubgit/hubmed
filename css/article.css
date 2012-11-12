@@ -45,9 +45,6 @@ article [property=creator] a {
 
 article [property=citation] {
     color: #270;
-    white-space: nowrap;
-    overflow-x: hidden;
-    text-overflow: ellipsis;
     margin-left: 10px;
 }
 
