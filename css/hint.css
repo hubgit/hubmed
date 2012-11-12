@@ -1,7 +1,7 @@
 @media only screen and (min-width: 500px) {
     a .hint {
         opacity: 0;
-        display: none;
+        display: inline-block;
         content: attr(data-hint);
         text-decoration: none;
         color: green;
@@ -12,20 +12,19 @@
         left: 8px;*/
 
         -webkit-transition-property:opacity;
-        -webkit-transition-duration:2s;
-        -webkit-transition-delay:1s;
+        -webkit-transition-duration:1s;
+        -webkit-transition-delay:0.5s;
 
         transition-property:opacity;
-        transition-duration:2s;
-        transition-delay:1s;
+        transition-duration:1s;
+        transition-delay:0.5s;
     }
 
     a:hover .hint {
-        display: inline-block;
         opacity: 0.7;
     }
 
     a:active .hint {
-        display: none !important;
+        display: none;
     }
 }
