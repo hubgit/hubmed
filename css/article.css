@@ -26,7 +26,7 @@ article [property=datePublished] {
     margin-left: 5px;
 }
 
-article [property=datePublished] .month {
+article [property=datePublished] .day {
     visibility: hidden;
 }
 
@@ -91,6 +91,11 @@ article .et-al {
     color: #aaa;
 }
 
+article .no-abstract {
+    font-size: 90%;
+    margin-left: 10px;
+}
+
 @media only screen and (max-width: 500px) {
     article [property=abstract] {
         margin-left: -10px;
@@ -108,6 +113,10 @@ article .et-al {
 
     article [property=datePublished]:hover .month {
         visibility: visible;
+    }
+
+    article [property=datePublished]:hover .day {
+        visibility: hidden;
     }
 }
 
