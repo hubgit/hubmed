@@ -73,28 +73,26 @@
 </script>
 
 <script type="text/html" data-template="Article">
-	<div class="context"></div>
+
 
 	<div class="main">
 		<header>
-			<a property="url" target="_blank" data-action="show-abstract"
-				title="click to show abstract, again for full text"
-			   {{#if doi}}href="http://dx.doi.org/{{doi}}"
-			   {{else}}href="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id={{pmid}}"
-			   {{/if}}><span property="name">{{{title}}}</span></a>
+			<a property="url" target="_blank" data-action="show-abstract" data-display="cell"
+			title="click to show abstract, again for full text"
+		   {{#if doi}}href="http://dx.doi.org/{{doi}}"
+		   {{else}}href="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id={{pmid}}"
+		   {{/if}}>{{{title}}}</a>
 
-			<div property="creators" class="collection">
-				{{#each creator}}<span property="creator">{{{.}}}</span>{{/each}}
-			</div>
+	   		{{#if datePublished}}<abbr property="datePublished" class="has-extra">{{{datePublished}}}</abbr>{{/if}}
+	   	</header>
 
-			<div property="citation">
-				<a property="journal" title="{{journalTitle}}" href="./?term={{journalISSN}} [ISSN]">{{#if journalISOAbbreviation}}{{journalISOAbbreviation}}{{else}}{{journalTitle}}{{/if}}.</a>
+	   	<div property="creators" class="collection">
+			{{#each creator}}<span property="creator">{{{.}}}</span>{{/each}}
+		</div>
 
-				{{#if datePublished}}<abbr property="datePublished">{{datePublished}}</abbr>;{{/if}}
-
-				{{#if volume}}<span property="volume">{{volume}}</span>{{/if}}{{#if issue}}(<a property="issue" href="./?term={{journalISSN}} [ISSN] AND {{issue}} [Issue]">{{issue}}</a>){{/if}}{{#if pagination}}:<span property="pagination">{{pagination}}</span>{{/if}}
-			</div>
-		</header>
+		<div property="citation" class="has-extra">
+			<a property="journal" title="{{journalTitle}}" href="./?term={{journalISSN}} [ISSN]">{{#if journalISOAbbreviation}}{{journalISOAbbreviation}}{{else}}{{journalTitle}}{{/if}}</a><span class="extra">. {{#if volume}}<span property="volume">{{volume}}</span>{{/if}}{{#if issue}}(<a property="issue" href="./?term={{journalISSN}} [ISSN] AND {{issue}} [Issue]">{{issue}}</a>){{/if}}{{#if pagination}}:<span property="pagination">{{pagination}}</span>{{/if}}</span>
+		</div>
 
 		<section>
 			{{#if abstract}}

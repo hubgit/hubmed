@@ -45,7 +45,6 @@ $(function() {
 	app.views = {
 		options: new Views.Options({
 			id: "options",
-			className: "wrapper",
 			model: app.models.options
 		}),
 

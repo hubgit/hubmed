@@ -47,7 +47,7 @@ article > .main {
 article > .context {
 	display: none;
 	height: 50px; /* needed for child 100%; expands to fit contents */
-	min-width: 4em;
+	min-width: 3em;
 	text-align: right;
 }
 
@@ -67,10 +67,6 @@ article .main {
 
 .collection .separator:last-of-type {
 	display: none;
-}
-
-header, section, footer {
-	margin-left: 10px;
 }
 
 @media only screen and (min-width: 1140px) {

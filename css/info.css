@@ -1,8 +1,10 @@
 #info {
-	display: table;
+	display: -webkit-flex;
+	display: flex;
 	white-space: nowrap;
 }
 
-#info > * {
-	display: table-cell;
+#info > *:first-child {
+	-webkit-flex: 1;
+	flex: 1;
 }
