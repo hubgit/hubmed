@@ -26,6 +26,7 @@ var PubMed = function(options) {
             tool: "hubmed",
             email: "alf@hubmed.org",
             db: "pubmed",
+            sort: "pub date",
             usehistory: "y",
             retmax: 0,
             term: parts.join(" AND ")
