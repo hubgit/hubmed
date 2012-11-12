@@ -34,7 +34,8 @@ $(function() {
 	};
 
 	app.models = {
-		query: new Models.Query()
+		query: new Models.Query(),
+		options: new Models.Options()
 	};
 
 	app.collections = {
@@ -42,6 +43,12 @@ $(function() {
 	};
 
 	app.views = {
+		options: new Views.Options({
+			id: "options",
+			className: "wrapper",
+			model: app.models.options
+		}),
+
 		input: new Views.Input({
 			id: "input",
 			className: "wrapper",
@@ -65,6 +72,8 @@ $(function() {
 			className: "wrapper pagination"
 		})
 	};
+
+	app.views.articles.$el.toggleClass("metrics", app.models.options.get("metrics"));
 
 	$.when(fetchXSL).done(createXSLProcessor);
 });

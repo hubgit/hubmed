@@ -21,4 +21,8 @@
         display: inline-block;
         opacity: 0.7;
     }
+
+    a[data-hint]:active:after {
+        display: none !important;
+    }
 }

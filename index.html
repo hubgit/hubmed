@@ -21,12 +21,14 @@
 <link rel="stylesheet" href="css/metrics.css">
 <link rel="stylesheet" href="css/info.css">
 <link rel="stylesheet" href="css/links.css">
+<link rel="stylesheet" href="css/options.css">
 
 <!-- scripts -->
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <!--<script src="vendor/jquery.js"></script>-->
 <script src="vendor/jquery.ajaxQueue.js"></script>
+<script src="vendor/jquery.cookie.js"></script>
 <script src="vendor/jquery.formatAuthors.js"></script>
 <script src="vendor/jquery.pluralise.js"></script>
 
@@ -118,5 +120,9 @@
 </script>
 
 <script type="text/html" data-template="Info">
-	<div>{{#pluralise count "article" "articles"}}{{/pluralise}}</div>
+	<span>{{#pluralise count "article" "articles"}}{{/pluralise}}</span>
+</script>
+
+<script type="text/html" data-template="Options">
+	<label><input name="metrics" type="checkbox" {{#if metrics}}checked{{/if}}> metrics</label>
 </script>

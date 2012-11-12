@@ -50,10 +50,12 @@ var Models = {
             this.links = new Collections.Links({ model: Models.Link });
             this.setLinks();
 
-            var model = this;
-            $.each(this.augmentors, function(name, augmentor) {
-                augmentor.call(model);
-            });
+            if (app.models.options.get("metrics")) {
+                var model = this;
+                $.each(this.augmentors, function(name, augmentor) {
+                    augmentor.call(model);
+                });
+            }
         },
 
         setLinks: function() {
@@ -119,5 +121,6 @@ var Models = {
     }),
 
     Link: Backbone.Model.extend({}),
-    Info: Backbone.Model.extend({})
+    Info: Backbone.Model.extend({}),
+    Options: Backbone.Model.extend({})
 };

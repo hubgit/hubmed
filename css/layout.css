@@ -40,22 +40,29 @@ article {
 	display: table-row;
 }
 
-article > .context,
 article > .main {
 	display: table-cell;
 }
 
 article > .context {
+	display: none;
 	height: 50px; /* needed for child 100%; expands to fit contents */
 	min-width: 4em;
 	text-align: right;
+}
+
+#articles.metrics article > .context {
+	display: table-cell;
 }
 
 article .main {
     width: 100%;
     vertical-align: top;
     padding-bottom: 20px;
-    padding-left: 15px;
+}
+
+#articles.metrics article > .main {
+	padding-left: 15px;
 }
 
 .collection .separator:last-of-type {

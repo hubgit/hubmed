@@ -1,4 +1,43 @@
 var Views = {
+	Options: Backbone.View.extend({
+		tagName: "form",
+
+		events: {
+			"change input": "handleChange"
+		},
+
+		initialize: function() {
+			//this.$el.appendTo("body");
+
+			var metrics = $.cookie("metrics") === "true";
+			this.model.set("metrics", metrics);
+
+			//this.render();
+		},
+
+		render: function() {
+			var data = this.model.toJSON();
+			this.$el.html(Templates.Options(data));
+			return this;
+		},
+
+		handleChange: function() {
+			var metrics = this.$("[name=metrics]").prop("checked");
+
+			if (!metrics) {
+				this.setWithCookie("metrics", metrics);
+			} else if (confirm("Enabling this will query Altmetric and Scopus for article-level metrics, and they will be able to see your search terms. Your choice will be stored in a cookie.")) {
+				this.setWithCookie("metrics", metrics);
+			}
+		},
+
+		setWithCookie: function(name, metrics) {
+			this.model.set(name, metrics);
+			$.cookie(name, metrics, { expires: 30 });
+			window.location.reload(); // TODO: just update the page
+		}
+	}),
+
 	Input: Backbone.View.extend({
 		tagName: "form",
 
@@ -25,7 +64,6 @@ var Views = {
 			}
 
 			this.model.on("change", this.render, this);
-
 			this.render();
 		},
 
@@ -96,6 +134,11 @@ var Views = {
 			var data = this.model.toJSON();
 
 			this.$el.html(Templates.Info(data));
+
+			if (app.views.options) {
+				this.$el.append(app.views.options.render().$el);
+			}
+
 			return this;
 		}
 	}),
