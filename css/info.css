@@ -2,6 +2,7 @@
 	display: -webkit-flex;
 	display: flex;
 	white-space: nowrap;
+	color: #777;
 }
 
 #info > *:first-child {

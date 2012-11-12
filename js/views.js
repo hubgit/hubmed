@@ -98,7 +98,7 @@ var Views = {
 					var filters = this.model.get("filters");
 
 					if (typeof filters[value] !== "undefined") {
-						filters[value] = true;
+						filters[value].enabled = true;
 						this.model.set("filters", filters);
 					}
 

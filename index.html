@@ -66,7 +66,7 @@
 	{{else}}
 		<div id="input-filters">
 			{{#eachProperty filters}}
-				<label><input type="checkbox" name="filter" value="{{property}}" {{#if value}}checked{{/if}}>{{property}}</input></label>
+				<label><input type="checkbox" name="filter" value="{{property}}" {{#if value.enabled}}checked{{/if}}>{{value.name}}</input></label>
 			{{/eachProperty}}
 		</div>
 	{{/if}}
@@ -77,11 +77,13 @@
 
 	<div class="main">
 		<header>
-			<a property="url" target="_blank" data-action="show-abstract" data-display="cell"
-			title="click to show abstract, again for full text"
-		   {{#if doi}}href="http://dx.doi.org/{{doi}}"
-		   {{else}}href="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id={{pmid}}"
-		   {{/if}}>{{{title}}}</a>
+			<span property="name">
+				<a property="url" target="_blank" data-action="show-abstract" data-display="cell"
+					title="click to show abstract, again for full text"
+				   {{#if doi}}href="http://dx.doi.org/{{doi}}"
+				   {{else}}href="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id={{pmid}}"
+				   {{/if}}>{{{title}}}</a>
+		   	</span>
 
 	   		{{#if datePublished}}<abbr property="datePublished" class="has-extra">{{{datePublished}}}</abbr>{{/if}}
 	   	</header>

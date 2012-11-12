@@ -28,10 +28,10 @@ a.link {
     opacity: 0.5;
     font-weight: 400;
     font-size: 90%;
+    position: relative;
 }
 
 a.link:not(:last-child) {
-    /*content: " · ";*/
     margin-right: 10px;
 }
 

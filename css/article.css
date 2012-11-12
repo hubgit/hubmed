@@ -3,19 +3,21 @@ article header {
     display: flex;
 }
 
+article [property=name] {
+    -webkit-flex: 1;
+    flex: 1;
+}
+
 article [property=url] {
     color: inherit;
     display: inline-block;
     margin-bottom: 5px;
     font-weight: 400;
-    -webkit-flex: 1;
-    flex: 1;
 }
 
 article [property=url]:visited {
     color: green;
 }
-
 
 article [property=datePublished] {
     display: inline-block;
@@ -46,11 +48,10 @@ article [property=citation] {
     white-space: nowrap;
     overflow-x: hidden;
     text-overflow: ellipsis;
-    display: inline;
     margin-left: 10px;
 }
 
-article [property=citation] a {
+article [property=journal]  {
     color: inherit;
 }
 
@@ -59,7 +60,7 @@ article .has-extra .extra {
 }
 
 article .has-extra:hover .extra {
-    display: inline;
+    /*display: inline;*/
 }
 
 article section {
