@@ -111,7 +111,7 @@ var Models = {
                         rel: "related",
                         href: "./?term=related:" + pmid,
                         title: "Show related items",
-                        "data-hint": "ctrl/cmd to combine"
+                        "data-hint": "combine using ctrl/cmd"
                     }
                 }
             ];
