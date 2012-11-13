@@ -51,6 +51,12 @@
 		<button type="submit">search</button>
 	</div>
 
+	<div id="input-filters">
+		{{#eachProperty filters}}
+			<label><input type="checkbox" name="filter" value="{{property}}" {{#if value.enabled}}checked{{/if}}>{{value.name}}</input></label>
+		{{/eachProperty}}
+	</div>
+
 	{{#if relatedQuery}}
 		<div id="date-filters">
 			<span>Published in the last</span>
@@ -63,13 +69,8 @@
 			<label><input type="radio" name="days" value="0" {{#ifEqual days "0"}}checked{{/ifEqual}}>
 				All</label>
 		</div>
-	{{else}}
-		<div id="input-filters">
-			{{#eachProperty filters}}
-				<label><input type="checkbox" name="filter" value="{{property}}" {{#if value.enabled}}checked{{/if}}>{{value.name}}</input></label>
-			{{/eachProperty}}
-		</div>
 	{{/if}}
+
 </script>
 
 <script type="text/html" data-template="Article">

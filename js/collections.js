@@ -25,6 +25,18 @@ var Collections = {
 
 			if(input.term.match(/^related:(.+)/)) {
 				return app.services.pubmed.related(input).done(function(doc) {
+					var errorNode = doc.evaluate("/eLinkResult/LinkSet/LinkSetDbHistory/ERROR", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+					if (errorNode) {
+						app.views.pagination.noMoreItems();
+						return;
+					}
+
+					var errorNode = doc.evaluate("/eLinkResult/LinkSet/LinkSetDbHistory/Info", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+					if (errorNode) {
+						app.views.pagination.noMoreItems();
+						return;
+					}
+
 					var data = {
 						count: 1000, // note: can be less than 1000
 						webEnv: doc.evaluate("/eLinkResult/LinkSet/WebEnv", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent,

@@ -314,8 +314,10 @@ var Views = {
 
 						pmid = this.model.get("pmid");
 
+						var currentTerm = $.trim(app.models.query.get("term"));
+
 						if (app.models.query.get("relatedQuery")) {
-							term = $.trim(app.models.query.get("term")) + "," + pmid;
+							term = currentTerm + "," + pmid;
 						} else {
 							term = "related:" + pmid;
 						}

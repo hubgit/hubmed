@@ -41,13 +41,22 @@ var PubMed = function(options) {
     };
 
     this.related = function(input) {
+        var parts = [];
+
+        $.each(input.filters, function(index, value) {
+            if (value.enabled) {
+                parts.push(index);
+            }
+        });
+
         var data = {
             tool: "hubmed",
             email: "alf@hubmed.org",
             db: "pubmed",
             cmd: "neighbor_history",
             linkname: "pubmed_pubmed",
-            id: input.term.replace(/^related:/, "")
+            id: input.term.replace(/^related:/, ""),
+            term: parts.join(" AND ")
         };
 
         if (input.days) {
