@@ -1,3 +1,7 @@
+a .hint {
+    display: none;
+}
+
 @media only screen and (min-width: 500px) {
     a .hint {
         opacity: 0;
