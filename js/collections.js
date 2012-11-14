@@ -30,7 +30,7 @@ var Collections = {
 						webEnv: "/eLinkResult/LinkSet/WebEnv",
 						queryKey: "/eLinkResult/LinkSet/LinkSetDbHistory/QueryKey",
 						error: "/eLinkResult/LinkSet/LinkSetDbHistory/ERROR",
-						info: "/eLinkResult/LinkSet/LinkSetDbHistory/Info",
+						info: "/eLinkResult/LinkSet/LinkSetDbHistory/Info"
 					};
 
 					var data = Jath.parse(template, doc);
@@ -61,50 +61,54 @@ var Collections = {
 			});
 		},
 
-		parse: function(doc) {
-			var node = document.createElement("div");
-
-			if (window.XSLTProcessor) {
-				var fragment = app.processor.transformToFragment(doc, document);
-				node.appendChild(fragment);
-			} else {
-				var msXMLDoc = new ActiveXObject("Msxml2.DOMDocument.6.0");
-				msXMLDoc.async = false;
-				msXMLDoc.loadXML(doc.xml);
-
-				app.processor.input = msXMLDoc;
-				app.processor.transform();
-
-				node.html(app.processor.output);
-			}
-
-
-			var items = $(node.firstChild).find("article").map(function() {
-				var item = {};
-				var node = $(this);
-
-				node.children("[property]").each(function() {
-					var node = $(this);
-					var property = node.attr("property");
-
-					if (node.hasClass("multiple")) {
-						if (typeof item[property] === "undefined") {
-							item[property] = [];
-						}
-
-						item[property].push(node.html());
-					} else {
-						item[property] = node.html();
+		itemTemplate: [
+			"/PubmedArticleSet/PubmedArticle",
+			{
+				pmid: "PubmedData/ArticleIdList/ArticleId[@IdType='pubmed']",
+				doi: "PubmedData/ArticleIdList/ArticleId[@IdType='doi']",
+				title: "MedlineCitation/Article/ArticleTitle",
+				creator: [
+					"MedlineCitation/Article/AuthorList/Author",
+					{
+						forename: "ForeName",
+						initials: "Initials",
+						lastname: "LastName",
+						name: "Name",
 					}
-				});
+				],
+				abstract: [
+					"MedlineCitation/Article/Abstract",
+					{
+						text: "AbstractText",
+						label: "@Label"
+					}
+				],
+				//pagination: "MedlineCitation/Article/Pagination/MedlinePgn",
+				journalISSN: "MedlineCitation/Article/Journal/ISSN",
+				journalTitle: "MedlineCitation/Article/Journal/Title",
+				journalISOAbbreviation: "MedlineCitation/Article/Journal/ISOAbbreviation",
+				//journalVolume: "MedlineCitation/Article/Journal/JournalIssue/Volume",
+				//journalIssue: "MedlineCitation/Article/Journal/JournalIssue/Issue",
+				pubDate: "MedlineCitation/Article/Journal/JournalIssue/PubDate/MedlineDate",
+				pubYear: "MedlineCitation/Article/Journal/JournalIssue/PubDate/Year",
+				pubMonth: "MedlineCitation/Article/Journal/JournalIssue/PubDate/Month",
+				//pubDay: "MedlineCitation/Article/Journal/JournalIssue/PubDate/Day",
+			}
+		],
 
-				return new Models.Article(item);
-			});
+		parse: function(doc) {
+			var items = Jath.parse(this.itemTemplate, doc);
+			console.log(items);
 
 			if (items.length) {
 				app.views.pagination.setNextOffset();
 
-				return items.toArray();
+				return $.map(items, function(item) {
+					item.title = item.title.replace(/\.$/, "");
+					item.journalISOAbbreviation = item.journalISOAbbreviation.replace(/\./g, "");
+
+					return new Models.Article(item);
+				});
 			}
 
 			app.views.pagination.noMoreItems();

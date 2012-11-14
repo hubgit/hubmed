@@ -87,24 +87,25 @@
 	   	</header>
 
 	   	<div property="creators" class="collection">
-			{{#each creator}}<span property="creator">{{{.}}}</span>{{/each}}
+			{{#each creator}}<span property="creator">{{#if forename}}{{forename}}{{else}}{{#if initials}}{{initials}}{{else}}{{name}}{{/if}}{{/if}} {{lastname}}</span>{{/each}}
 		</div>
 
 		<div property="citation" class="has-extra">
-			<a property="journal" title="{{journalTitle}}" href="./?term={{journalISSN}} [ISSN]">{{#if journalISOAbbreviation}}{{journalISOAbbreviation}}{{else}}{{journalTitle}}{{/if}}</a><span class="extra">.
+			<a property="journal" title="{{journalTitle}}" href="./?term={{journalISSN}} [ISSN]">{{#if journalISOAbbreviation}}{{journalISOAbbreviation}}{{else}}{{journalTitle}}{{/if}}</a>
 
-			{{#if volume}}<span property="volume">{{volume}}</span>{{/if}}{{#if issue}}(<a property="issue" href="./?term={{journalISSN}} [ISSN] AND {{issue}} [Issue]">{{issue}}</a>){{/if}}{{#if pagination}}:<span property="pagination">{{pagination}}</span>{{/if}}</span>
-
-			{{#if datePublished}}
+			{{#if pubDate}}
 				<span class="separator">&middot;</span>
-				<abbr property="datePublished" class="has-extra">{{{datePublished}}}</abbr>
+				<abbr property="datePublished">{{{pubDate}}}</abbr>
+			{{else}}
+				<span class="separator">&middot;</span>
+				{{#if pubYear}}<abbr property="datePublished">{{pubYear}} {{#if pubMonth}}{{pubMonth}}{{/if}}</span>{{/if}}
 			{{/if}}
 
 		</div>
 
 		<section>
 			{{#if abstract}}
-				{{#each abstract}}<p property="abstract">{{{.}}}</p>{{/each}}
+				{{#each abstract}}<p property="abstract">{{#if label}}<span class="label">{{label}}: </span>{{/if}}{{text}}</p>{{/each}}
 			{{else}}
 				<p class="no-abstract">No abstract available</p>
 			{{/if}}

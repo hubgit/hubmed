@@ -3,29 +3,7 @@
 
 var app = {};
 
-var fetchXSL = $.ajax({
-	url: "results.xsl",
-	dataType: "xml"
-});
-
 $(function() {
-	var createXSLProcessor = function(xsl) {
-		if (window.XSLTProcessor) {
-			app.processor = new XSLTProcessor();
-			app.processor.importStylesheet(xsl);
-		} else {
-			var msXSLDoc = new ActiveXObject("MSXML2.FreeThreadedDOMDocument.6.0");
-			msXSLDoc.async = false;
-			msXSLDoc.loadXML(xsl.xml);
-
-			var msXSLTemplate = new ActiveXObject("MSXML2.XSLTemplate.6.0");
-			msXSLTemplate.stylesheet = msXSLDoc;
-			app.processor = msXSLTemplate.createProcessor();
-		}
-
-		refresh();
-	};
-
 	/** Fetch the list of articles and update the collection **/
 	var refresh = function() {
 		if (app.models.query.get("term")) {
@@ -49,7 +27,7 @@ $(function() {
 	};
 
 	app.collections = {
-		articles: new Collections.Articles()
+		articles: new Collections.Articles({ model: Models.Article })
 	};
 
 	app.views = {
@@ -84,5 +62,5 @@ $(function() {
 
 	app.views.articles.$el.toggleClass("show-metrics", app.models.options.get("metrics"));
 
-	$.when(fetchXSL).done(createXSLProcessor);
+	refresh();
 });
