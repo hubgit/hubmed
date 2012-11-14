@@ -61,13 +61,3 @@ a.link[rel=save].preferred-save-type {
 	margin-right: 0;
 }
 
-@media only screen and (max-width: 500px) {
-	a.link[rel=save] {
-		display: none;
-	}
-
-	a.link[rel=bookmark] {
-		display: inline-block;
-	}
-}
-

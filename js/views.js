@@ -13,7 +13,7 @@ var Views = {
 			this.model.set("metrics", metrics);
 
 			var saveType = $.cookie("saveType");
-			this.model.set("saveType", saveType);
+			this.model.set("saveType", saveType ? saveType : "com.mendeley");
 
 			this.model.on("change", this.render, this);
 		},
@@ -256,6 +256,11 @@ var Views = {
 	Links: Backbone.View.extend({
 		className: "links",
 
+		events: {
+			"mouseenter .preferred-save-type": "showOptionalSaveTypes",
+			"mouseleave": "hideOptionalSaveTypes",
+		},
+
 		initialize: function() {
 			this.collection.on("reset", this.reset, this);
 			this.collection.on("add", this.add, this);
@@ -277,6 +282,14 @@ var Views = {
 			}
 
 			view.$el.appendTo(this.$el);
+		},
+
+		showOptionalSaveTypes: function(event) {
+			$(event.currentTarget).closest(".links").addClass("expand-save");
+		},
+
+		hideOptionalSaveTypes: function(event) {
+			$(event.currentTarget).closest(".links").removeClass("expand-save");
 		}
 	}),
 
@@ -285,7 +298,7 @@ var Views = {
 		className: "link",
 
 		events: {
-			"click": "handleClick"
+			"click": "handleClick",
 		},
 
 		initialize: function() {
@@ -323,10 +336,6 @@ var Views = {
 					$("a.link.preferred-save-type").removeClass("preferred-save-type");
 					$("a.link[rel=save][type='" + attributes.type + "']").addClass("preferred-save-type");
 					return;
-
-				case "show-save-options":
-					this.$el.closest(".links").toggleClass("expand-save");
-					return false;
 
 				default:
 					return;

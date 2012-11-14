@@ -74,7 +74,7 @@ var Models = {
             var items = [
                 {
                     pmid: pmid,
-                    text: "≈ Related<span class='hint'>combine using ctrl/cmd</span>",
+                    text: "✫ Related<span class='hint'>combine using ctrl/cmd</span>",
                     attributes: {
                         rel: "related",
                         href: "./?term=related:" + pmid,
@@ -82,12 +82,16 @@ var Models = {
                     }
                 },
 
+
                 {
                     text: "✫ Save",
                     attributes: {
-                        rel: "show-save-options",
-                        href: "#"
-                    },
+                        rel: "save",
+                        href: "http://www.mendeley.com/import/?url=" + encodeURIComponent("http://www.ncbi.nlm.nih.gov/pubmed/" + pmid),
+                        title: "Save to Mendeley",
+                        type: "com.mendeley",
+                        target: "_blank"
+                    }
                 },
 
                 {
@@ -109,17 +113,6 @@ var Models = {
                         href: app.services.pubmed.url + "?format=text%2Fbibtex&id=" + pmid,
                         type: "text/bibtex",
                         title: "Download as BibTeX"
-                    }
-                },
-
-                {
-                    text: "✫ Mendeley",
-                    attributes: {
-                        rel: "save",
-                        href: "http://www.mendeley.com/import/?url=" + encodeURIComponent("http://www.ncbi.nlm.nih.gov/pubmed/" + pmid),
-                        title: "Save to Mendeley",
-                        type: "com.mendeley",
-                        target: "_blank"
                     }
                 }
             ];
