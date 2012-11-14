@@ -10,8 +10,13 @@ var fetchXSL = $.ajax({
 
 $(function() {
 	var createXSLProcessor = function(xsl) {
-		app.processor = new XSLTProcessor();
-		app.processor.importStylesheet(xsl);
+		if (window.XSLTProcessor) {
+			app.processor = new XSLTProcessor();
+			app.processor.importStylesheet(xsl);
+		} else {
+			app.processor = new ActiveXObject("Msxml2.DOMDocument.6.0");
+			app.processor.loadXML(xsl.xml);
+		}
 
 		refresh();
 	};

@@ -63,7 +63,16 @@ var Collections = {
 		},
 
 		parse: function(doc) {
-			var fragment = app.processor.transformToFragment(doc, document);
+			if (window.XSLTProcessor) {
+				var fragment = app.processor.transformToFragment(doc, document);
+			} else {
+				var xml = new ActiveXObject("Msxml2.DOMDocument.6.0");
+				xml.loadXML(doc.xml);
+				console.log(xml);
+				var fragment = xml.transformNode(app.processor);
+				console.log(fragment);
+			}
+
 			var node = document.createElement("div");
 			node.appendChild(fragment);
 
