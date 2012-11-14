@@ -59,22 +59,40 @@ article .has-extra:hover .extra {
     /*display: inline;*/
 }
 
-article section {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    display: none;
-}
-
 article [property=abstract] {
-    background: white;
     font-weight: normal;
-    padding: 10px;
+    padding: 0 10px;
     color: #444;
     font-size: 90%;
 }
 
 article [property=abstract]:not(:last-of-type) {
     margin-bottom: 10px;
+}
+
+article section {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: none;
+}
+
+article.expanded section {
+    display: -webkit-flex;
+    display: flex;
+}
+
+article section .abstract-container {
+    -webkit-flex: 1;
+    flex: 1;
+}
+
+article section .sources {
+    text-align: right;
+}
+
+article section .sources .link {
+    white-space: nowrap;
+    display: block;
 }
 
 article footer {
@@ -93,6 +111,17 @@ article .no-abstract {
 }
 
 @media only screen and (max-width: 500px) {
+    article.expanded section {
+        display: block
+    }
+
+    article section .sources {
+        margin-top: 5px;
+    }
+
+    article section .sources .link {
+        display: inline-block;
+    }
 }
 
 @media only screen and (min-width: 500px) {

@@ -143,9 +143,8 @@ var Views = {
 
 			var articles = $("article");
 
-			if(articles.length === 1) {
-				articles.find("section").show();
-				articles.find("[data-action=show-abstract]").addClass("expanded");
+			if (articles.length === 1) {
+				articles.addClass("expanded");
 			}
 		},
 
@@ -195,11 +194,13 @@ var Views = {
 
 			switch (node.data("action")) {
 				case "show-abstract":
-					if (node.hasClass("expanded")) {
+					var article = node.closest("article");
+
+					if (article.hasClass("expanded")) {
 						return true;
 					}
 
-					node.toggleClass("expanded").closest("article").find("section").toggle();
+					article.toggleClass("expanded");
 				break;
 			}
 
