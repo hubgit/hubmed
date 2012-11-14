@@ -98,7 +98,6 @@ var Collections = {
 
 		parse: function(doc) {
 			var items = Jath.parse(this.itemTemplate, doc);
-			console.log(items);
 
 			if (items.length) {
 				app.views.pagination.setNextOffset();

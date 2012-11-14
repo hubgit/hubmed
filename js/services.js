@@ -37,6 +37,7 @@ var PubMed = function(options) {
             data.dateType = "pdat";
         }
 
+
         return this.get({ url: "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi", data: data });
     };
 

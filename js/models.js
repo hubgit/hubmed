@@ -82,7 +82,6 @@ var Models = {
                     }
                 },
 
-
                 {
                     text: "✫ Save",
                     attributes: {
@@ -99,7 +98,7 @@ var Models = {
                     attributes: {
                         rel: "save",
                         download: "hubmed-" + pmid,
-                        href: app.services.pubmed.url + "?format=application%2Fresearch-info-systems&id=" + pmid,
+                        href: "http://pubmed.macropus.org/articles/?format=application%2Fresearch-info-systems&id=" + pmid,
                         type: "application/research-info-systems",
                         title: "Download as RIS",
                     }
@@ -110,7 +109,7 @@ var Models = {
                     attributes: {
                         rel: "save",
                         download: "hubmed-" + pmid,
-                        href: app.services.pubmed.url + "?format=text%2Fbibtex&id=" + pmid,
+                        href: "http://pubmed.macropus.org/articles/?format=text%2Fbibtex&id=" + pmid,
                         type: "text/bibtex",
                         title: "Download as BibTeX"
                     }
