@@ -5,15 +5,15 @@ a .hint {
 @media only screen and (min-width: 500px) {
     a .hint {
         opacity: 0;
-        display: inline-block;
+        display: none;
         content: attr(data-hint);
         text-decoration: none;
         color: green;
         font-family: "Helvetica", "Arial", sans-serif;
-        margin-left: 5px;
-        /*position: absolute;
-        top: 18px;
-        left: 8px;*/
+        margin-left: 10px;
+        position: absolute;
+        top: 1em;
+        left: 0px;
 
         -webkit-transition-property:opacity;
         -webkit-transition-duration:1s;
@@ -26,7 +26,8 @@ a .hint {
 
     a:hover .hint {
         opacity: 0.7;
-    }
+        display: inline-block;
+   }
 
     a:active .hint {
         display: none;

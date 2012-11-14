@@ -80,6 +80,17 @@ var Models = {
                     },
                 },
 
+
+                {
+                    pmid: pmid,
+                    text: "≈ Related<span class='hint'>combine using ctrl/cmd</span>",
+                    attributes: {
+                        rel: "related",
+                        href: "./?term=related:" + pmid,
+                        title: "Show related items",
+                    }
+                },
+
                 {
                     text: "⇣ RIS",
                     attributes: {
@@ -110,16 +121,6 @@ var Models = {
                         title: "Save to Mendeley",
                         type: "com.mendeley",
                         target: "_blank"
-                    }
-                },
-
-                {
-                    pmid: pmid,
-                    text: "≈ Related <span class='hint'>combine using ctrl/cmd</span>",
-                    attributes: {
-                        rel: "related",
-                        href: "./?term=related:" + pmid,
-                        title: "Show related items",
                     }
                 }
             ];
