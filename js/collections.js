@@ -23,25 +23,22 @@ var Collections = {
 				return app.services.pubmed.history(data, view.offset, view.limit).done(options.success);
 			}
 
-			if(input.term.match(/^related:(.+)/)) {
+			if (input.term.match(/^related:(.+)/)) {
 				return app.services.pubmed.related(input).done(function(doc) {
-					var errorNode = doc.evaluate("/eLinkResult/LinkSet/LinkSetDbHistory/ERROR", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-					if (errorNode) {
-						app.views.pagination.noMoreItems();
-						return;
-					}
-
-					var errorNode = doc.evaluate("/eLinkResult/LinkSet/LinkSetDbHistory/Info", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-					if (errorNode) {
-						app.views.pagination.noMoreItems();
-						return;
-					}
-
-					var data = {
-						count: 1000, // note: can be less than 1000
-						webEnv: doc.evaluate("/eLinkResult/LinkSet/WebEnv", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent,
-						queryKey: doc.evaluate("/eLinkResult/LinkSet/LinkSetDbHistory/QueryKey", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent
+					var template = {
+						count: ":1000", // note: can be less than 1000
+						webEnv: "/eLinkResult/LinkSet/WebEnv",
+						queryKey: "/eLinkResult/LinkSet/LinkSetDbHistory/QueryKey",
+						error: "/eLinkResult/LinkSet/LinkSetDbHistory/ERROR",
+						info: "/eLinkResult/LinkSet/LinkSetDbHistory/Info",
 					};
+
+					var data = Jath.parse(template, doc);
+
+					if (data.error || data.info) {
+						app.views.pagination.noMoreItems();
+						return;
+					}
 
 					app.models.query.set(data);
 
@@ -50,11 +47,13 @@ var Collections = {
 			}
 
 			return app.services.pubmed.search(input).done(function(doc) {
-				var data = {
-					count: doc.evaluate("/eSearchResult/Count", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent,
-					webEnv: doc.evaluate("/eSearchResult/WebEnv", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent,
-					queryKey: doc.evaluate("/eSearchResult/QueryKey", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent
+				var template = {
+					count: "/eSearchResult/Count",
+					webEnv: "/eSearchResult/WebEnv",
+					queryKey: "/eSearchResult/QueryKey"
 				};
+
+				var data = Jath.parse(template, doc);
 
 				app.models.query.set(data);
 
