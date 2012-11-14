@@ -5,6 +5,7 @@
 
 #options > * {
 	display: table-cell;
+	padding-bottom: 10px;
 }
 
 #options > div {

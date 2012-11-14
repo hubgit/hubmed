@@ -48,14 +48,6 @@ p {
 	padding: 0 10px;
 }
 
-#articles {
-	margin-top: 10px;
-}
-
-article {
-    padding-bottom: 20px;
-}
-
 .collection .separator:last-of-type {
 	display: none;
 }
