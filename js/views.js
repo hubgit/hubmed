@@ -7,11 +7,15 @@ var Views = {
 		},
 
 		initialize: function() {
+			this.$el.appendTo("body");
+
 			var metrics = $.cookie("metrics") === "true";
 			this.model.set("metrics", metrics);
 
 			var saveType = $.cookie("saveType");
 			this.model.set("saveType", saveType);
+
+			this.model.on("change", this.render, this);
 		},
 
 		render: function() {
@@ -119,25 +123,6 @@ var Views = {
 
 		selectInput: function(event) {
 			$(event.currentTarget).select();
-		}
-	}),
-
-	Info: Backbone.View.extend({
-		initialize: function() {
-			this.$el.appendTo("body");
-			this.model.on("change", this.render, this);
-		},
-
-		render: function() {
-			if (app.models.query.get("relatedQuery")) {
-				return;
-			}
-
-			var data = this.model.toJSON();
-
-			this.$el.html(Templates.Info(data));
-
-			return this;
 		}
 	}),
 

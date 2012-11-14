@@ -73,15 +73,6 @@ var Models = {
 
             var items = [
                 {
-                    text: "✫ Save",
-                    attributes: {
-                        rel: "show-save-options",
-                        href: "#"
-                    },
-                },
-
-
-                {
                     pmid: pmid,
                     text: "≈ Related<span class='hint'>combine using ctrl/cmd</span>",
                     attributes: {
@@ -89,6 +80,14 @@ var Models = {
                         href: "./?term=related:" + pmid,
                         title: "Show related items",
                     }
+                },
+
+                {
+                    text: "✫ Save",
+                    attributes: {
+                        rel: "show-save-options",
+                        href: "#"
+                    },
                 },
 
                 {

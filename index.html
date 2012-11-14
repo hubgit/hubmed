@@ -125,11 +125,7 @@
 	</div>
 </script>
 
-<script type="text/html" data-template="Info">
-	<span>{{#pluralise count "article" "articles"}}{{/pluralise}}</span>
-</script>
-
 <script type="text/html" data-template="Options">
-	<div></div>
-	<label><input name="metrics" type="checkbox" {{#if metrics}}checked{{/if}}> metrics</label>
+	<span class="info">{{#unless relatedQuery}}{{#pluralise count "article" "articles"}}{{/pluralise}}{{/unless}}</span>
+	<label class="metrics"><input name="metrics" type="checkbox" {{#if metrics}}checked{{/if}}> metrics</label>
 </script>

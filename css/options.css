@@ -1,17 +1,16 @@
 #options {
+	display: -webkit-flex;
+	display: flex;
+	white-space: nowrap;
+	color: #777;
+	margin-bottom: 10px;
+}
+
+#options .info {
+	-webkit-flex: 1;
+	flex: 1;
+}
+
+#options .metrics {
 	text-align: right;
-	display: table-row;
-}
-
-#options > * {
-	display: table-cell;
-	padding-bottom: 10px;
-}
-
-#options > div {
-	display: none;
-}
-
-.show-metrics #options > div {
-	display: table-cell;
 }

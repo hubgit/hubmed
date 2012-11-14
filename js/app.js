@@ -54,8 +54,8 @@ $(function() {
 			model: app.models.query
 		}),
 
-		info: new Views.Info({
-			id: "info",
+		options: new Views.Options({
+			id: "options",
 			className: "wrapper",
 			model: app.models.query
 		}),
@@ -73,7 +73,6 @@ $(function() {
 	};
 
 	app.views.articles.$el.toggleClass("show-metrics", app.models.options.get("metrics"));
-	app.views.articles.$el.append(app.views.options.render().$el);
 
 	$.when(fetchXSL).done(createXSLProcessor);
 });
