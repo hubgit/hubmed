@@ -72,15 +72,13 @@ var Models = {
             var pmid = this.get("pmid");
 
             var items = [
-                /*{
-                    text: "Abstract",
+                {
+                    text: "✫ Save",
                     attributes: {
-                        rel: "abstract",
-                        href: "./?term=" + pmid + " [UID]",
-                        "class": "link expandable",
-                        "data-action": "show-abstract"
-                    }
-                },*/
+                        rel: "show-save-options",
+                        href: "#"
+                    },
+                },
 
                 {
                     text: "⇣ RIS",
@@ -89,7 +87,7 @@ var Models = {
                         download: "hubmed-" + pmid,
                         href: app.services.pubmed.url + "?format=application%2Fresearch-info-systems&id=" + pmid,
                         type: "application/research-info-systems",
-                        title: "Download as RIS"
+                        title: "Download as RIS",
                     }
                 },
 
@@ -105,18 +103,19 @@ var Models = {
                 },
 
                 {
-                    text: "↪ Mendeley",
+                    text: "✫ Mendeley",
                     attributes: {
-                        rel: "bookmark",
+                        rel: "save",
                         href: "http://www.mendeley.com/import/?url=" + encodeURIComponent("http://www.ncbi.nlm.nih.gov/pubmed/" + pmid),
                         title: "Save to Mendeley",
+                        type: "com.mendeley",
                         target: "_blank"
                     }
                 },
 
                 {
                     pmid: pmid,
-                    text: "✫ Related <span class='hint'>combine using ctrl/cmd</span>",
+                    text: "≈ Related <span class='hint'>combine using ctrl/cmd</span>",
                     attributes: {
                         rel: "related",
                         href: "./?term=related:" + pmid,

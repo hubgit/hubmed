@@ -9,6 +9,9 @@ var Views = {
 		initialize: function() {
 			var metrics = $.cookie("metrics") === "true";
 			this.model.set("metrics", metrics);
+
+			var saveType = $.cookie("saveType");
+			this.model.set("saveType", saveType);
 		},
 
 		render: function() {
@@ -281,6 +284,13 @@ var Views = {
 
 		add: function(link) {
 			var view = new Views.Link({ model: link });
+
+			var attributes = link.get("attributes");
+
+			if (attributes.type === app.models.options.get("saveType")) {
+				view.$el.addClass("preferred-save-type");
+			}
+
 			view.$el.appendTo(this.$el);
 		}
 	}),
@@ -322,6 +332,16 @@ var Views = {
 					}
 
 					return;
+
+				case "save":
+					$.cookie("saveType", attributes.type, { expires: 30 });
+					$("a.link.preferred-save-type").removeClass("preferred-save-type");
+					$("a.link[rel=save][type='" + attributes.type + "']").addClass("preferred-save-type");
+					return;
+
+				case "show-save-options":
+					this.$el.closest(".links").toggleClass("expand-save");
+					return false;
 
 				default:
 					return;

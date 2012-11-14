@@ -44,6 +44,23 @@ a.link[rel=bookmark] {
 	display: none;
 }
 
+a.link[rel=save] {
+	display: none;
+}
+
+a.link[rel=save].preferred-save-type {
+	display: inline-block;
+}
+
+.links.expand-save a.link[rel=save] {
+	display: inline-block;
+}
+
+.sources a.link {
+	margin-left: 10px;
+	margin-right: 0;
+}
+
 @media only screen and (max-width: 500px) {
 	a.link[rel=save] {
 		display: none;
