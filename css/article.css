@@ -23,7 +23,6 @@ article [property=datePublished] {
     display: inline-block;
     white-space: nowrap;
     color: #999;
-    margin-left: 5px;
 }
 
 article [property=datePublished] .day {

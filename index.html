@@ -95,7 +95,10 @@
 
 			{{#if volume}}<span property="volume">{{volume}}</span>{{/if}}{{#if issue}}(<a property="issue" href="./?term={{journalISSN}} [ISSN] AND {{issue}} [Issue]">{{issue}}</a>){{/if}}{{#if pagination}}:<span property="pagination">{{pagination}}</span>{{/if}}</span>
 
-			{{#if datePublished}}<abbr property="datePublished" class="has-extra">{{{datePublished}}}</abbr>{{/if}}
+			{{#if datePublished}}
+				<span class="separator">&middot;</span>
+				<abbr property="datePublished" class="has-extra">{{{datePublished}}}</abbr>
+			{{/if}}
 
 		</div>
 

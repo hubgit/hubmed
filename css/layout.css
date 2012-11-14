@@ -42,6 +42,10 @@ p {
 	display: none;
 }
 
+.separator {
+	color: #aaa;
+}
+
 .wrapper{
 	width: 90%;
 	margin: 0 auto;
