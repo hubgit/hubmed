@@ -7,27 +7,26 @@ var Views = {
 		},
 
 		initialize: function() {
-			//this.$el.appendTo("body");
-
 			var metrics = $.cookie("metrics") === "true";
 			this.model.set("metrics", metrics);
-
-			//this.render();
 		},
 
 		render: function() {
 			var data = this.model.toJSON();
 			this.$el.html(Templates.Options(data));
+
 			return this;
 		},
 
-		handleChange: function() {
+		handleChange: function(event) {
 			var metrics = this.$("[name=metrics]").prop("checked");
 
 			if (!metrics) {
 				this.setWithCookie("metrics", metrics);
 			} else if (confirm("Enabling this will query Altmetric and Scopus for article-level metrics, and they will be able to see your search terms. Your choice will be stored in a cookie.")) {
 				this.setWithCookie("metrics", metrics);
+			} else {
+				event.preventDefault();
 			}
 		},
 
@@ -46,7 +45,7 @@ var Views = {
 		},
 
 		events: {
-			"change input[type=checkbox],input[type=radio]": "submitChangedForm",
+			"change input[type=checkbox],select": "submitChangedForm",
 			"click .clear": "clearInput",
 			//"click input[name=term]": "selectInput"
 		},
@@ -134,10 +133,6 @@ var Views = {
 			var data = this.model.toJSON();
 
 			this.$el.html(Templates.Info(data));
-
-			if (app.views.options) {
-				this.$el.append(app.views.options.render().$el);
-			}
 
 			return this;
 		}

@@ -59,15 +59,14 @@
 
 	{{#if relatedQuery}}
 		<div id="date-filters">
-			<span>Published in the last</span>
-			<label><input type="radio" name="days" value="365" {{#ifEqual days "365"}}checked{{/ifEqual}}>
-				1 year</label>
-			<label><input type="radio" name="days" value="730" {{#ifEqual days "730"}}checked{{/ifEqual}}>
-				2 years</label>
-			<label><input type="radio" name="days" value="1825" {{#ifEqual days "1825"}}checked{{/ifEqual}}>
-				5 years</label>
-			<label><input type="radio" name="days" value="0" {{#ifEqual days "0"}}checked{{/ifEqual}}>
-				All</label>
+			<span>Published</span>
+
+			<select name="days">
+				<option value="0" {{#ifEqual days "0"}}selected{{/ifEqual}}>any time</option>
+				<option value="365" {{#ifEqual days "365"}}selected{{/ifEqual}}>in the last 1 year</option>
+				<option value="730" {{#ifEqual days "730"}}selected{{/ifEqual}}>in the last 2 years</option>
+				<option value="1825" {{#ifEqual days "1825"}}selected{{/ifEqual}}>in the last 5 years</option>
+			</select>
 		</div>
 	{{/if}}
 
@@ -128,5 +127,6 @@
 </script>
 
 <script type="text/html" data-template="Options">
+	<div></div>
 	<label><input name="metrics" type="checkbox" {{#if metrics}}checked{{/if}}> metrics</label>
 </script>

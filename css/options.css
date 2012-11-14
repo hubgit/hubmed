@@ -1,3 +1,16 @@
 #options {
 	text-align: right;
+	display: table-row;
+}
+
+#options > * {
+	display: table-cell;
+}
+
+#options > div {
+	display: none;
+}
+
+.show-metrics #options > div {
+	display: table-cell;
 }
