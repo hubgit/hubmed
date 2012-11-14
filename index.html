@@ -51,25 +51,27 @@
 		<button type="submit">search</button>
 	</div>
 
-	<div id="input-filters">
-		{{#eachProperty filters}}
-			<label><input type="checkbox" name="filter" value="{{property}}" {{#if value.enabled}}checked{{/if}}>{{value.name}}</input></label>
-		{{/eachProperty}}
+	<div>
+		<span id="input-filters">
+			{{#eachProperty filters}}
+				<label><input type="checkbox" name="filter" value="{{property}}" {{#if value.enabled}}checked{{/if}}>{{value.name}}</input></label>
+			{{/eachProperty}}
+		</span>
+
+		{{#if relatedQuery}}
+			<span id="date-filters">
+				<span>&raquo; published</span>
+
+				<select name="days">
+					<option value="0" {{#ifEqual days "0"}}selected{{/ifEqual}}>any time</option>
+					<option value="365" {{#ifEqual days "365"}}selected{{/ifEqual}}>in the last 1 year</option>
+					<option value="730" {{#ifEqual days "730"}}selected{{/ifEqual}}>in the last 2 years</option>
+					<option value="1825" {{#ifEqual days "1825"}}selected{{/ifEqual}}>in the last 5 years</option>
+				</select>
+			</span>
+		{{/if}}
+
 	</div>
-
-	{{#if relatedQuery}}
-		<div id="date-filters">
-			<span>Published</span>
-
-			<select name="days">
-				<option value="0" {{#ifEqual days "0"}}selected{{/ifEqual}}>any time</option>
-				<option value="365" {{#ifEqual days "365"}}selected{{/ifEqual}}>in the last 1 year</option>
-				<option value="730" {{#ifEqual days "730"}}selected{{/ifEqual}}>in the last 2 years</option>
-				<option value="1825" {{#ifEqual days "1825"}}selected{{/ifEqual}}>in the last 5 years</option>
-			</select>
-		</div>
-	{{/if}}
-
 </script>
 
 <script type="text/html" data-template="Article">

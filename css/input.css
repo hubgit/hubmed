@@ -33,6 +33,10 @@
 	vertical-align: middle;
 }
 
+#date-filters {
+	white-space: nowrap;
+}
+
 #date-filters label {
 	display: inline-block;
 	margin-left: 0.5em;
