@@ -14,8 +14,13 @@ $(function() {
 			app.processor = new XSLTProcessor();
 			app.processor.importStylesheet(xsl);
 		} else {
-			app.processor = new ActiveXObject("Msxml2.DOMDocument.6.0");
-			app.processor.loadXML(xsl.xml);
+			var xslDoc = new ActiveXObject("MSXML2.FreeThreadedDOMDocument.6.0");
+			xslDoc.async = false;
+			xslDoc.load("results.xsl");
+
+			var xslt = new ActiveXObject("MSXML2.XSLTemplate.6.0");
+			xslt.stylesheet = xslDoc;
+			app.processor = xslt.createProcessor();
 		}
 
 		refresh();

@@ -63,18 +63,20 @@ var Collections = {
 		},
 
 		parse: function(doc) {
+			var node = document.createElement("div");
+
 			if (window.XSLTProcessor) {
 				var fragment = app.processor.transformToFragment(doc, document);
+				node.appendChild(fragment);
 			} else {
-				var xml = new ActiveXObject("Msxml2.DOMDocument.6.0");
-				xml.loadXML(doc.xml);
-				console.log(xml);
-				var fragment = xml.transformNode(app.processor);
-				console.log(fragment);
+				var xmlDoc = new ActiveXObject("Msxml2.DOMDocument.6.0");
+				xmlDoc.loadXML(doc.xml);
+				app.processor.input = xmlDoc;
+				app.processor.transform();
+
+				node.html(app.processor.output);
 			}
 
-			var node = document.createElement("div");
-			node.appendChild(fragment);
 
 			var items = $(node.firstChild).find("article").map(function() {
 				var item = {};
