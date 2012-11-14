@@ -88,10 +88,6 @@ article.expanded .sources {
     display: inline-block;
 }
 
-article footer {
-    margin-top: 5px;
-}
-
 article .et-al {
     font-style: italic;
     white-space: nowrap;

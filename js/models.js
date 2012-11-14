@@ -74,7 +74,7 @@ var Models = {
             var items = [
                 {
                     pmid: pmid,
-                    text: "✫ Related",
+                    text: "Related",
                     attributes: {
                         rel: "related",
                         href: "./?term=related:" + pmid,
