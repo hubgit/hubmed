@@ -69,9 +69,11 @@ var Collections = {
 				var fragment = app.processor.transformToFragment(doc, document);
 				node.appendChild(fragment);
 			} else {
-				var xmlDoc = new ActiveXObject("Msxml2.DOMDocument.6.0");
-				xmlDoc.loadXML(doc.xml);
-				app.processor.input = xmlDoc;
+				var msXMLDoc = new ActiveXObject("Msxml2.DOMDocument.6.0");
+				msXMLDoc.async = false;
+				msXMLDoc.loadXML(doc.xml);
+
+				app.processor.input = msXMLDoc;
 				app.processor.transform();
 
 				node.html(app.processor.output);

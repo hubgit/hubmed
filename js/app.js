@@ -14,13 +14,13 @@ $(function() {
 			app.processor = new XSLTProcessor();
 			app.processor.importStylesheet(xsl);
 		} else {
-			var xslDoc = new ActiveXObject("MSXML2.FreeThreadedDOMDocument.6.0");
-			xslDoc.async = false;
-			xslDoc.load("results.xsl");
+			var msXSLDoc = new ActiveXObject("MSXML2.FreeThreadedDOMDocument.6.0");
+			msXSLDoc.async = false;
+			msXSLDoc.loadXML(xsl.xml);
 
-			var xslt = new ActiveXObject("MSXML2.XSLTemplate.6.0");
-			xslt.stylesheet = xslDoc;
-			app.processor = xslt.createProcessor();
+			var msXSLTemplate = new ActiveXObject("MSXML2.XSLTemplate.6.0");
+			msXSLTemplate.stylesheet = msXSLDoc;
+			app.processor = msXSLTemplate.createProcessor();
 		}
 
 		refresh();
