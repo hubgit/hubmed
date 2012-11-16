@@ -38,7 +38,7 @@ var PubMed = function(options) {
         }
 
 
-        return this.get({ url: "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi", data: data });
+        return this.get({ url: this.url + "esearch.fcgi", data: data });
     };
 
     this.related = function(input) {
@@ -65,7 +65,7 @@ var PubMed = function(options) {
             data.dateType = "pdat";
         }
 
-        return this.get({ url: "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi", data: data });
+        return this.get({ url: this.url + "elink.fcgi", data: data });
     };
 
     this.history = function(query, offset, limit) {
@@ -80,7 +80,7 @@ var PubMed = function(options) {
             retmax: limit
         };
 
-        return this.get({ url: "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi", data: data });
+        return this.get({ url: this.url + "efetch.fcgi", data: data });
     };
 };
 
