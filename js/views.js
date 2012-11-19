@@ -54,7 +54,6 @@ var Views = {
 		events: {
 			"change input[type=checkbox],select": "submitChangedForm",
 			"click .clear": "clearInput",
-			//"click input[name=term]": "selectInput"
 		},
 
 		initialize: function() {
@@ -176,6 +175,7 @@ var Views = {
 		render: function() {
 			var data = this.model.toJSON();
 			this.$el.html(Templates.Article(data));
+			this.$el.attr("id", "article-" + data.pmid);
 
 			this.$el.find("[property=creators]").formatAuthors(5, "creator");
 
@@ -300,7 +300,7 @@ var Views = {
 		className: "link",
 
 		events: {
-			"click": "handleClick",
+			"click": "handleClick"
 		},
 
 		initialize: function() {
@@ -309,7 +309,7 @@ var Views = {
 		},
 
 		handleClick: function(event) {
-			var term, pmid;
+			var node = $(event.currentTarget);
 			var attributes = this.model.get("attributes");
 
 			switch (attributes.rel) {
@@ -317,9 +317,9 @@ var Views = {
 					if (event.metaKey || event.ctrlKey) {
 						event.preventDefault();
 
-						pmid = this.model.get("pmid");
-
+						var pmid = this.model.get("pmid");
 						var currentTerm = $.trim(app.models.query.get("term"));
+						var term;
 
 						if (app.models.query.get("relatedQuery")) {
 							term = currentTerm + "," + pmid;
@@ -338,6 +338,20 @@ var Views = {
 					$("a.link.preferred-save-type").removeClass("preferred-save-type");
 					$("a.link[rel=save][type='" + attributes.type + "']").addClass("preferred-save-type");
 					return;
+
+				case "store":
+					var pmid = this.model.get("pmid");
+
+					var data = {
+					  "type": "http://schemas.google.com/AddActivity",
+					  "target": {
+					    "url": "http://pubmed.macropus.org/html/?pmid=" + pmid
+					  }
+					};
+
+					app.services.googleplus.writeMoment(data, function(result) {
+						node.text(result.error ? "Error" : "Stored");
+					});
 
 				default:
 					return;
@@ -412,5 +426,44 @@ var Views = {
 		noMoreItems: function() {
 			this.$el.text("No more items");
 		}
-	})
+	}),
+
+	Auth: Backbone.View.extend({
+		id: "authenticate",
+
+		events: {
+			"click #sign-in": "authenticate"
+		},
+
+		initialize: function() {
+			var data = this.model.toJSON();
+			this.$el.html(Templates.Auth(data));
+			this.$el.appendTo("body");
+		},
+
+		authenticate: function(event) {
+			$(event.currentTarget).hide();
+
+			var button = $("<g:plus/>").attr({
+				action: "connect",
+				clientid: "257039582604.apps.googleusercontent.com",
+				scope: "https://www.googleapis.com/auth/plus.moments.write",
+				callback: "onSignInCallback"
+			});
+
+			button.wrap("<div class='show-when-unauthenticated'/>").parent().appendTo(this.$el);
+
+			var scripts = [
+				$("<script/>", { src: "//apis.google.com/js/client.js" }),
+				$("<script/>", { src: "https://apis.google.com/js/plusone.js" }),
+			];
+
+			$("body").append(scripts);
+		},
+
+		storeAuthResult: function(result) {
+			var data = result ? JSON.stringify(result) : null;
+	    	$.cookie("auth", data, { expires: 7 });
+		}
+	}),
 };

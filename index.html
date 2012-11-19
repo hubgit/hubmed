@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="css/info.css">
 <link rel="stylesheet" href="css/links.css">
 <link rel="stylesheet" href="css/options.css">
+<link rel="stylesheet" href="css/history.css">
 
 <!-- scripts -->
 
@@ -43,7 +44,15 @@
 <script src="js/views.js"></script>
 <script src="js/app.js"></script>
 
+<script async src="js/history.js"></script>
+<script async src="https://apis.google.com/js/plusone.js"></script>
+<script async src="//apis.google.com/js/client.js"></script>
+
 <!-- templates -->
+
+<script type="text/html" data-template="Auth">
+	<button type="button" id="sign-in" class="show-when-unauthenticated">Authenticate</button>
+</script>
 
 <script type="text/html" data-template="Input">
 	<div>

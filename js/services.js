@@ -181,3 +181,23 @@ var Scopus = function(options) {
 
 Scopus.prototype = new Service();
 
+var GooglePlus = function(options) {
+    this.defaults = $.extend({}, options);
+
+    this.writeMoment = function(data, callback){
+        gapi.auth.setToken(this.authResult);
+
+        var args = {
+            path: "/plus/v1moments/people/me/moments/vault?debug=true",
+            method: "POST",
+            body: JSON.stringify(data),
+            callback: callback
+        };
+
+        gapi.client.request(args);
+    };
+};
+
+GooglePlus.prototype = new Service();
+
+

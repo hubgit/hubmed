@@ -1,4 +1,7 @@
 var Models = {
+    Auth: Backbone.Model.extend({
+    }),
+
     Query: Backbone.Model.extend({
         defaults: {
             "filters":  {
@@ -71,6 +74,7 @@ var Models = {
         setLinks: function() {
             var pmid = this.get("pmid");
             var doi = this.get("doi");
+            var title = this.get("title");
 
             var items = [
                 {
@@ -80,6 +84,16 @@ var Models = {
                         rel: "related",
                         href: "./?term=related:" + pmid,
                         title: "Show related items",
+                    }
+                },
+
+                {
+                    pmid: pmid,
+                    text: "Store",
+                    attributes: {
+                        class: "link show-when-authenticated",
+                        rel: "store",
+                        href: "#",
                     }
                 },
 

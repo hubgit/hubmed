@@ -18,10 +18,12 @@ $(function() {
 	app.services = {
 		pubmed: new PubMed(),
 		altmetric: new Altmetric(),
-		scopus: new Scopus()
+		scopus: new Scopus(),
+		googleplus: new GooglePlus()
 	};
 
 	app.models = {
+		auth: new Models.Auth(),
 		query: new Models.Query(),
 		options: new Models.Options()
 	};
@@ -31,6 +33,11 @@ $(function() {
 	};
 
 	app.views = {
+		auth: new Views.Auth({
+			id: "auth",
+			model: app.models.auth
+		}),
+
 		options: new Views.Options({
 			id: "options",
 			model: app.models.options
