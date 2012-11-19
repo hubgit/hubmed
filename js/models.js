@@ -71,6 +71,7 @@ var Models = {
         setLinks: function() {
             var pmid = this.get("pmid");
             var doi = this.get("doi");
+            var title = this.get("title");
 
             var items = [
                 {
