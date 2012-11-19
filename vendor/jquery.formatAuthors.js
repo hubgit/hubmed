@@ -30,7 +30,7 @@
           name = matches[2] + " " + matches[1].replace(/\s/g, "");
         }
 
-        var query = $.param({ term: name + "[AU]" });
+        var query = $.param({ term: name + "[Author]" });
         var link = $("<a/>", { href: "./?" + query });
         node.wrapInner(link);
       });
