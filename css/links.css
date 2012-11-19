@@ -23,25 +23,24 @@ a.expandable.expanded:before {
 	content: "▴ ";
 }
 
+.links {
+	display: inline-block;
+}
+
 a.link {
     white-space: nowrap;
-    opacity: 0.5;
-    font-weight: 400;
+    font-weight: 200;
     font-size: 90%;
-    position: relative;
+    opacity: 0.5;
+    display: none;
 }
 
 a.link:not(:last-child) {
     margin-right: 10px;
 }
 
-a.link:hover {
-	opacity: 1.0;
-	text-decoration: none;
-}
-
-a.link[rel=bookmark] {
-	display: none;
+a.link[rel=related] {
+	display: inline-block;
 }
 
 a.link[rel=save] {
@@ -52,12 +51,31 @@ a.link[rel=save].preferred-save-type {
 	display: inline-block;
 }
 
-.links.expand-save a.link[rel=save] {
+article.expanded a.link {
 	display: inline-block;
 }
 
-.sources a.link {
-	margin-left: 5px;
-	margin-right: 0;
+.links:hover a.link {
+	opacity: 1.0;
+}
+
+article.expanded .save-links a.link {
+	display: none;
+}
+
+.save-links a.link[rel=save].preferred-save-type {
+	display: inline-block;
+}
+
+.save-links:hover {
+	margin-right: 10px;
+}
+
+.save-links:hover a.link {
+	display: inline-block !important;
+}
+
+a.link:hover {
+	text-decoration: underline;
 }
 

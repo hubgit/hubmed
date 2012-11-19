@@ -70,6 +70,7 @@ var Models = {
 
         setLinks: function() {
             var pmid = this.get("pmid");
+            var doi = this.get("doi");
 
             var items = [
                 {
@@ -79,6 +80,26 @@ var Models = {
                         rel: "related",
                         href: "./?term=related:" + pmid,
                         title: "Show related items",
+                    }
+                },
+
+                {
+                    text: "PubMed",
+                    attributes: {
+                        rel: "alternate",
+                        href: "http://www.ncbi.nlm.nih.gov/pubmed/" + pmid,
+                        title: "View in PubMed",
+                        target: "_blank"
+                    }
+                },
+
+                {
+                    text: "Google Scholar",
+                    attributes: {
+                        rel: "full-text",
+                        href: "http://scholar.google.com/scholar?" + (doi ? "cluster=http://dx.doi.org/" + encodeURIComponent(doi) : "q=" + encodeURIComponent(title)),
+                        title: "Find in Google Scholar",
+                        target: "_blank"
                     }
                 },
 

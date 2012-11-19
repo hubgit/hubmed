@@ -179,7 +179,7 @@ var Views = {
 
 			this.$el.find("[property=creators]").formatAuthors(5, "creator");
 
-			this.$el.find("footer").append(this.links.$el);
+			this.$el.find("footer").prepend(this.links.$el);
 			this.$el.find(".context").append(this.metrics.$el);
 
 			return this;
@@ -271,6 +271,7 @@ var Views = {
 		reset: function() {
 			this.$el.empty();
 			this.collection.each(this.add, this);
+			this.$(".link[rel=save]").wrapAll("<span class='save-links'></span>");
 		},
 
 		add: function(link) {
