@@ -345,7 +345,7 @@ var Views = {
 					var data = {
 					  "type": "http://schemas.google.com/AddActivity",
 					  "target": {
-					    "url": "http://pubmed.macropus.org/html/?pmid=" + pmid
+					    "url": "http://pubmed.macropus.org/" + pmid
 					  }
 					};
 
