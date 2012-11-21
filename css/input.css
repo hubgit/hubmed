@@ -25,8 +25,12 @@
 	margin-left: 1px;
 }
 
-#input-filters input[type=checkbox] {
+#input input[type=checkbox] {
 	margin: 0 5px 0 0;
+	vertical-align: 0.1em;
+}
+
+#input select {
 	vertical-align: 0.1em;
 }
 
