@@ -11,8 +11,14 @@
 }
 
 #input input[name=term] {
-	width: 60%;
+	width: 100%;
 	background: white;
+	padding: 5px;
+	border-radius: 5px;
+}
+
+#input [type=submit] {
+	display: none;
 }
 
 #input-filters, #date-filters {
@@ -21,6 +27,7 @@
 
 #input-filters input[type=checkbox] {
 	margin: 0 5px 0 0;
+	vertical-align: 0.1em;
 }
 
 #input-filters label {
