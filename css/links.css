@@ -55,10 +55,6 @@ article.expanded a.link {
 	display: inline-block;
 }
 
-.links:hover a.link {
-	opacity: 1.0;
-}
-
 article.expanded .save-links a.link {
 	display: none;
 }
@@ -76,6 +72,6 @@ article.expanded .save-links a.link {
 }
 
 a.link:hover {
-	text-decoration: underline;
+	opacity: 1.0;
 }
 
