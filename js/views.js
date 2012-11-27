@@ -400,13 +400,26 @@ var Views = {
 
 			var spinner = $("<img/>", { src: "./images/spinner.gif"}).addClass("spinner");
 
-			node.addClass("loading").text("Loading").append(spinner);
+			var count = app.models.query.get("count");
+			var text;
+			if (count) {
+				var offset = app.views.articles.offset;
+				var nextOffset = offset + app.views.articles.limit;
+				var text = "Loading " + offset + " - " + nextOffset + " of " + this.numberWithCommas(count) + " articles";
+			} else {
+				text = "Searching";
+			}
+			node.addClass("loading").text(text).append(spinner);
 
 			app.views.articles.offset = node.data("offset");
 
 			app.collections.articles.fetch({ add: true });
 
             return false;
+        },
+
+        numberWithCommas: function(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         },
 
 		noMoreItems: function() {
