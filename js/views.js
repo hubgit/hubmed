@@ -403,8 +403,8 @@ var Views = {
 			var count = app.models.query.get("count");
 			var text;
 			if (count) {
-				var offset = app.views.articles.offset;
-				var nextOffset = offset + app.views.articles.limit;
+				var offset = app.views.articles.offset + app.views.articles.limit + 1;
+				var nextOffset = Math.min(count, offset + app.views.articles.limit);
 				var text = "Loading " + offset + " - " + nextOffset + " of " + this.numberWithCommas(count) + " articles";
 			} else {
 				text = "Searching";
