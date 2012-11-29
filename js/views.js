@@ -413,7 +413,7 @@ var Views = {
 
 			app.views.articles.offset = node.data("offset");
 
-			app.collections.articles.fetch({ add: true });
+			app.collections.articles.fetch({ add: true, success: this.collectionUpdated });
 
             return false;
         },
@@ -424,6 +424,12 @@ var Views = {
 
 		noMoreItems: function() {
 			this.$el.text("No more items");
+		},
+
+		collectionUpdated: function() {
+			if (app.views.articles.offset == 0) {
+				$(document).trigger("ZoteroItemUpdated");
+			}
 		}
 	})
 };
