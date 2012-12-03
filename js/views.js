@@ -350,7 +350,11 @@ var Views = {
 					event.preventDefault();
 					event.stopPropagation();
 					localStorage.setItem("saveType", node.attr("type"));
-					window.open(node.attr("href"));
+					if (node.attr("download")) {
+						window.location = node.attr("href");
+					} else {
+						window.open(node.attr("href"));
+					}
 					return;
 
 				case "find":
