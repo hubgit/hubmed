@@ -47,7 +47,7 @@ article .link:hover {
     margin-right: 10px;
 }
 
-.link[intent] {
+.link[data-intent] {
 	margin-right: 5px;
 }
 
