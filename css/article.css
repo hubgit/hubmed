@@ -88,6 +88,10 @@ article.expanded .sources {
     display: inline-block;
 }
 
+article:not(.expanded) .show-when-expanded {
+    display: none;
+}
+
 article .et-al {
     font-style: italic;
     white-space: nowrap;
