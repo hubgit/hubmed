@@ -113,6 +113,5 @@ var Collections = {
 			app.views.pagination.noMoreItems();
 		}
 	}),
-	Links: Backbone.Collection.extend({}),
 	Metrics: Backbone.Collection.extend({})
 };

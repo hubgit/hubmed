@@ -9,11 +9,11 @@ var Views = {
 		initialize: function() {
 			this.$el.appendTo("body");
 
-			var metrics = $.cookie("metrics") === "true";
+			var metrics = localStorage.getItem("metrics") === "true";
 			this.model.set("metrics", metrics);
 
-			var saveType = $.cookie("saveType");
-			this.model.set("saveType", saveType ? saveType : "com.mendeley");
+			var saveType = localStorage.getItem("saveType");
+			var findType = localStorage.getItem("findType");
 
 			this.model.on("change", this.render, this);
 		},
@@ -29,17 +29,17 @@ var Views = {
 			var metrics = this.$("[name=metrics]").prop("checked");
 
 			if (!metrics) {
-				this.setWithCookie("metrics", metrics);
-			} else if (confirm("Enabling this will query Altmetric and Scopus for article-level metrics, and they will be able to see your search terms. Your choice will be stored in a cookie.")) {
-				this.setWithCookie("metrics", metrics);
+				this.setAndStore("metrics", metrics);
+			} else if (confirm("Enabling this will query Altmetric and Scopus for article-level metrics, and they will be able to see your search terms.")) {
+				this.setAndStore("metrics", metrics);
 			} else {
 				event.preventDefault();
 			}
 		},
 
-		setWithCookie: function(name, metrics) {
+		setAndStore: function(name, metrics) {
 			this.model.set(name, metrics);
-			$.cookie(name, metrics, { expires: 30 });
+			localStorage.setItem(name, metrics);
 			window.location.reload(); // TODO: just update the page
 		}
 	}),
@@ -167,7 +167,7 @@ var Views = {
 		},
 
 		initialize: function() {
-			this.links = new Views.Links({ collection: this.model.links });
+			this.links = new Views.Links({ model: this.model });
 			this.metrics = new Views.Metrics({ collection: this.model.metrics });
 
 			this.model.on("change", this.render, this);
@@ -258,69 +258,82 @@ var Views = {
 		className: "links",
 
 		events: {
-			"mouseenter .preferred-save-type": "showOptionalSaveTypes",
-			"mouseleave": "hideOptionalSaveTypes",
+			"click .link": "handleClick",
 		},
 
 		initialize: function() {
-			this.collection.on("reset", this.reset, this);
-			this.collection.on("add", this.add, this);
-			this.reset();
+			this.render();
 		},
 
-		reset: function() {
-			this.$el.empty();
-			this.collection.each(this.add, this);
-			this.$(".link[rel=save]").wrapAll("<span class='save-links'></span>");
-		},
-
-		add: function(link) {
-			var view = new Views.Link({ model: link });
-
-			var attributes = link.get("attributes");
-
-			if (attributes.type === app.models.options.get("saveType")) {
-				view.$el.addClass("preferred-save-type");
-			}
-
-			view.$el.appendTo(this.$el);
-		},
-
-		showOptionalSaveTypes: function(event) {
-			$(event.currentTarget).closest(".links").addClass("expand-save");
-		},
-
-		hideOptionalSaveTypes: function(event) {
-			$(event.currentTarget).closest(".links").removeClass("expand-save");
-		}
-	}),
-
-	Link: Backbone.View.extend({
-		tagName: "a",
-		className: "link",
-
-		events: {
-			"click": "handleClick",
-		},
-
-		initialize: function() {
+		render: function() {
 			var data = this.model.toJSON();
-			this.$el.html(data.text).attr(data.attributes);
+			this.$el.html(Templates.Links(data));
+		},
+
+		showLinks: function(event) {
+			var link = $(event.target);
+
+
 		},
 
 		handleClick: function(event) {
-			var term, pmid;
-			var attributes = this.model.get("attributes");
+			var node = $(event.target);
 
-			switch (attributes.rel) {
+			switch (node.attr("intent")) {
+				case "save":
+					var type = localStorage.getItem("saveType");
+					if (type) {
+						this.$("[rel=save][type='" + type + "']").click();
+					} else {
+						node.next(".link").click();
+					}
+					return;
+
+				case "find":
+					var type = localStorage.getItem("findType");
+
+					if (type) {
+						this.$("[rel=find][type='" + type + "']").click();
+					} else {
+						node.next(".link").click();
+					}
+					return;
+			}
+
+			if (node.data("dropdown-target")) {
+				var target = this.$(node.data("dropdown-target"));
+
+				if (target.is(":visible")) {
+					target.hide();
+				} else {
+					event.stopPropagation();
+					var offset = node.offset();
+					var previous = node.prev(".link");
+
+					target.show();
+					target.offset({ top: offset.top + node.height(), left: offset.left - previous.width() });
+
+					var clickListener = function() {
+						$(".dropdown-list:visible").hide();
+						$(document).off("click", clickListener);
+					};
+
+					$(document).on("click", clickListener);
+				}
+
+				return;
+			}
+
+			switch (node.attr("rel")) {
 				case "related":
 					if (event.metaKey || event.ctrlKey) {
 						event.preventDefault();
 
-						pmid = this.model.get("pmid");
+						var pmid = this.model.get("pmid");
 
 						var currentTerm = $.trim(app.models.query.get("term"));
 
+						var term;
 						if (app.models.query.get("relatedQuery")) {
 							term = currentTerm + "," + pmid;
 						} else {
@@ -334,9 +347,17 @@ var Views = {
 					return;
 
 				case "save":
-					$.cookie("saveType", attributes.type, { expires: 30 });
-					$("a.link.preferred-save-type").removeClass("preferred-save-type");
-					$("a.link[rel=save][type='" + attributes.type + "']").addClass("preferred-save-type");
+					event.preventDefault();
+					event.stopPropagation();
+					localStorage.setItem("saveType", node.attr("type"));
+					window.open(node.attr("href"));
+					return;
+
+				case "find":
+					event.preventDefault();
+					event.stopPropagation();
+					localStorage.setItem("findType", node.attr("type"));
+					window.open(node.attr("href"));
 					return;
 
 				default:

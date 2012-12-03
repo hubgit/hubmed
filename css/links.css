@@ -1,25 +1,28 @@
 a {
-	color: #00E;
 	text-decoration: none;
 }
 
-a:focus {
+.link {
+	color: #00E;
+}
+
+.link:focus {
 	outline: thin dotted;
 }
 
-a:hover, a:active {
+.link:hover, .link:active {
 	outline: 0;
 }
 
-article a:hover {
+article .link:hover {
     color: #00E !important;
 }
 
-a.expandable:before {
+.link.expandable:before {
 	content: "▿ ";
 }
 
-a.expandable.expanded:before {
+.link.expandable.expanded:before {
 	content: "▴ ";
 }
 
@@ -27,51 +30,41 @@ a.expandable.expanded:before {
 	display: inline-block;
 }
 
-a.link {
+.link {
     white-space: nowrap;
     font-weight: 200;
     font-size: 90%;
     opacity: 0.5;
-    display: none;
+    display: inline-block;
+    cursor: pointer;
 }
 
-a.link:not(:last-child) {
-    margin-right: 10px;
-}
-
-a.link[rel=related] {
-	display: inline-block;
-}
-
-a.link[rel=save] {
-	display: none;
-}
-
-a.link[rel=save].preferred-save-type {
-	display: inline-block;
-}
-
-article.expanded a.link {
-	display: inline-block;
-}
-
-article.expanded .save-links a.link {
-	display: none;
-}
-
-.save-links a.link[rel=save].preferred-save-type {
-	display: inline-block;
-}
-
-.save-links:hover {
-	margin-right: 10px;
-}
-
-.save-links:hover a.link {
-	display: inline-block !important;
-}
-
-a.link:hover {
+.link:hover {
 	opacity: 1.0;
 }
 
+.link:not(:last-child) {
+    margin-right: 10px;
+}
+
+.link[intent] {
+	margin-right: 5px;
+}
+
+.dropdown-list {
+	display: none;
+	position: absolute;
+	background: white;
+	box-shadow: 1px 1px 3px rgba(125, 125, 125, 0.5);
+}
+
+.dropdown-list .link {
+	display: block;
+	padding: 2px 5px;
+	margin-right: 0;
+	opacity: 0.7;
+}
+
+.dropdown-list .link:hover {
+	background-color: #CACAFA;
+}
