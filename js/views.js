@@ -279,7 +279,7 @@ var Views = {
 		handleClick: function(event) {
 			var node = $(event.target);
 
-			switch (node.attr("intent")) {
+			switch (node.data("intent")) {
 				case "save":
 					var type = localStorage.getItem("saveType");
 					if (type) {
