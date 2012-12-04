@@ -44,7 +44,7 @@ article .link:hover {
 }
 
 .link:not(:last-child) {
-    margin-right: 10px;
+    margin-right: 0.5em;
 }
 
 .link[data-intent] {
@@ -67,4 +67,17 @@ article .link:hover {
 
 .dropdown-list .link:hover {
 	background-color: #CACAFA;
+}
+
+[data-dropdown-target] {
+	visibility: hidden;
+}
+
+.expanded [data-dropdown-target],
+.link-group:hover [data-dropdown-target] {
+	visibility: visible;
+}
+
+.link-group:not(:last-child) {
+	margin-right: 0.5em;
 }
