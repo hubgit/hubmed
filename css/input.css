@@ -15,6 +15,7 @@
 	background: white;
 	padding: 5px;
 	border-radius: 5px;
+	font-size: 16px; /* prevent zoom on small screens */
 }
 
 #input [type=submit] {
