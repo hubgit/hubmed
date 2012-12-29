@@ -313,15 +313,14 @@ var Views = {
 					target.show();
 					target.offset({ top: offset.top + node.height(), left: offset.left - previous.width() });
 
-					var clickListener = function() {
-						$(".dropdown-list:visible").hide();
-						$(document).off("click", clickListener);
-					};
-
-					$(document).on("click", clickListener);
+					window.setTimeout(function() {
+						$(document).one("click", function() {
+							$(".dropdown-list:visible").hide();
+						});
+					}, 100);
 				}
 
-				return;
+				return false;
 			}
 
 			switch (node.attr("rel")) {
