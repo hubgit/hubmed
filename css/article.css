@@ -31,7 +31,6 @@ article [property=datePublished] .day {
 
 article [property=creators] {
     color: #777;
-    margin-left: 10px;
 }
 
 article [property=creator] {
@@ -44,7 +43,6 @@ article [property=creator] a {
 
 article [property=citation] {
     color: #270;
-    margin-left: 10px;
 }
 
 article [property=journal]  {
@@ -109,6 +107,11 @@ article .no-abstract {
 @media only screen and (min-width: 500px) {
     article .context {
         width: 4em;
+    }
+
+    article [property=creators],
+    article [property=citation]{
+        margin-left: 10px;
     }
 }
 
