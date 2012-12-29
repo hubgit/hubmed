@@ -30,10 +30,6 @@ article > * {
 	padding-bottom: 20px;
 }
 
-footer {
-	margin-left: 10px;
-}
-
 p {
 	margin: 0;
 }
@@ -89,5 +85,11 @@ p {
 
     section {
     	text-align: left;
+    }
+}
+
+@media only screen and (min-width: 500px) {
+   footer {
+        margin-left: 10px;
     }
 }
