@@ -207,7 +207,6 @@ var PMC = function(options) {
         };
 
         var data = Jath.parse(template, doc);
-        console.log(data);
 
         if (!data.count || !data.id) return;
 
