@@ -181,3 +181,43 @@ var Scopus = function(options) {
 
 Scopus.prototype = new Service();
 
+var PMC = function(options) {
+    this.defaults = $.extend({}, options);
+
+    this.url = $("link[rel='service.pubmed']").attr("href");
+
+    this.fetch = function(doi){
+        var data = {
+            tool: "hubmed",
+            email: "alf@hubmed.org",
+            db: "pmc",
+            //sort: "pub date",
+            usehistory: "n",
+            retmax: 1,
+            term: doi + "[DOI]"
+        };
+
+        return this.get({ url: this.url + "esearch.fcgi", data: data });
+    };
+
+    this.parse = function(doc) {
+        var template = {
+            count: "/eSearchResult/Count",
+            id: "/eSearchResult/IdList/Id"
+        };
+
+        var data = Jath.parse(template, doc);
+        console.log(data);
+
+        if (!data.count || !data.id) return;
+
+        return {
+            url: "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC" + data.id + "/",
+            text: "",
+            image: "oa.png"
+        };
+    };
+};
+
+PMC.prototype = new Service();
+

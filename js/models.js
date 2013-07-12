@@ -22,6 +22,19 @@ var Models = {
 
     Article: Backbone.Model.extend({
         augmentors: {
+            pmc: function() {
+                var model = this,
+                    service = app.services.pmc,
+                    doi = this.get("doi");
+
+                if(!doi) return;
+
+                service.fetch(doi).done(function(data) {
+                    var item = service.parse(data);
+                    if(item) model.metrics.add(item);
+                });
+            },
+
             altmetric: function() {
                 var model = this,
                     service = app.services.altmetric,

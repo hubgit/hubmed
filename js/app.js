@@ -18,7 +18,8 @@ $(function() {
 	app.services = {
 		pubmed: new PubMed(),
 		altmetric: new Altmetric(),
-		scopus: new Scopus()
+		scopus: new Scopus(),
+		pmc: new PMC()
 	};
 
 	app.models = {
