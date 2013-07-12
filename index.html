@@ -85,6 +85,7 @@
 				   {{else}}href="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id={{pmid}}"
 				   {{/if}}>{{{title}}}</a>
 		   	</span>
+		   	{{#if pmcid}}<a class="pmc" href="http://www.ncbi.nlm.nih.gov/pmc/articles/{{pmcid}}/"><img src="images/oa.png"></a>{{/if}}
 	   	</header>
 
 	   	<div property="creators" class="collection">

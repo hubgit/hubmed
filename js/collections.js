@@ -66,6 +66,7 @@ var Collections = {
 			{
 				pmid: "PubmedData/ArticleIdList/ArticleId[@IdType='pubmed']",
 				doi: "PubmedData/ArticleIdList/ArticleId[@IdType='doi']",
+				pmcid: "PubmedData/ArticleIdList/ArticleId[@IdType='pmc']",
 				title: "MedlineCitation/Article/ArticleTitle",
 				creator: [
 					"MedlineCitation/Article/AuthorList/Author",
