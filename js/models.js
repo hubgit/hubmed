@@ -25,11 +25,9 @@ var Models = {
             pmc: function() {
                 var model = this,
                     service = app.services.pmc,
-                    doi = this.get("doi");
+                    pmid = this.get("pmid");
 
-                if(!doi) return;
-
-                service.fetch(doi).done(function(data) {
+                service.fetch(pmid).done(function(data) {
                     var item = service.parse(data);
                     if(item) model.metrics.add(item);
                 });

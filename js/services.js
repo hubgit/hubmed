@@ -186,29 +186,27 @@ var PMC = function(options) {
 
     this.url = $("link[rel='service.pubmed']").attr("href");
 
-    this.fetch = function(doi){
+    this.fetch = function(pmid){
         var data = {
             tool: "hubmed",
             email: "alf@hubmed.org",
             db: "pmc",
-            //sort: "pub date",
-            usehistory: "n",
+            dbfrom: "pubmed",
             retmax: 1,
-            term: doi + "[DOI]"
+            id: pmid
         };
 
-        return this.get({ url: this.url + "esearch.fcgi", data: data });
+        return this.get({ url: this.url + "elink.fcgi", data: data });
     };
 
     this.parse = function(doc) {
         var template = {
-            count: "/eSearchResult/Count",
-            id: "/eSearchResult/IdList/Id"
+            id: "/eLinkResult/LinkSet/LinkSetDb[LinkName='pubmed_pmc']/Link/Id"
         };
 
         var data = Jath.parse(template, doc);
 
-        if (!data.count || !data.id) return;
+        if (!data.id) return;
 
         return {
             url: "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC" + data.id + "/",
