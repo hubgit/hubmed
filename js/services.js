@@ -201,7 +201,7 @@ var OA = function(options) {
 
     this.parse = function(doc) {
         var template = {
-            url: "/eLinkResult/LinkSet/IdUrlList/IdUrlSet/ObjUrl[Attribute='free resource'][Attribute='full-text online']/Url"
+            url: "/eLinkResult/LinkSet/IdUrlList/IdUrlSet/ObjUrl[Attribute='free resource'][Attribute='full-text online' or Attribute='full-text pdf']/Url"
         };
 
         var data = Jath.parse(template, doc);
