@@ -181,3 +181,38 @@ var Scopus = function(options) {
 
 Scopus.prototype = new Service();
 
+var OA = function(options) {
+    this.defaults = $.extend({}, options);
+
+    this.url = $("link[rel='service.pubmed']").attr("href");
+
+    this.fetch = function(pmid){
+        var data = {
+            tool: "hubmed",
+            email: "alf@hubmed.org",
+            dbfrom: "pubmed",
+            cmd: "prlinks",
+            retmax: 1,
+            id: pmid
+        };
+
+        return this.get({ url: this.url + "elink.fcgi", data: data });
+    };
+
+    this.parse = function(doc) {
+        var template = {
+            url: "/eLinkResult/LinkSet/IdUrlList/IdUrlSet/ObjUrl[Attribute='free resource'][Attribute='full-text online']/Url"
+        };
+
+        var data = Jath.parse(template, doc);
+
+        if (!data.url) return;
+
+        return {
+            url: data.url,
+        };
+    };
+};
+
+OA.prototype = new Service();
+

@@ -105,6 +105,7 @@ var Collections = {
 
 				return $.map(items, function(item) {
 					item.title = item.title.replace(/\.$/, "");
+					item.oa = item.pmcid ? "http://www.ncbi.nlm.nih.gov/pmc/articles/" + item.pmcid + "/" : null;
 					item.journalISOAbbreviation = item.journalISOAbbreviation.replace(/\./g, "");
 
 					return new Models.Article(item);

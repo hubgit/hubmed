@@ -47,6 +47,20 @@ var Models = {
                     var item = service.parse(data);
                     if(item) model.metrics.add(item);
                 });
+            },
+
+            oa: function() {
+                var model = this,
+                    service = app.services.oa,
+                    oa = this.get("oa"),
+                    pmid = this.get("pmid");
+
+                if(oa) return;
+
+                service.fetch(pmid).done(function(data) {
+                    var item = service.parse(data);
+                    if(item) model.set("oa", item.url);
+                });
             }
         },
 
