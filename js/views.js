@@ -178,6 +178,7 @@ var Views = {
 			this.$el.html(Templates.Article(data));
 
 			this.$el.find("[property=creators]").formatAuthors(5, "creator");
+			this.$el.find("[property=abstract]").formatAbstract();
 
 			this.$el.find("footer").prepend(this.links.$el);
 			this.$el.find(".context").append(this.metrics.$el);
