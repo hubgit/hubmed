@@ -68,7 +68,8 @@ article [property=abstract]:not(:last-of-type) {
     margin-bottom: 10px;
 }
 
-article [property=abstract] > div {
+article [property=abstract] > span {
+    display: block;
     margin-left: 1em;
     text-indent: -1em;
 }
