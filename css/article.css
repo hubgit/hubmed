@@ -68,6 +68,11 @@ article [property=abstract]:not(:last-of-type) {
     margin-bottom: 10px;
 }
 
+article [property=abstract] > div {
+    margin-left: 1em;
+    text-indent: -1em;
+}
+
 article section {
     margin-top: 5px;
     margin-bottom: 5px;
