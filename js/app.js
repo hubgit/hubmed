@@ -62,6 +62,7 @@ $(function() {
 	};
 
 	app.views.articles.$el.toggleClass("show-metrics", app.models.options.get("metrics"));
+	$(document).navigation(); // listen for keyboard navigation
 
 	refresh();
 });
