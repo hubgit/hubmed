@@ -197,9 +197,9 @@ var Views = {
 				case "show-abstract":
 					var article = node.closest("article");
 
-					if (article.hasClass("expanded")) {
-						return true;
-					}
+					//if (article.hasClass("expanded")) {
+						//return true;
+					//}
 
 					article.toggleClass("expanded");
 				break;
@@ -271,12 +271,6 @@ var Views = {
 			this.$el.html(Templates.Links(data));
 		},
 
-		showLinks: function(event) {
-			var link = $(event.target);
-
-
-		},
-
 		handleClick: function(event) {
 			var node = $(event.target);
 
@@ -299,6 +293,10 @@ var Views = {
 						node.next(".link").click();
 					}
 					return;
+
+				case "read":
+					window.open(this.$el.closest("article").find("[property=url]").attr("href"));
+					return false;
 			}
 
 			if (node.data("dropdown-target")) {

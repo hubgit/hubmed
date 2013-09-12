@@ -99,6 +99,7 @@ var Collections = {
 
 		parse: function(doc) {
 			var items = Jath.parse(this.itemTemplate, doc);
+			var url = this.url;
 
 			if (items.length) {
 				app.views.pagination.setNextOffset();
@@ -107,12 +108,21 @@ var Collections = {
 					item.title = item.title.replace(/\.$/, "");
 					item.oa = item.pmcid ? "http://www.ncbi.nlm.nih.gov/pmc/articles/" + item.pmcid + "/" : null;
 					item.journalISOAbbreviation = item.journalISOAbbreviation.replace(/\./g, "");
+					item.url = url(item);
 
 					return new Models.Article(item);
 				});
 			}
 
 			app.views.pagination.noMoreItems();
+		},
+
+		url: function(item) {
+		    if (item.doi) {
+		        return "http://dx.doi.org/" + encodeURIComponent(item.doi);
+		    }
+
+	        return "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id=" + encodeURIComponent(item.pmid);
 		}
 	}),
 	Metrics: Backbone.Collection.extend({})

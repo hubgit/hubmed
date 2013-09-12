@@ -81,10 +81,7 @@
 		<header>
 			<span property="name">
 				<a property="url" target="_blank" data-action="show-abstract" data-display="cell"
-					title="click to show abstract, again for full text"
-				   {{#if doi}}href="http://dx.doi.org/{{doi}}"
-				   {{else}}href="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id={{pmid}}"
-				   {{/if}}>{{{title}}}</a>
+					title="click to show abstract" href="{{url}}">{{{title}}}</a>
 		   	</span>
 		   	{{#if oa}}<a class="oa" href="{{oa}}" target="_blank"><img src="images/oa.png"></a>{{/if}}
 	   	</header>
@@ -120,6 +117,8 @@
 </script>
 
 <script type="text/html" data-template="Links">
+	<a class="link" target="_blank" href="{{url}}">Read</a>
+
 	<a class="link" rel="related" href="./?term=related:{{pmid}}" title="Show related items">Related</a>
 
 	<span class="link-group">
