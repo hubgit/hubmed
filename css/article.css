@@ -93,6 +93,14 @@ article.expanded .sources {
     display: inline-block;
 }
 
+article.expanded .creators .hidden {
+    display: inline;
+}
+
+article.expanded .creators .et-al {
+    display: none;
+}
+
 article:not(.expanded) .show-when-expanded {
     display: none;
 }
