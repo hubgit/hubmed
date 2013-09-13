@@ -144,7 +144,7 @@ var Views = {
 			var articles = $("article");
 
 			if (articles.length === 1) {
-				articles.addClass("expanded");
+				articles.trigger("toggleExpanded");
 			}
 		},
 
@@ -163,7 +163,8 @@ var Views = {
 		},
 
 		events: {
-			"click a[data-action]": "action"
+			"click a[data-action]": "action",
+			"toggleExpanded": "toggleExpanded",
 		},
 
 		initialize: function() {
@@ -195,17 +196,22 @@ var Views = {
 
 			switch (node.data("action")) {
 				case "show-abstract":
-					var article = node.closest("article");
-
-					//if (article.hasClass("expanded")) {
-						//return true;
-					//}
-
-					article.toggleClass("expanded");
+					node.closest("article").trigger("toggleExpanded");
 				break;
 			}
 
 			return false;
+		},
+
+		toggleExpanded: function(event) {
+			console.log(event);
+			var node = $(event.target).toggleClass("expanded");
+
+			if (history && history.pushState && node.is(".expanded")) {
+				var pmid = this.model.get("pmid");
+			  	history.pushState({ pmid: pmid }, this.model.get("title"), "./?term=" + pmid);
+			  	// TODO: restore to query
+			}
 		}
 	}),
 
