@@ -110,6 +110,12 @@ var Collections = {
 					item.journalISOAbbreviation = item.journalISOAbbreviation.replace(/\./g, "");
 					item.url = url(item);
 
+					if (item.pubDate) {
+						var dateParts = item.pubDate.split(/\s+/);
+						dateParts.reverse();
+						item.pubDate = dateParts.join(" ");
+					}
+
 					return new Models.Article(item);
 				});
 			}

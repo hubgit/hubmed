@@ -3,7 +3,8 @@ article header {
     display: flex;
 }
 
-article [property=name] {
+article [property=name],
+article [property=creators] {
     -webkit-flex: 1;
     flex: 1;
 }
@@ -107,10 +108,14 @@ article .no-abstract {
     margin-left: 10px;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 1024px) {
+    article header.meta,
+    article header.meta > span {
+        display: block;
+    }
 }
 
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 512px) {
     article .context {
         width: 4em;
     }

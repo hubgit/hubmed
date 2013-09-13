@@ -85,24 +85,27 @@
 				<a property="url" target="_blank" data-action="show-abstract" data-display="cell"
 					title="click to show abstract" href="{{url}}">{{{title}}}</a>
 		   	</span>
+
 		   	{{#if oa}}<a class="oa" href="{{oa}}" target="_blank"><img src="images/oa.png"></a>{{/if}}
-	   	</header>
+		</header>
 
-	   	<div property="creators" class="collection">
-			{{#each creator}}<span property="creator">{{#if forename}}{{forename}}{{else}}{{#if initials}}{{initials}}{{else}}{{name}}{{/if}}{{/if}} {{lastname}}</span>{{/each}}
-		</div>
+	   	<header class="meta">
+		   	<span property="creators" class="collection">
+				{{#each creator}}<span property="creator">{{#if forename}}{{forename}}{{else}}{{#if initials}}{{initials}}{{else}}{{name}}{{/if}}{{/if}} {{lastname}}</span>{{/each}}
+			</span>
 
-		<div property="citation" class="has-extra">
-			<a property="journal" title="{{journalTitle}}" href="./?term={{journalISSN}}[ISSN]">{{#if journalISOAbbreviation}}{{journalISOAbbreviation}}{{else}}{{journalTitle}}{{/if}}</a>
+			<span property="citation" class="has-extra">
+				<a property="journal" title="{{journalTitle}}" href="./?term={{journalISSN}}[ISSN]">{{#if journalISOAbbreviation}}{{journalISOAbbreviation}}{{else}}{{journalTitle}}{{/if}}</a>
 
-			{{#if pubDate}}
-				<span class="separator">&middot;</span>
-				<abbr property="datePublished">{{{pubDate}}}</abbr>
-			{{else}}
-				<span class="separator">&middot;</span>
-				{{#if pubYear}}<span property="datePublished">{{pubYear}} {{#if pubMonth}}{{pubMonth}}{{/if}}</span>{{/if}}
-			{{/if}}
-		</div>
+				{{#if pubDate}}
+					<span class="separator">&middot;</span>
+					<abbr property="datePublished">{{{pubDate}}}</abbr>
+				{{else}}
+					<span class="separator">&middot;</span>
+					{{#if pubYear}}<span property="datePublished">{{#if pubMonth}}{{pubMonth}}{{/if}} {{pubYear}}</span>{{/if}}
+				{{/if}}
+			</span>
+		</header>
 
 		<section>
 			{{#if abstract}}
