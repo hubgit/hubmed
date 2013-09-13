@@ -62,6 +62,10 @@ p {
 	text-align: right;
 }
 
+.history-frame {
+	display: none;
+}
+
 @media only screen and (min-width: 1140px) {
 	.wrapper {
 		width: 1026px;
