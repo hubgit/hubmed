@@ -81,9 +81,11 @@
 
 	<div class="main">
 		<header>
+		    <a class="read" href="./?term={{pmid}}">&nbsp;</a>
+
 			<span property="name">
 				<a property="url" target="_blank" data-action="show-abstract" data-display="cell"
-					title="click to show abstract" href="{{url}}">{{{title}}}</a>
+					title="click to show abstract" href="{{url}}">{{title}}</a>
 		   	</span>
 
 		   	{{#if oa}}<a class="oa" href="{{oa}}" target="_blank"><img src="images/oa.png"></a>{{/if}}

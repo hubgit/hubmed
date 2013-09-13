@@ -1,6 +1,7 @@
 article header {
     display: -webkit-flex;
     display: flex;
+    position: relative;
 }
 
 article [property=name],
@@ -115,6 +116,21 @@ article .no-abstract {
     font-size: 90%;
     margin-left: 10px;
 }
+
+article .read {
+    margin-right: 5px;
+    position: absolute;
+    left: -10px;
+    top: 3px;
+    display: inline-block;
+    width: 5px;
+    background-color: rgb(121, 179, 233);
+}
+
+article .read:visited {
+    background-color: #f6f6f6;
+}
+
 
 @media only screen and (max-width: 1024px) {
     article header.meta,
