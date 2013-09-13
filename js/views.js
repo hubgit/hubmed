@@ -206,15 +206,9 @@ var Views = {
 		toggleExpanded: function(event) {
 			var node = $(event.target).toggleClass("expanded");
 
-			/*
-			if (history && history.pushState && node.is(".expanded")) {
-				var pmid = this.model.get("pmid");
-			  	history.pushState({ pmid: pmid }, this.model.get("title"), "./?term=" + pmid);
-			  	// TODO: restore to query
+			if (node.is(".expanded")) {
+				$("#history").attr("src", this.$(".read").attr("href"));
 			}
-			*/
-
-			$("#history").attr("src", this.$(".read").attr("href"));
 		}
 	}),
 
