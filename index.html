@@ -81,7 +81,7 @@
 
 	<div class="main">
 		<header>
-		    <a class="read" href="./item.html?pmid={{pmid}}">&nbsp;</a>
+		    <a class="read" href="item.html?pmid={{pmid}}">&nbsp;</a>
 
 			<span property="name">
 				<a property="url" target="_blank" data-action="show-abstract" data-display="cell"
@@ -155,4 +155,4 @@
 	<label class="metrics"><input name="metrics" type="checkbox" {{#if metrics}}checked{{/if}}> metrics</label>
 </script>
 
-<iframe id="history" class="history-frame"></iframe>
+<iframe id="history" class="history-frame" src="item.html"></iframe>
