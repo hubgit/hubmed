@@ -120,16 +120,26 @@ article .no-abstract {
 article .read {
     margin-right: 5px;
     position: absolute;
-    left: -10px;
-    top: 3px;
+    left: -20px;
     height: 1em;
     display: inline-block;
-    width: 5px;
-    background-color: rgb(121, 179, 233);
+    color: #ddd;
+}
+
+article .read:hover {
+    color: #ccc;
+}
+
+article .read:before {
+    content: "►";
+}
+
+article.expanded .read:before {
+    content: "▼";
 }
 
 article .read:visited {
-    background-color: #f6f6f6;
+    color: #f6f6f6;
 }
 
 
