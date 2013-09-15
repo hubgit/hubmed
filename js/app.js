@@ -32,11 +32,6 @@ $(function() {
 	};
 
 	app.views = {
-		options: new Views.Options({
-			id: "options",
-			model: app.models.options
-		}),
-
 		input: new Views.Input({
 			id: "input",
 			className: "wrapper",
