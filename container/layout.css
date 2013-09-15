@@ -1,0 +1,40 @@
+html, body {
+	height: 100%;
+	margin: 0;
+	font-family: sans-serif;
+}
+
+iframe {
+	height: 100%;
+	border: none;
+	position: fixed;
+	top: 0;
+}
+
+#main {
+	left: 0;
+	width: 33%;
+}
+
+#external {
+	right: 0;
+	width: 67%;
+}
+
+#actions {
+	position: fixed;
+	top: 0;
+	right: 0;
+	z-index: 10;
+	opacity: 0.1;
+	padding: 5px 20px;
+	background: white;
+}
+
+#actions a {
+	text-decoration: none;
+}
+
+#actions:hover {
+	opacity: 1;
+}

@@ -4,10 +4,6 @@ article header {
     position: relative;
 }
 
-article.active {
-    background: #ddd;
-}
-
 article [property=name],
 article [property=creators] {
     -webkit-flex: 1;
