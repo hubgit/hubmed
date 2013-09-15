@@ -6,6 +6,9 @@ $(function() {
 			return;
 		}
 
+		frame.attr("src", event.data.url);
+		return;
+
 		var setURL = function() {
 			frame.off("load", setURL);
 			frame.attr("src", event.data.url);
