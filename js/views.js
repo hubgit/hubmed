@@ -211,7 +211,7 @@ var Views = {
 
 			if (node.is(".expanded")) {
 				node.addClass("active").scrollIntoView();
-				window.parent.postMessage({ url: url }, "*");
+				window.parent.postMessage({ url: url }, window.location.origin);
 			}
 		}
 	}),
