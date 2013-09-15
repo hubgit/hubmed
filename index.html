@@ -44,6 +44,7 @@
 <script src="js/models.js"></script>
 <script src="js/collections.js"></script>
 <script src="js/views.js"></script>
+<script src="js/routers.js"></script>
 <script src="js/app.js"></script>
 
 <!-- templates -->
@@ -152,6 +153,6 @@
 </script>
 
 <script type="text/html" data-template="Options">
-	<span class="info">{{#unless relatedQuery}}{{#pluralise count "article" "articles"}}{{/pluralise}}{{/unless}}</span>
+	{{#if count}}<span class="info">{{#unless relatedQuery}}{{#pluralise count "article" "articles"}}{{/pluralise}}{{/unless}}</span>{{/if}}
 	<label class="metrics"><input name="metrics" type="checkbox" {{#if metrics}}checked{{/if}}> metrics</label>
 </script>

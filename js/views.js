@@ -40,7 +40,7 @@ var Views = {
 		setAndStore: function(name, metrics) {
 			this.model.set(name, metrics);
 			localStorage.setItem(name, metrics);
-			window.location.reload(); // TODO: just update the page
+			app.views.input.$el.submit();
 		}
 	}),
 
@@ -54,20 +54,12 @@ var Views = {
 		events: {
 			"change input[type=checkbox],select": "submitChangedForm",
 			"click .clear": "clearInput",
+			"submit": "handleSubmit",
 			//"click input[name=term]": "selectInput"
 		},
 
 		initialize: function() {
 			this.$el.appendTo("body");
-
-			if (location.search) {
-				this.parseQueryString().forEach(this.handleQueryPart, this);
-
-				// only use "days" for "related" queries
-				if (!this.model.get("relatedQuery")) {
-					this.model.set("days", 0);
-				}
-			}
 
 			this.model.on("change", this.render, this);
 			this.render();
@@ -78,38 +70,11 @@ var Views = {
 			this.$el.html(Templates.Input(data));
 		},
 
-		parseQueryString: function() {
-			return location.search.substring(1).split("&").map(function(item) {
-				return item.split("=").map(decodeURIComponent).map(function(text) {
-					return text.replace(/\+/g, " ");
-				});
-			});
-		},
-
-		handleQueryPart: function(item) {
-			var name = item[0];
-			var value = item[1].replace(/\/$/, "");
-
-			switch (name) {
-				case "days":
-					this.model.set("days", Number(value));
-					return;
-
-				case "term":
-					this.model.set("relatedQuery", value.match(/^related:/));
-					this.model.set("term", value);
-					break;
-
-				case "filter":
-					var filters = this.model.get("filters");
-
-					if (typeof filters[value] !== "undefined") {
-						filters[value].enabled = true;
-						this.model.set("filters", filters);
-					}
-
-					break;
-			}
+		handleSubmit: function(event) {
+			event.preventDefault();
+			var query = this.$el.serialize();
+			//history.pushState(null, null, "./?" + query);
+			app.routers.search.navigate("./?" + query, { trigger: true });
 		},
 
 		submitChangedForm: function() {
