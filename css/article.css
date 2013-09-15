@@ -21,9 +21,11 @@ article [property=url] {
     font-weight: 400;
 }
 
+/*
 article [property=url]:visited {
     color: green;
 }
+*/
 
 article [property=datePublished] {
     display: inline-block;
