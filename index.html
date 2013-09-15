@@ -81,7 +81,7 @@
 
 	<div class="main">
 		<header>
-		    <a class="read" data-action="show-abstract" href="data:text/plain,pmid/{{pmid}}">&nbsp;</a>
+		    <a class="read" data-action="show-abstract" href="{{url}}" target="external">&nbsp;</a>
 
 			<span property="name">
 				<a property="url" target="_blank" data-action="show-abstract" data-display="cell"
@@ -154,5 +154,3 @@
 	<span class="info">{{#unless relatedQuery}}{{#pluralise count "article" "articles"}}{{/pluralise}}{{/unless}}</span>
 	<label class="metrics"><input name="metrics" type="checkbox" {{#if metrics}}checked{{/if}}> metrics</label>
 </script>
-
-<iframe id="history" class="history-frame" src="item.html"></iframe>

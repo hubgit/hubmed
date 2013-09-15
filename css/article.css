@@ -4,6 +4,10 @@ article header {
     position: relative;
 }
 
+article.active {
+    background: #ddd;
+}
+
 article [property=name],
 article [property=creators] {
     -webkit-flex: 1;
@@ -148,11 +152,15 @@ article .read:visited {
     article header.meta > span {
         display: block;
     }
+
+    article [property=abstract] {
+        padding: 0;
+    }
 }
 
 @media only screen and (min-width: 512px) {
     article .context {
-        width: 4em;
+        /*width: 4em;*/
     }
 
     article [property=creators],

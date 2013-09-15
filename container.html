@@ -1,0 +1,27 @@
+<!doctype html>
+<style>
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
+iframe {
+	height: 100%;
+	border: none;
+	position: fixed;
+	top: 0;
+}
+
+#main {
+	left: 0;
+	width: 25%;
+}
+
+#external {
+	right: 0;
+	width: 75%;
+}
+</style>
+
+<iframe id="main" src="index.html"></iframe>
+<iframe id="external" sandbox="allow-forms allow-scripts"></iframe>

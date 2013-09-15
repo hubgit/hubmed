@@ -168,6 +168,7 @@ var Views = {
 		},
 
 		initialize: function() {
+			//.frame = $("#external", window.parent.document);
 			this.links = new Views.Links({ model: this.model });
 			this.metrics = new Views.Metrics({ collection: this.model.metrics });
 
@@ -205,9 +206,21 @@ var Views = {
 
 		toggleExpanded: function(event) {
 			var node = $(event.target).toggleClass("expanded");
+			var url = this.$(".read").attr("href");
+
+			$("article.active").removeClass("active");
 
 			if (node.is(".expanded")) {
-				$("#history").attr("src", this.$(".read").attr("href"));
+				node.addClass("active").scrollIntoView();
+
+				var frame = $("#external", window.parent.document);
+
+				var setURL = function() {
+					frame.off("load", setURL);
+					frame.attr("src", url);
+				};
+
+				frame.on("load", setURL).attr("src", "loading.html");
 			}
 		}
 	}),

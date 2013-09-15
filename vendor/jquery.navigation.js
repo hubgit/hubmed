@@ -9,7 +9,7 @@
 
 				switch (event.which) {
 					case 74: // j = down
-						var currentArticle = $("article.expanded");
+						var currentArticle = $("article.active");
 						currentArticle.trigger("toggleExpanded");
 						var nextArticle = currentArticle.length ? currentArticle.next("article") : $("article:first");
 						console.log(nextArticle);
@@ -17,7 +17,7 @@
 						break;
 
 					case 75: // k = up
-						var currentArticle = $("article.expanded");
+						var currentArticle = $("article.active");
 						currentArticle.trigger("toggleExpanded");
 						if (currentArticle.length) {
 							currentArticle.prev("article").trigger("toggleExpanded").scrollIntoView();
@@ -25,7 +25,7 @@
 						break;
 
 					case 13: // enter = open
-						var currentArticle = $("article.expanded");
+						var currentArticle = $("article.active");
 						currentArticle.trigger("toggleExpanded");
 						if (currentArticle.length) {
 							var href = currentArticle.find("[property=url]").attr("href");
