@@ -12,7 +12,6 @@
 						var currentArticle = $("article.active");
 						currentArticle.trigger("toggleExpanded");
 						var nextArticle = currentArticle.length ? currentArticle.next("article") : $("article:first");
-						console.log(nextArticle);
 						nextArticle.trigger("toggleExpanded").scrollIntoView();
 						break;
 

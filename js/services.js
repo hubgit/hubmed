@@ -216,3 +216,23 @@ var OA = function(options) {
 
 OA.prototype = new Service();
 
+var DOI = function(options) {
+    this.defaults = $.extend({}, options);
+
+    this.url = $("link[rel='service.doi']").attr("href");
+
+    this.fetch = function(doi){
+        return this.get({ url: this.url + encodeURIComponent(doi), data: { type: "URL" } });
+    };
+
+    this.parse = function(data) {
+        if (!data.responseCode || data.responseCode != 1) return;
+
+        return {
+            url: data.values[0].data,
+        };
+    };
+};
+
+DOI.prototype = new Service();
+

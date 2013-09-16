@@ -1,6 +1,5 @@
 /*global Backbone, $, Handlebars, window */
 
-
 var Collections = {
 	Articles: Backbone.Collection.extend({
 		sync: function(method, collection, options) {

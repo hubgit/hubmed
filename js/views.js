@@ -9,7 +9,7 @@ var Views = {
 		initialize: function() {
 			this.$el.appendTo("body");
 
-			var metrics = localStorage.getItem("metrics") === "true";
+			var metrics = localStorage.getItem("metrics") === "on";
 			this.model.set("metrics", metrics);
 
 			var saveType = localStorage.getItem("saveType");
@@ -29,9 +29,9 @@ var Views = {
 			var metrics = this.$("[name=metrics]").prop("checked");
 
 			if (!metrics) {
-				this.setAndStore("metrics", metrics);
+				this.setAndStore("metrics", "off");
 			} else if (confirm("Enabling this will query Altmetric and Scopus for article-level metrics, and they will be able to see your search terms.")) {
-				this.setAndStore("metrics", metrics);
+				this.setAndStore("metrics", "on");
 			} else {
 				event.preventDefault();
 			}

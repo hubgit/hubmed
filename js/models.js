@@ -61,6 +61,19 @@ var Models = {
                     var item = service.parse(data);
                     if(item) model.set("oa", item.url);
                 });
+            },
+
+            doi: function() {
+                var model = this,
+                    service = app.services.doi,
+                    doi = this.get("doi");
+
+                if(!doi) return;
+
+                service.fetch(doi).done(function(data) {
+                    var item = service.parse(data);
+                    if(item) model.set("url", item.url);
+                });
             }
         },
 

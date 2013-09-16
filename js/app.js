@@ -19,7 +19,8 @@ $(function() {
 		pubmed: new PubMed(),
 		altmetric: new Altmetric(),
 		scopus: new Scopus(),
-		oa: new OA()
+		oa: new OA(),
+		doi: new DOI()
 	};
 
 	app.models = {
@@ -41,7 +42,7 @@ $(function() {
 		options: new Views.Options({
 			id: "options",
 			className: "wrapper",
-			model: app.models.query
+			model: app.models.options
 		}),
 
 		articles: new Views.Articles({
