@@ -12,14 +12,13 @@ var Views = {
 			var metrics = localStorage.getItem("metrics") === "on";
 			this.model.set("metrics", metrics);
 
-			var saveType = localStorage.getItem("saveType");
-			var findType = localStorage.getItem("findType");
-
 			this.model.on("change", this.render, this);
+			this.render();
 		},
 
 		render: function() {
 			var data = this.model.toJSON();
+			console.log(data);
 			this.$el.html(Templates.Options(data));
 
 			return this;

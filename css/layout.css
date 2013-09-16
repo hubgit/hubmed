@@ -60,6 +60,7 @@ p {
 	display: table-cell;
 	vertical-align: top;
 	text-align: right;
+	padding-top: 1.5em;
 }
 
 .history-frame {

@@ -1,6 +1,5 @@
 #options {
-	display: -webkit-flex;
-	display: flex;
+	text-align: right;
 	white-space: nowrap;
 	color: #777;
 	margin-bottom: 10px;
