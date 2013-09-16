@@ -18,7 +18,6 @@ var Views = {
 
 		render: function() {
 			var data = this.model.toJSON();
-			console.log(data);
 			this.$el.html(Templates.Options(data));
 
 			return this;
