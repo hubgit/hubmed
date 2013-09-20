@@ -162,7 +162,7 @@ var Views = {
 
 		events: {
 			"click a[data-action]": "action",
-			"toggleExpanded": "toggleExpanded",
+			"toggleExpanded": "toggleExpanded"
 		},
 
 		initialize: function() {
@@ -300,12 +300,14 @@ var Views = {
 					return;
 
 				case "read":
-					window.open(this.$el.closest("article").find("[property=url]").attr("href"));
+					this.openURL(node.attr("href"));
 					return false;
 			}
 
-			if (node.data("dropdown-target")) {
-				var target = this.$(node.data("dropdown-target"));
+			var targetSelector = node.data("dropdown-target");
+
+			if (target) {
+				var target = this.$(targetSelector);
 
 				if (target.is(":visible")) {
 					target.hide();
@@ -356,7 +358,7 @@ var Views = {
 					if (node.attr("download")) {
 						window.location = node.attr("href");
 					} else {
-						window.open(node.attr("href"));
+						this.openURL(node.attr("href"));
 					}
 					return;
 
@@ -364,11 +366,19 @@ var Views = {
 					event.preventDefault();
 					event.stopPropagation();
 					localStorage.setItem("findType", node.attr("type"));
-					window.open(node.attr("href"));
+					this.openURL(node.attr("href"));
 					return;
 
 				default:
 					return;
+			}
+		},
+
+		openURL: function(url) {
+			if (window.parent) {
+				window.parent.getElementById("external").src = url;
+			} else {
+				window.open(url);
 			}
 		}
 	}),

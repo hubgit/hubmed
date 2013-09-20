@@ -1,5 +1,6 @@
 $(function() {
 	var frame = $("#external");
+	var main = $("#main");
 
 	window.addEventListener("message", function(event) {
 		if (event.origin !== window.location.origin) {
@@ -17,5 +18,10 @@ $(function() {
 		frame.on("load", setURL).attr("src", "loading.html");
 	}, false);
 
-	$("#main").attr("src", "../" + location.search);
+	main.on("load", function(event) {
+		var search = event.target.contentWindow.location.search;
+		// TODO: keep the parent iframe URL in sync
+	});
+
+	main.attr("src", "../" + location.search);
 });
