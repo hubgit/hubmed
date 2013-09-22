@@ -306,7 +306,7 @@ var Views = {
 
 			var targetSelector = node.data("dropdown-target");
 
-			if (target) {
+			if (targetSelector) {
 				var target = this.$(targetSelector);
 
 				if (target.is(":visible")) {
@@ -375,7 +375,7 @@ var Views = {
 		},
 
 		openURL: function(url) {
-			if (window.parent) {
+			if (typeof window.parent == "defined") {
 				window.parent.getElementById("external").src = url;
 			} else {
 				window.open(url);
