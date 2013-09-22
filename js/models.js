@@ -61,7 +61,7 @@ var Models = {
 
                     service.fetch(pmid).done(function(data) {
                         var item = service.parse(data);
-                        if(item) model.set("oa", item.url);
+                        //if(item) model.set("oa", item.url);
                     });
                 },
 
