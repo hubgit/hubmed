@@ -202,12 +202,16 @@ var Views = {
 		},
 
 		toggleExpanded: function(event) {
-			var node = $(event.target).toggleClass("expanded");
+			var node = $(event.target);
+			var expanded = node.is(".expanded");
+			$(".expanded").removeClass("expanded");
+			node.toggleClass("expanded", !expanded);
+
 			var url = this.$(".read").attr("href");
 
 			$("article.active").removeClass("active");
 
-			if (node.is(".expanded")) {
+			if (!expanded) {
 				node.addClass("active").scrollIntoView();
 				window.parent.postMessage({ url: url }, window.location.origin);
 			}
