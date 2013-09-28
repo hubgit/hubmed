@@ -83,14 +83,14 @@
 
 		<div class="main">
 			<header>
-			    <a class="read" data-action="show-abstract" href="{{url}}" target="external" tabIndex="-2">&nbsp;</a>
+			    <a class="read" data-action="show-abstract" href="{{url}}" target="external" tabindex="-2">&nbsp;</a>
 
 				<span property="name">
 					<a property="url" target="_blank" data-action="show-abstract" data-display="cell"
 						title="click to show abstract" href="{{url}}">{{title}}</a>
 			   	</span>
 
-			   	{{#if oa}}<a class="oa" href="{{oa}}" target="_blank"><img src="images/oa.png"></a>{{/if}}
+			   	{{#if oa}}<a class="oa" href="{{oa}}" target="_blank" tabindex="-1"><img src="images/oa.png"></a>{{/if}}
 			</header>
 
 		   	<header class="meta">
