@@ -1,12 +1,10 @@
 article header {
-    display: -webkit-flex;
     display: flex;
     position: relative;
 }
 
 article [property=name],
 article [property=creators] {
-    -webkit-flex: 1;
     flex: 1;
 }
 
@@ -122,7 +120,7 @@ article .no-abstract {
 article .read {
     margin-right: 5px;
     position: absolute;
-    left: -20px;
+    left: -25px;
     height: 1em;
     display: inline-block;
     color: #ddd;

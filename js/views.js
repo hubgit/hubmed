@@ -125,6 +125,7 @@ var Views = {
 	}),
 
 	Articles: Backbone.View.extend({
+		tagName: "ol",
 		offset: 0,
 		limit: 5,
 
@@ -139,7 +140,7 @@ var Views = {
 
 			this.collection.each(this.add, this);
 
-			var articles = $("article");
+			var articles = $(".article");
 
 			if (articles.length === 1) {
 				articles.trigger("toggleExpanded");
@@ -153,16 +154,13 @@ var Views = {
 	}),
 
 	Article: Backbone.View.extend({
-		tagName: "article",
-
-		attributes: {
-			"vocab": "http://schema.org/",
-			"typeof": "MedicalScholarlyArticle"
-		},
+		tagName: "li",
+		className: "article",
 
 		events: {
 			"click a[data-action]": "action",
-			"toggleExpanded": "toggleExpanded"
+			"toggleExpanded": "toggleExpanded",
+			"click .link": "handleLink",
 		},
 
 		initialize: function() {
@@ -209,85 +207,22 @@ var Views = {
 
 			var url = this.$(".read").attr("href");
 
-			$("article.active").removeClass("active");
+			$(".article.active").removeClass("active");
 
 			if (!expanded) {
-				node.addClass("active").scrollIntoView();
+				node.parent().addClass("active").attr("tabIndex", -1).focus().scrollIntoView();
 				window.parent.postMessage({ url: url }, window.location.origin);
 			}
-		}
-	}),
-
-	Metrics: Backbone.View.extend({
-		tagName: "span",
-		className: "metrics",
-
-		initialize: function() {
-			this.collection.on("reset", this.reset, this);
-			this.collection.on("add", this.add, this);
 		},
 
-		reset: function() {
-			this.$el.empty();
-			this.collection.each(this.add, this);
-		},
-
-		add: function(metric) {
-			var view = new Views.Metric({ model: metric });
-			view.render().$el.appendTo(this.$el);
-		}
-	}),
-
-	Metric: Backbone.View.extend({
-		tagName: "a",
-
-		className: "metric",
-
-		attributes: {
-			target: "_blank"
-		},
-
-		initialize: function() {
-			this.model.on("change", this.render, this);
-		},
-
-		render: function() {
-			var data = this.model.toJSON();
-
-			this.$el.attr("href", data.url).text(data.text);
-
-			if (data.image) {
-				$("<img/>", { src: "images/" + data.image }).prependTo(this.$el);
-			}
-
-			return this;
-		}
-	}),
-
-	Links: Backbone.View.extend({
-		className: "links",
-
-		events: {
-			"click .link": "handleClick",
-		},
-
-		initialize: function() {
-			this.render();
-		},
-
-		render: function() {
-			var data = this.model.toJSON();
-			this.$el.html(Templates.Links(data));
-		},
-
-		handleClick: function(event) {
+		handleLink: function(event) {
 			var node = $(event.target);
 
 			switch (node.data("intent")) {
 				case "save":
 					var type = localStorage.getItem("saveType");
 					if (type) {
-						this.$("[rel=save][type='" + type + "']").click();
+						this.$(".links [rel=save][type='" + type + "']").click();
 					} else {
 						node.next(".link").click();
 					}
@@ -297,7 +232,7 @@ var Views = {
 					var type = localStorage.getItem("findType");
 
 					if (type) {
-						this.$("[rel=find][type='" + type + "']").click();
+						this.$(".links [rel=find][type='" + type + "']").click();
 					} else {
 						node.next(".link").click();
 					}
@@ -384,6 +319,65 @@ var Views = {
 			} else {
 				window.open(url);
 			}
+		}
+	}),
+
+	Metrics: Backbone.View.extend({
+		tagName: "span",
+		className: "metrics",
+
+		initialize: function() {
+			this.collection.on("reset", this.reset, this);
+			this.collection.on("add", this.add, this);
+		},
+
+		reset: function() {
+			this.$el.empty();
+			this.collection.each(this.add, this);
+		},
+
+		add: function(metric) {
+			var view = new Views.Metric({ model: metric });
+			view.render().$el.appendTo(this.$el);
+		}
+	}),
+
+	Metric: Backbone.View.extend({
+		tagName: "a",
+
+		className: "metric",
+
+		attributes: {
+			target: "_blank"
+		},
+
+		initialize: function() {
+			this.model.on("change", this.render, this);
+		},
+
+		render: function() {
+			var data = this.model.toJSON();
+
+			this.$el.attr("href", data.url).text(data.text);
+
+			if (data.image) {
+				$("<img/>", { src: "images/" + data.image }).prependTo(this.$el);
+			}
+
+			return this;
+		}
+	}),
+
+	Links: Backbone.View.extend({
+		className: "links",
+
+		initialize: function() {
+			this.render();
+		},
+
+		render: function() {
+			var data = this.model.toJSON();
+			this.$el.html(Templates.Links(data));
 		}
 	}),
 

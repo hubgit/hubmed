@@ -74,7 +74,7 @@ var Models = {
 
                     service.fetch(doi).done(function(data) {
                         var item = service.parse(data);
-                        //if(item) model.set("url", item.url);
+                        if(item) model.set("url", item.url);
                     });
                 }
             }

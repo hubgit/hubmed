@@ -26,8 +26,7 @@
 
 <!-- scripts -->
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<!--<script src="vendor/jquery.js"></script>-->
+<script src="vendor/jquery.js"></script>
 <script src="vendor/jquery.ajaxQueue.js"></script>
 <script src="vendor/jquery.formatAuthors.js"></script>
 <script src="vendor/jquery.formatAbstract.js"></script>
@@ -79,50 +78,52 @@
 </script>
 
 <script type="text/html" data-template="Article">
-	<div class="context"></div>
+	<article vocab="http://schema.org/" typeof="MedicalScholarlyArticle">
+		<div class="context"></div>
 
-	<div class="main">
-		<header>
-		    <a class="read" data-action="show-abstract" href="{{url}}" target="external">&nbsp;</a>
+		<div class="main">
+			<header>
+			    <a class="read" data-action="show-abstract" href="{{url}}" target="external" tabIndex="-2">&nbsp;</a>
 
-			<span property="name">
-				<a property="url" target="_blank" data-action="show-abstract" data-display="cell"
-					title="click to show abstract" href="{{url}}">{{title}}</a>
-		   	</span>
+				<span property="name">
+					<a property="url" target="_blank" data-action="show-abstract" data-display="cell"
+						title="click to show abstract" href="{{url}}">{{title}}</a>
+			   	</span>
 
-		   	{{#if oa}}<a class="oa" href="{{oa}}" target="_blank"><img src="images/oa.png"></a>{{/if}}
-		</header>
+			   	{{#if oa}}<a class="oa" href="{{oa}}" target="_blank"><img src="images/oa.png"></a>{{/if}}
+			</header>
 
-	   	<header class="meta">
-		   	<span property="creators" class="collection creators">
-				{{#each creator}}<span property="creator">{{#if forename}}{{forename}}{{else}}{{#if initials}}{{initials}}{{else}}{{name}}{{/if}}{{/if}} {{lastname}}</span>{{/each}}
-			</span>
+		   	<header class="meta">
+			   	<span property="creators" class="collection creators">
+					{{#each creator}}<span property="creator">{{#if forename}}{{forename}}{{else}}{{#if initials}}{{initials}}{{else}}{{name}}{{/if}}{{/if}} {{lastname}}</span>{{/each}}
+				</span>
 
-			<span property="citation" class="has-extra">
-				<a property="journal" title="{{journalTitle}}" href="./?term={{journalISSN}}[ISSN]">{{#if journalISOAbbreviation}}{{journalISOAbbreviation}}{{else}}{{journalTitle}}{{/if}}</a>
+				<span property="citation" class="has-extra">
+					<a property="journal" title="{{journalTitle}}" href="./?term={{journalISSN}}[ISSN]">{{#if journalISOAbbreviation}}{{journalISOAbbreviation}}{{else}}{{journalTitle}}{{/if}}</a>
 
-				{{#if pubDate}}
-					<span class="separator">&middot;</span>
-					<abbr property="datePublished">{{{pubDate}}}</abbr>
+					{{#if pubDate}}
+						<span class="separator">&middot;</span>
+						<abbr property="datePublished">{{{pubDate}}}</abbr>
+					{{else}}
+						<span class="separator">&middot;</span>
+						{{#if pubYear}}<span property="datePublished">{{#if pubMonth}}{{pubMonth}}{{/if}} {{pubYear}}</span>{{/if}}
+					{{/if}}
+				</span>
+			</header>
+
+			<section>
+				{{#if abstract}}
+					{{#each abstract}}<p property="abstract">{{#if label}}<span class="label">{{label}}: </span>{{/if}}{{text}}</p>{{/each}}
 				{{else}}
-					<span class="separator">&middot;</span>
-					{{#if pubYear}}<span property="datePublished">{{#if pubMonth}}{{pubMonth}}{{/if}} {{pubYear}}</span>{{/if}}
+					<p class="no-abstract">No abstract available</p>
 				{{/if}}
-			</span>
-		</header>
+			</section>
 
-		<section>
-			{{#if abstract}}
-				{{#each abstract}}<p property="abstract">{{#if label}}<span class="label">{{label}}: </span>{{/if}}{{text}}</p>{{/each}}
-			{{else}}
-				<p class="no-abstract">No abstract available</p>
-			{{/if}}
-		</section>
+			<footer>
 
-		<footer>
-
-		</footer>
-	</div>
+			</footer>
+		</div>
+	</article>
 </script>
 
 <script type="text/html" data-template="Links">
@@ -130,11 +131,11 @@
 
 	<a class="link" rel="related" href="./?term=related:{{pmid}}" title="Show related items">Related</a>
 
-	<span class="link-group">
+	<span class="link-group" tabindex="0">
 		<a class="link" data-intent="save">Save</a><span class="link" data-dropdown-target=".save-links">▿</span>
 	</span>
 
-	<span class="link-group show-when-expanded">
+	<span class="link-group show-when-expanded" tabindex="0">
 		<a class="link" data-intent="find">Find</a><span class="link" data-dropdown-target=".find-links">▿</span>
 	</span>
 

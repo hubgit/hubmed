@@ -17,17 +17,31 @@ body {
 	background: #f6f6f6;
 }
 
-#articles {
-	display: table;
+#articles, .article {
+	list-style-type: none;
+}
+
+.article {
+	width: 100%;
+	padding: 5px;
+	margin-bottom: 15px;
+}
+
+.article:focus {
+    outline: 0;
+    z-index: 1;
+    position: relative;
+    border: 1px solid #56b4ef;
+    margin: -1px 0;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,.05),0 0 8px rgba(82,168,236,.6);
 }
 
 article {
-	display: table-row;
+	display: flex;
 }
 
 article > * {
-	display: table-cell;
-	padding-bottom: 20px;
+	flex: 1;
 }
 
 p {
@@ -81,12 +95,6 @@ p {
 	#articles {
 		display: block;
 	}
-
-    article {
-        width: 100%;
-        margin: 0 0 15px 0;
-        padding: 0;
-    }
 
     section {
     	text-align: left;
