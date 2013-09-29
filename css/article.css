@@ -1,3 +1,16 @@
+article {
+    display: flex;
+}
+
+article .context {
+    flex: 0.1;
+    padding-right: 10px;
+}
+
+article .main {
+    flex: 1;
+}
+
 article header {
     display: flex;
     position: relative;
@@ -118,30 +131,27 @@ article .no-abstract {
 }
 
 article .read {
-    margin-right: 5px;
-    position: absolute;
-    left: -25px;
-    height: 1em;
-    display: inline-block;
+    padding-right: 10px;
+    display: block;
     color: #ddd;
+    text-align: right;
 }
 
 article .read:hover {
     color: #ccc;
 }
 
-article .read:before {
+article .read:after {
     content: "►";
 }
 
-article.expanded .read:before {
+article.expanded .read:after {
     content: "▼";
 }
 
 article .read:visited {
-    color: #f6f6f6;
+    color: #f6f6f6; /* can't hide when visited */
 }
-
 
 @media only screen and (max-width: 1024px) {
     article header.meta,
@@ -155,10 +165,6 @@ article .read:visited {
 }
 
 @media only screen and (min-width: 512px) {
-    article .context {
-        /*width: 4em;*/
-    }
-
     article [property=creators],
     article [property=citation]{
         margin-left: 10px;

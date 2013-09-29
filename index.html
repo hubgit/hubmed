@@ -79,12 +79,12 @@
 
 <script type="text/html" data-template="Article">
 	<article vocab="http://schema.org/" typeof="MedicalScholarlyArticle">
-		<div class="context"></div>
+		<div class="context">
+			<a class="read" data-action="show-abstract" href="{{url}}" target="external" tabindex="-2">&nbsp;</a>
+		</div>
 
 		<div class="main">
 			<header>
-			    <a class="read" data-action="show-abstract" href="{{url}}" target="external" tabindex="-2">&nbsp;</a>
-
 				<span property="name">
 					<a property="url" target="_blank" data-action="show-abstract" data-display="cell"
 						title="click to show abstract" href="{{url}}">{{title}}</a>
