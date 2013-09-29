@@ -40,7 +40,11 @@ article {
 	display: flex;
 }
 
-article > * {
+article .context {
+	flex: 0.1;
+}
+
+article .main {
 	flex: 1;
 }
 
