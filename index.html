@@ -129,7 +129,9 @@
 <script type="text/html" data-template="Links">
 	<a class="link" data-intent="read" target="external" href="{{url}}">Read</a>
 
-	<a class="link" rel="related" href="./?term=related:{{pmid}}" title="Show related items">Related</a>
+	<span class="link-group" tabindex="0">
+		<a class="link" rel="related" href="./?term=related:{{pmid}}" title="Show related items">Related</a><span class="link" data-dropdown-target=".related-links">▿</span>
+	</span>
 
 	<span class="link-group" tabindex="0">
 		<a class="link" data-intent="save">Save</a><span class="link" data-dropdown-target=".save-links">▿</span>
@@ -150,6 +152,10 @@
 	<span class="dropdown-list find-links">
 		<a class="link" rel="find" href="http://scholar.google.com/scholar?{{#if doi}}cluster=http://dx.doi.org/{{doi}}{{else}}q={{title}}{{/if}}" title="Find in Google Scholar" target="_blank" type="google.scholar">Google Scholar</a>
 		<a class="link" rel="find" href="http://www.ncbi.nlm.nih.gov/pubmed/{{pmid}}" title="View in PubMed" target="_blank"type="pubmed">PubMed</a>
+	</span>
+
+	<span class="dropdown-list related-links">
+		<a class="link" rel="add-related" href="./?term=related:{{pmid}}">+ Add</a>
 	</span>
 </script>
 

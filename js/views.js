@@ -270,23 +270,24 @@ var Views = {
 
 			switch (node.attr("rel")) {
 				case "related":
-					if (event.metaKey || event.ctrlKey) {
-						event.preventDefault();
+					return;
 
-						var pmid = this.model.get("pmid");
+				case "add-related":
+					event.preventDefault();
 
-						var currentTerm = $.trim(app.models.query.get("term"));
+					var pmid = this.model.get("pmid");
 
-						var term;
-						if (app.models.query.get("relatedQuery")) {
-							term = currentTerm + "," + pmid;
-						} else {
-							term = "related:" + pmid;
-						}
+					var currentTerm = $.trim(app.models.query.get("term"));
 
-						app.models.query.set("term", term);
-						app.views.input.$el.submit();
+					var term;
+					if (app.models.query.get("relatedQuery")) {
+						term = currentTerm + "," + pmid;
+					} else {
+						term = "related:" + pmid;
 					}
+
+					app.models.query.set("term", term);
+					app.views.input.$el.submit();
 
 					return;
 

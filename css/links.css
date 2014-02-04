@@ -70,10 +70,6 @@ article .link:hover {
 	background-color: #CACAFA;
 }
 
-[data-dropdown-target] {
-	visibility: hidden;
-}
-
 .expanded [data-dropdown-target],
 .link-group:hover [data-dropdown-target] {
 	visibility: visible;
