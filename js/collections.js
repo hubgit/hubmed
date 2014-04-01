@@ -93,6 +93,17 @@ var Collections = {
 				pubYear: "MedlineCitation/Article/Journal/JournalIssue/PubDate/Year",
 				pubMonth: "MedlineCitation/Article/Journal/JournalIssue/PubDate/Month",
 				//pubDay: "MedlineCitation/Article/Journal/JournalIssue/PubDate/Day",
+				headings: [
+					"MedlineCitation/MeshHeadingList/MeshHeading", {
+						descriptor: "DescriptorName",
+						qualifier: [
+							"QualifierName", {
+								name: ".",
+								major: "@MajorTopicYN"
+							}
+						]
+					}
+				]
 			}
 		],
 
