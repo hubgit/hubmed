@@ -28,6 +28,10 @@ article [property=url] {
     font-weight: 400;
 }
 
+article [property=url]:visited {
+    color: rgb(192, 121, 219);
+}
+
 /*
 article [property=url]:visited {
     color: green;
