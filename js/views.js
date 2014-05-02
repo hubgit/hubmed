@@ -9,8 +9,8 @@ var Views = {
 		initialize: function() {
 			this.$el.appendTo("body");
 
-			var metrics = localStorage.getItem("metrics") === "on";
-			this.model.set("metrics", metrics);
+			//var metrics = localStorage.getItem("metrics") === "on";
+			this.model.set("metrics", true);
 
 			this.model.on("change", this.render, this);
 			this.render();
@@ -21,18 +21,6 @@ var Views = {
 			this.$el.html(Templates.Options(data));
 
 			return this;
-		},
-
-		handleChange: function(event) {
-			var metrics = this.$("[name=metrics]").prop("checked");
-
-			if (!metrics) {
-				this.setAndStore("metrics", "off");
-			} else if (confirm("Enabling this will query Altmetric and Scopus for article-level metrics, and they will be able to see your search terms.")) {
-				this.setAndStore("metrics", "on");
-			} else {
-				event.preventDefault();
-			}
 		},
 
 		setAndStore: function(name, metrics) {
