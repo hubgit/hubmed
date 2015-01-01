@@ -9,10 +9,6 @@ var Models = {
                 "review[ptyp]": {
                     name: "review",
                     enabled: false
-                },
-                "comment[ptyp]": {
-                    name: "comment",
-                    enabled: false
                 }
             },
             "days": 0,
