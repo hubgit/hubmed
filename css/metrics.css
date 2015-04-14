@@ -9,7 +9,8 @@
 	font-size: 90%;
 	opacity: 0.75;
 	text-shadow: 0 -1px 1px white;
-	margin: 0 10px 0 5px;
+	padding: 0 20px 0 0px;
+        width: 100%;
 }
 
 .metric:hover {
