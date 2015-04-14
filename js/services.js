@@ -229,7 +229,7 @@ var DOI = function(options) {
         if (!data.responseCode || data.responseCode != 1) return;
 
         return {
-            url: data.values[0].data,
+            url: data.values[0].data.value,
         };
     };
 };
