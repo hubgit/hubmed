@@ -1,23 +1,33 @@
 article {
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
 }
 
 article .context {
+    -ms-flex: 0.1;
+    -webkit-flex: 0.1;
     flex: 0.1;
     padding-right: 10px;
 }
 
 article .main {
+    -ms-flex: 1;
+    -webkit-flex: 1;
     flex: 1;
 }
 
 article header {
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     position: relative;
 }
 
 article [property=name],
 article [property=creators] {
+    -ms-flex: 1;
+    -webkit-flex: 1;
     flex: 1;
 }
 
