@@ -28,12 +28,12 @@ article .link:hover {
 
 .links {
 	display: inline-block;
+	margin-top: 3px;
 }
 
 .link {
     white-space: nowrap;
     font-weight: 200;
-    font-size: 90%;
     opacity: 0.5;
     display: inline-block;
     cursor: pointer;
