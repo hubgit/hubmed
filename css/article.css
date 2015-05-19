@@ -167,9 +167,12 @@ article .read:visited {
     color: #f6f6f6; /* can't hide when visited */
 }
 
+article [property=keywords] {
+    margin-top: 3px;
+}
+
 article .mesh {
     color: #8a8;
-    font-size: 90%;
 }
 
 article .mesh:not(:last-of-type):after {
