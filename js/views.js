@@ -198,7 +198,7 @@ var Views = {
 			$(".article.active").removeClass("active");
 
 			if (!expanded) {
-				node.parent().addClass("active").attr("tabIndex", -1).focus().scrollIntoView();
+				node.parent().addClass("active").attr("tabIndex", -1).focus()//.scrollIntoView();
 				window.parent.postMessage({ url: url }, window.location.origin);
 			}
 		},
