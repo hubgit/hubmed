@@ -129,7 +129,9 @@
 </script>
 
 <script type="text/html" data-template="Links">
-	<a class="link" data-intent="read" target="external" href="{{url}}">Read</a>
+	<a class="link" data-action="show-abstract" href="#">Abstract</a>
+	
+	<a class="link" data-intent="read" target="external" href="{{url}}">FullText</a>
 
 	<span class="link-group" tabindex="0">
 		<a class="link" rel="related" href="./?term=related:{{pmid}}" title="Show related items">Related</a><span class="link" data-dropdown-target=".related-links">▿</span>
