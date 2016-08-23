@@ -95,7 +95,7 @@
 
 		   	<header class="meta">
 			   	<span property="creators" class="collection creators">
-					{{#each creator}}<span property="creator">{{#if forename}}{{forename}}{{else}}{{#if initials}}{{initials}}{{else}}{{name}}{{/if}}{{/if}} {{lastname}}</span>{{/each}}
+					{{#each creator}}<span property="creator">{{#if collectivename}}{{collectivename}}{{else}}{{#if forename}}{{forename}}{{else}}{{#if initials}}{{initials}}{{else}}{{name}}{{/if}}{{/if}} {{lastname}}{{/if}}</span>{{/each}}
 				</span>
 
 				<span property="citation" class="has-extra">
