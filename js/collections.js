@@ -74,6 +74,7 @@ var Collections = {
 						initials: "Initials",
 						lastname: "LastName",
 						name: "Name",
+						collectivename: "CollectiveName",
 					}
 				],
 				abstract: [
