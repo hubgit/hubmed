@@ -112,7 +112,7 @@ var Altmetric = function(options) {
 
         if (data.cited_by_blogs_count) {
             items.push({
-                url: "http://altmetric.com/details.php?citation_id=" + id,
+                url: "https://altmetric.com/details.php?citation_id=" + id,
                 text: data.cited_by_blogs_count,
                 image: "altmetric.png"
             });
@@ -120,7 +120,7 @@ var Altmetric = function(options) {
 
         if (data.cited_by_tweeters_count){
             items.push({
-              url: "http://altmetric.com/details.php?citation_id=" + id,
+              url: "https://altmetric.com/details.php?citation_id=" + id,
               text: data.cited_by_tweeters_count,
               image: "twitter.png"
           });
@@ -129,9 +129,9 @@ var Altmetric = function(options) {
         data.readers.mendeley = Number(data.readers.mendeley);
 
         if (data.readers.mendeley) {
-            if (data.pmid) mendeley_url = "http://www.mendeley.com/openURL?id=pmid:" + encodeURIComponent(data.pmid);
-            else if (data.doi) mendeley_url = "http://www.mendeley.com/openURL?id=doi:" + encodeURIComponent(data.doi);
-            else mendeley_url = "http://altmetric.com/details.php?citation_id=" + id;
+            if (data.pmid) mendeley_url = "https://www.mendeley.com/openURL?id=pmid:" + encodeURIComponent(data.pmid);
+            else if (data.doi) mendeley_url = "https://www.mendeley.com/openURL?id=doi:" + encodeURIComponent(data.doi);
+            else mendeley_url = "https://altmetric.com/details.php?citation_id=" + id;
 
             items.push({
                 url: mendeley_url,
