@@ -55,10 +55,11 @@ var Models = {
 
                     if(oa) return;
 
-                    service.fetch(pmid).done(function(data) {
-                        var item = service.parse(data);
-                        if(item) model.set("oa", item.url);
-                    });
+                    // disabled to avoid "429 Too Many Requests"
+//                     service.fetch(pmid).done(function(data) {
+//                         var item = service.parse(data);
+//                         if(item) model.set("oa", item.url);
+//                     });
                 },
 
                 doi: function() {
