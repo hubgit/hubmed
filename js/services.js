@@ -146,41 +146,6 @@ var Altmetric = function(options) {
 
 Altmetric.prototype = new Service();
 
-var Scopus = function(options) {
-    this.defaults = $.extend({}, options);
-
-    var node = $("link[rel='service.scopus']");
-
-    this.url = node.attr("href");
-    this.key = node.data("key");
-
-    this.fetch = function(doi){
-        var data = {
-            apiKey: this.key,
-            search: "DOI(" + doi + ")"
-        };
-
-        return this.get({ url: this.url + "documentSearch.url", data: data, dataType: "jsonp", queue: true });
-    };
-
-    this.parse = function(data) {
-        if(!data.OK || !data.OK.results || !data.OK.results.length) return;
-
-        var item = data.OK.results[0];
-
-        var citedbycount = Number(item.citedbycount);
-        if(!citedbycount) return;
-
-        return {
-            url: item.inwardurl,
-            text: citedbycount,
-            image: "sciverse.png"
-        };
-    };
-};
-
-Scopus.prototype = new Service();
-
 var OA = function(options) {
     this.defaults = $.extend({}, options);
 

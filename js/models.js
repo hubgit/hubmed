@@ -31,19 +31,6 @@ var Models = {
                         var items = service.parse(data);
                         model.metrics.add(items);
                     });
-                },
-
-                scopus: function() {
-                    var model = this,
-                        service = app.services.scopus,
-                        doi = this.get("doi");
-
-                    if(!doi) return;
-
-                    service.fetch(doi).done(function(data) {
-                        var item = service.parse(data);
-                        if(item) model.metrics.add(item);
-                    });
                 }
             },
             data: {
