@@ -5,10 +5,9 @@ article {
 }
 
 article .context {
-    -ms-flex: 0.1;
-    -webkit-flex: 0.1;
-    flex: 0.1;
+    flex-shrink: 0;
     padding-right: 10px;
+    width: 48px;
 }
 
 article .main {
