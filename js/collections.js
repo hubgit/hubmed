@@ -136,7 +136,7 @@ var Collections = {
 
 		url: function(item) {
 		    if (item.doi) {
-		        return "https://dx.doi.org/" + encodeURIComponent(item.doi);
+		        return "https://doi.org/" + encodeURIComponent(item.doi);
 		    }
 
 	        return "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&cmd=prlinks&retmode=ref&id=" + encodeURIComponent(item.pmid);
