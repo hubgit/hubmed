@@ -378,7 +378,7 @@ var Views = {
 		},
 
         initialize: function() {
-            _.bindAll(this);
+            _.bindAll(this, 'start', 'setNextOffset', 'fetchPage', 'noMoreItems');
 
             this
                 .$el
